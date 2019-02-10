@@ -102,25 +102,27 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("homepage").send_keys(contact.homepage)
         # birthday info
         wd.find_element_by_name("bday").click()
+        # enter value from keyboard
         Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.birth_day)
-        wd.find_element_by_xpath("//option[@value='" + contact.birth_day + "']").click()
+        # select value by mouse click
+        wd.find_element_by_xpath("//option[@value='%s']" % contact.birth_day).click()
         wd.find_element_by_name("bmonth").click()
         Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.birth_month)
-        wd.find_element_by_xpath("//option[@value='" + contact.birth_month + "']").click()
+        wd.find_element_by_xpath("//option[@value='%s']" % contact.birth_month).click()
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys(contact.birth_year)
         # anniversary info
         wd.find_element_by_name("aday").click()
         Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.anniversary_day)
-        wd.find_element_by_xpath("(//option[@value='" + contact.anniversary_day + "'])[2]").click()
+        # wd.find_element_by_xpath("(//option[@value='%s'])[2]" % contact.anniversary_day).click()
         wd.find_element_by_name("amonth").click()
         Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.anniversary_month)
-        wd.find_element_by_xpath("(//option[@value='" + contact.anniversary_month + "'])[2]").click()
+        wd.find_element_by_xpath("(//option[@value='%s'])[2]" % contact.anniversary_month).click()
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys(contact.anniversary_year)
-        # choose group
+        # select group
         wd.find_element_by_name("new_group").click()
         wd.find_element_by_xpath("//option[@value='%s']" % contact.group_name).click()
         # secondary info
