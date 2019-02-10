@@ -17,12 +17,14 @@ class TestAddContact(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.create_contact(wd, Contact(first_name="first_name", middle_name="middle_name", last_name="last_name",
-                            nickname="nickname", title="title", company="company", address="address",
-                            home_phone="homephone", mobile_phone="mobilephone", work_phone="workphone", fax="fax",
-                            primary_email="email", secondary_email="email2", third_email="email3", homepage="homepage",
-                            birth_day="5", birth_month="January", birth_year="1950", anniversary_day="15",
-                            anniversary_month="June", anniversary_year="2000", secondary_address="address secondary",
-                            secondary_home_phone="home secondary", notes="notes"))
+                                        nickname="nickname", title="title", company="company", address="address",
+                                        home_phone="homephone", mobile_phone="mobilephone", work_phone="workphone",
+                                        fax="fax", primary_email="email", secondary_email="email2",
+                                        third_email="email3", homepage="homepage", birth_day="5", birth_month="January",
+                                        birth_year="1950", anniversary_day="15", anniversary_month="June",
+                                        anniversary_year="2000", group_name="[none]",
+                                        secondary_address="address secondary", secondary_home_phone="home secondary",
+                                        notes="notes"))
         self.return_to_homepage(wd)
         self.logout(wd)
 
@@ -50,7 +52,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys(contact.nickname)
         '''
-        # todo: return photo add
+        # todo: return photo add when understand why test crash
         wd.find_element_by_name("photo").click()
         wd.find_element_by_name("photo").clear()
         wd.find_element_by_name("photo").send_keys("test_data/cat.jpg")
@@ -112,6 +114,9 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys(contact.anniversary_year)
+        # choose group
+        wd.find_element_by_name("new_group").click()
+        wd.find_element_by_xpath("//option[@value='%s']" % contact.group_name).click()
         # secondary info
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
