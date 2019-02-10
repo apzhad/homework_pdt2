@@ -14,7 +14,7 @@ class TestAddContact(unittest.TestCase):
     def test_add_contact(self):
         wd = self.wd
         self.open_home_page(wd)
-        self.login(wd)
+        self.login(wd, username="admin", password="secret")
         self.create_contact(wd)
         self.return_to_homepage(wd)
         self.logout(wd)
@@ -41,9 +41,11 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys("nickname")
+        '''
         wd.find_element_by_name("photo").click()
         wd.find_element_by_name("photo").clear()
-        wd.find_element_by_name("photo").send_keys("C:\\fakepath\\cat.jpg")
+        wd.find_element_by_name("photo").send_keys("test_data/cat.jpg")
+        '''
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
         wd.find_element_by_name("title").send_keys("title")
@@ -108,11 +110,11 @@ class TestAddContact(unittest.TestCase):
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
-    def login(self, wd):
+    def login(self, wd, username, password):
         wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def open_home_page(self, wd):
