@@ -15,7 +15,13 @@ class TestAddContact(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_contact(wd)
+        self.create_contact(wd, first_name="first_name", middle_name="middle_name", last_name="last_name",
+                            nickname="nickname", title="title", company="company", address="address",
+                            home_phone="homephone", mobile_phone="mobilephone", work_phone="workphone", fax="fax",
+                            primary_email="email", secondary_email="email2", third_email="email3", homepage="homepage",
+                            birth_day="5", birth_month="January", birth_year="1950", anniversary_day="15",
+                            anniversary_month="June", anniversary_year="2000", secondary_address="address secondary",
+                            secondary_home_phone="home secondary", notes="notes")
         self.return_to_homepage(wd)
         self.logout(wd)
 
@@ -25,13 +31,10 @@ class TestAddContact(unittest.TestCase):
     def return_to_homepage(self, wd):
         wd.find_element_by_link_text("home page").click()
 
-    def create_contact(self, wd, first_name="first_name", middle_name="middle_name", last_name="last_name",
-                       nickname="nickname", title="title", company="company", address="address", home_phone="homephone",
-                       mobile_phone="mobilephone", work_phone="workphone", fax="fax", primary_email="email",
-                       secondary_email="email2", third_email="email3", homepage="homepage", birth_day="5",
-                       birth_month="January", birth_year="1950", anniversary_day="15", anniversary_month="June",
-                       anniversary_year="2000", secondary_address="address secondary", secondary_home_phone="home secondary",
-                       notes="notes"):
+    def create_contact(self, wd, first_name, middle_name, last_name, nickname, title, company, address, home_phone,
+                       mobile_phone, work_phone, fax, primary_email, secondary_email, third_email, homepage, birth_day,
+                       birth_month, birth_year, anniversary_day, anniversary_month, anniversary_year, secondary_address,
+                       secondary_home_phone, notes):
         # init new contact creation
         wd.find_element_by_link_text("add new").click()
         # enter contact parameters
