@@ -5,6 +5,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
 from contact import Contact
+import os
 
 
 class TestAddContact(unittest.TestCase):
@@ -24,7 +25,7 @@ class TestAddContact(unittest.TestCase):
                                         birth_year="1950", anniversary_day="15", anniversary_month="June",
                                         anniversary_year="2000", group_name="[none]",
                                         secondary_address="address secondary", secondary_home_phone="home secondary",
-                                        notes="notes"))
+                                        notes="notes"), "\\test_data\\cat.jpg")
         self.return_to_homepage(wd)
         self.logout(wd)
 
@@ -34,7 +35,7 @@ class TestAddContact(unittest.TestCase):
     def return_to_homepage(self, wd):
         wd.find_element_by_link_text("home page").click()
 
-    def create_contact(self, wd, contact):
+    def create_contact(self, wd, contact, photo_path):
         # init new contact creation
         wd.find_element_by_link_text("add new").click()
         # enter contact parameters
@@ -51,12 +52,17 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys(contact.nickname)
-        '''
-        # todo: return photo add when understand why test crash
+
+        # add photo
+        photo = wd.find_element_by_name("photo")
+        photo.send_keys(os.getcwd() + photo_path)
+        """
+        # code from recoder
         wd.find_element_by_name("photo").click()
         wd.find_element_by_name("photo").clear()
-        wd.find_element_by_name("photo").send_keys("test_data/cat.jpg")
-        '''
+        wd.find_element_by_name("photo").send_keys(os.getcwd() + "\\test_data\\cat.jpg")
+        """
+
         # common info (company, address,title, etc.)
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
