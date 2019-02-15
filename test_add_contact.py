@@ -25,7 +25,6 @@ class TestAddContact(unittest.TestCase):
                                         anniversary_year="2000", group_name="[none]",
                                         secondary_address="address secondary", secondary_home_phone="home secondary",
                                         notes="notes", photo_path="\\test_data\\cat.jpg"))
-        self.return_to_homepage(wd)
         self.logout(wd)
 
     def logout(self, wd):
@@ -114,7 +113,7 @@ class TestAddContact(unittest.TestCase):
         # anniversary info
         wd.find_element_by_name("aday").click()
         Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.anniversary_day)
-        # wd.find_element_by_xpath("(//option[@value='%s'])[2]" % contact.anniversary_day).click()
+        wd.find_element_by_xpath("(//option[@value='%s'])[2]" % contact.anniversary_day).click()
         wd.find_element_by_name("amonth").click()
         Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.anniversary_month)
         wd.find_element_by_xpath("(//option[@value='%s'])[2]" % contact.anniversary_month).click()
@@ -136,6 +135,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("notes").send_keys(contact.notes)
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
+        self.return_to_homepage(wd)
 
     def login(self, wd, username, password):
         self.open_home_page(wd)
