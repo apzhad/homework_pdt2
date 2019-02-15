@@ -14,26 +14,28 @@ class TestAddContact(unittest.TestCase):
         self.wd.implicitly_wait(30)
 
     def test_add_contact(self):
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(first_name="first_name", middle_name="middle_name", last_name="last_name",
-                                        nickname="nickname", title="title", company="company", address="address",
-                                        home_phone="homephone", mobile_phone="mobilephone", work_phone="workphone",
-                                        fax="fax", primary_email="email", secondary_email="email2",
-                                        third_email="email3", homepage="homepage", birth_day="5", birth_month="January",
-                                        birth_year="1950", anniversary_day="15", anniversary_month="June",
-                                        anniversary_year="2000", group_name="[none]",
-                                        secondary_address="address secondary", secondary_home_phone="home secondary",
-                                        notes="notes", photo_path="\\test_data\\cat.jpg"))
-        self.logout(wd)
+        self.login(username="admin", password="secret")
+        self.create_contact(Contact(first_name="first_name", middle_name="middle_name", last_name="last_name",
+                                    nickname="nickname", title="title", company="company", address="address",
+                                    home_phone="homephone", mobile_phone="mobilephone", work_phone="workphone",
+                                    fax="fax", primary_email="email", secondary_email="email2",
+                                    third_email="email3", homepage="homepage", birth_day="5", birth_month="January",
+                                    birth_year="1950", anniversary_day="15", anniversary_month="June",
+                                    anniversary_year="2000", group_name="[none]",
+                                    secondary_address="address secondary", secondary_home_phone="home secondary",
+                                    notes="notes", photo_path="\\test_data\\cat.jpg"))
+        self.logout()
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
-    def return_to_homepage(self, wd):
+    def return_to_homepage(self):
+        wd = self.wd
         wd.find_element_by_link_text("home page").click()
 
-    def create_contact(self, wd, contact):
+    def create_contact(self, contact):
+        wd = self.wd
         # init new contact creation
         wd.find_element_by_link_text("add new").click()
         # enter contact parameters
@@ -135,17 +137,19 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("notes").send_keys(contact.notes)
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
-        self.return_to_homepage(wd)
+        self.return_to_homepage()
 
-    def login(self, wd, username, password):
-        self.open_home_page(wd)
+    def login(self, username, password):
+        wd = self.wd
+        self.open_home_page()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
+        wd = self.wd
         wd.get("http://localhost/addressbook/")
 
     def is_element_present(self, how, what):
