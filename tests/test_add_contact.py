@@ -21,5 +21,5 @@ def test_add_contact(gen):
                                birth_year="1950", anniversary_day="15", anniversary_month="June",
                                anniversary_year="2000", group_name="[none]",
                                secondary_address="address secondary", secondary_home_phone="home secondary",
-                               notes="notes", photo_path="\\test_data\\cat.jpg"))
+                               notes="notes", photo_path="\\tests\\test_data\\cat.jpg"))
     gen.session.logout()

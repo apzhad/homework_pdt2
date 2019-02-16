@@ -29,7 +29,7 @@ class ContactManage:
 
         # add photo
         photo = wd.find_element_by_name("photo")
-        photo.send_keys(os.getcwd() + contact.photo_path)
+        photo.send_keys(os.path.split(os.environ['VIRTUAL_ENV'])[0] + contact.photo_path)
         """
         # code from recoder
         wd.find_element_by_name("photo").click()
