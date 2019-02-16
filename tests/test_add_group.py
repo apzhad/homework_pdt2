@@ -1,14 +1,5 @@
 # -*- coding: utf-8 -*-
-import pytest
 from model.group import Group
-from fixture.generic import Generic
-
-
-@pytest.fixture
-def gen(request):
-    fixture = Generic()
-    request.addfinalizer(fixture.finish)
-    return fixture
 
 
 def test_add_group(gen):
