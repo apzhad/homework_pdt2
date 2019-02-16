@@ -33,3 +33,11 @@ class GroupManage:
         wd.find_element_by_name("submit").click()
         self.return_to_groups_page()
 
+    def del_first(self):
+        wd = self.gen.wd
+        self.open_groups_page()
+        # select group & submit deletion
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_name("delete").click()
+        self.return_to_groups_page()
+
