@@ -2,6 +2,7 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from fixture.session import SessionManage
+from fixture.group import GroupManage
 import os
 
 
@@ -11,29 +12,7 @@ class Generic:
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
         self.session = SessionManage(self)
-
-    def return_to_groups_page(self):
-        wd = self.wd
-        wd.find_element_by_link_text("group page").click()
-
-    def create_new_group(self, group):
-        wd = self.wd
-        self.open_groups_page()
-        # init new group creation
-        wd.find_element_by_name("new").click()
-        # enter groups parameters
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys(group.name)
-        wd.find_element_by_name("group_header").click()
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys(group.header)
-        wd.find_element_by_name("group_footer").click()
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys(group.footer)
-        # submit group creation and return to group page
-        wd.find_element_by_name("submit").click()
-        self.return_to_groups_page()
+        self.group = GroupManage(self)
 
     def create_contact(self, contact):
         wd = self.wd
@@ -143,10 +122,6 @@ class Generic:
     def return_to_homepage(self):
         wd = self.wd
         wd.find_element_by_link_text("home page").click()
-
-    def open_groups_page(self):
-        wd = self.wd
-        wd.find_element_by_link_text("groups").click()
 
     def open_home_page(self):
         wd = self.wd
