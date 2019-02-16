@@ -13,7 +13,7 @@ def gen(request):
 
 def test_add_contact(gen):
     gen.session.login(username="admin", password="secret")
-    gen.create_contact(Contact(first_name="first_name", middle_name="middle_name", last_name="last_name",
+    gen.contact.create(Contact(first_name="first_name", middle_name="middle_name", last_name="last_name",
                                nickname="nickname", title="title", company="company", address="address",
                                home_phone="homephone", mobile_phone="mobilephone", work_phone="workphone",
                                fax="fax", primary_email="email", secondary_email="email2",
