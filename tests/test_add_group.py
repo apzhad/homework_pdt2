@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
-from group import Group
-from generic import Generic
+from model.group import Group
+from fixture.generic import Generic
 
 
 @pytest.fixture
