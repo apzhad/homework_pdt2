@@ -41,3 +41,21 @@ class GroupManage:
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
 
+    def edit_first(self, group):
+        wd = self.gen.wd
+        self.open_groups_page()
+        # select group & init editing
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_name("edit").click()
+        # change group parameters
+        wd.find_element_by_name("group_name").click()
+        wd.find_element_by_name("group_name").clear()
+        wd.find_element_by_name("group_name").send_keys(group.name)
+        wd.find_element_by_name("group_header").click()
+        wd.find_element_by_name("group_header").clear()
+        wd.find_element_by_name("group_header").send_keys(group.header)
+        wd.find_element_by_name("group_footer").click()
+        wd.find_element_by_name("group_footer").clear()
+        wd.find_element_by_name("group_footer").send_keys(group.footer)
+        wd.find_element_by_name("update").click()
+        self.return_to_groups_page()
