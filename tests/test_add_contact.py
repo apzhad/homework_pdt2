@@ -14,3 +14,9 @@ def test_add_contact(gen):
                                secondary_address="address secondary", secondary_home_phone="home secondary",
                                notes="notes", photo_path="\\tests\\test_data\\cat.jpg"))
     gen.session.logout()
+
+
+def test_add_empty_contact(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.contact.create_empty()
+    gen.session.logout()

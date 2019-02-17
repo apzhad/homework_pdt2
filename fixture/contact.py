@@ -117,3 +117,9 @@ class ContactManage:
         wd = self.gen.wd
         wd.find_element_by_link_text("home page").click()
 
+    def create_empty(self):
+        wd = self.gen.wd
+        # init new contact creation
+        wd.find_element_by_link_text("add new").click()
+        wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
+        self.return_to_homepage()
