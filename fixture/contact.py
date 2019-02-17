@@ -126,21 +126,31 @@ class ContactManage:
 
     def del_first(self):
         wd = self.gen.wd
-        # select group & submit deletion
+        # select first contact & submit deletion
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
 
     def cancel_del_first(self):
         wd = self.gen.wd
-        # select group & submit deletion
+        # select contact & submit deletion
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().dismiss()
 
-    def del_all(self):
+    def del_by_select_all(self):
         wd = self.gen.wd
-        # select group & submit deletion
+        # click "select all" & submit deletion
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
+        wd.find_element_by_xpath("(//input[@value='Delete'])").click()
+        wd.switch_to_alert().accept()
+
+    def del_all_by_click(self):
+        wd = self.gen.wd
+        # get contact count
+        contact_count = len(wd.find_elements_by_name("selected[]"))
+        # click each contact & submit deletion
+        for i in range(contact_count):
+            wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i + 1)).click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
