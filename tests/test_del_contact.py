@@ -45,3 +45,9 @@ def test_del_first_contact_using_edit(gen):
     gen.session.login(username="admin", password="secret")
     gen.contact.del_first_using_edit()
     gen.session.logout()
+
+
+def test_del_all_search_result(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.contact.del_all_found("lastname")
+    gen.session.logout()
