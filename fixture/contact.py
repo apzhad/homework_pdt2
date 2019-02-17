@@ -123,3 +123,11 @@ class ContactManage:
         wd.find_element_by_link_text("add new").click()
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.return_to_homepage()
+
+    def del_first(self):
+        wd = self.gen.wd
+        # select group & submit deletion
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("(//input[@value='Delete'])").click()
+        wd.switch_to_alert().accept()
+
