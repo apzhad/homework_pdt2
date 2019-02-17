@@ -126,3 +126,15 @@ class GroupManage:
         wd.find_element_by_name("group_footer").send_keys(group.footer)
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
+
+    def edit_all_wo_change(self):
+        wd = self.gen.wd
+        self.open_groups_page()
+        # get group count
+        group_count = len(wd.find_elements_by_name("selected[]"))
+        # select all groups & init editing
+        for i in range(group_count):
+            wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i + 1)).click()
+        wd.find_element_by_name("edit").click()
+        wd.find_element_by_name("update").click()
+        self.return_to_groups_page()
