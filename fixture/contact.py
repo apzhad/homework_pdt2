@@ -197,12 +197,6 @@ class ContactManage:
         # add photo
         photo = wd.find_element_by_name("photo")
         photo.send_keys(os.path.split(os.environ['VIRTUAL_ENV'])[0] + contact.photo_path)
-        """
-        # code from recoder
-        wd.find_element_by_name("photo").click()
-        wd.find_element_by_name("photo").clear()
-        wd.find_element_by_name("photo").send_keys(os.getcwd() + "\\test_data\\cat.jpg")
-        """
 
         # common info (company, address,title, etc.)
         wd.find_element_by_name("title").click()
@@ -274,3 +268,9 @@ class ContactManage:
         wd = self.gen.wd
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
+
+    def edit_first_wo_change(self):
+        wd = self.gen.wd
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("update").click()
+        self.return_to_homepage()

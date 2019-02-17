@@ -13,3 +13,9 @@ def test_edit_first_contact(gen):
                                    secondary_address="sec_addr", secondary_home_phone="",
                                    notes="s jv s\njsbej", photo_path="\\tests\\test_data\\3.png"))
     gen.session.logout()
+
+
+def test_edit_first_contact_without_change(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.contact.edit_first_wo_change()
+    gen.session.logout()
