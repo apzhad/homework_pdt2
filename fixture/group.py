@@ -95,3 +95,12 @@ class GroupManage:
         self.open_groups_page()
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
+
+    def create_empty(self):
+        wd = self.gen.wd
+        self.open_groups_page()
+        # init new group creation
+        wd.find_element_by_name("new").click()
+        # submit group creation and return to group page
+        wd.find_element_by_name("submit").click()
+        self.return_to_groups_page()
