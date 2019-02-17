@@ -237,3 +237,10 @@ class ContactManage:
         Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_to)
         wd.find_element_by_name("add").click()
         wd.find_element_by_link_text("group page \"%s\"" % group_to).click()
+
+    def remove_from_group(self, group_name):
+        wd = self.gen.wd
+        Select(wd.find_element_by_name("group")).select_by_visible_text(group_name)
+        wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
+        wd.find_element_by_name("remove").click()
+        wd.find_element_by_link_text("group page \"%s\"" % group_name).click()

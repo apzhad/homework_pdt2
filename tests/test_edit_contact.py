@@ -64,3 +64,9 @@ def test_add_contacts_to_group_from_another_group(gen):
     gen.session.login(username="admin", password="secret")
     gen.contact.add_to_group_from_another(group_from="new_name", group_to="last_name")
     gen.session.logout()
+
+
+def test_remove_contact_from_group(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.contact.remove_from_group(group_name="new_name")
+    gen.session.logout()
