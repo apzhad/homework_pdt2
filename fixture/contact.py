@@ -176,7 +176,7 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
 
-    def edit_first_contact(self, contact):
+    def edit_first(self, contact):
         wd = self.gen.wd
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         # enter contact parameters
@@ -269,3 +269,8 @@ class ContactManage:
         wd.find_element_by_name("notes").send_keys(contact.notes)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
+
+    def del_first_using_edit(self):
+        wd = self.gen.wd
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
