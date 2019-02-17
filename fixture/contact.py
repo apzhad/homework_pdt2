@@ -205,3 +205,11 @@ class ContactManage:
         self.enter_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
+
+    def edit_first_in_group(self, group_name, contact):
+        wd = self.gen.wd
+        Select(wd.find_element_by_name("group")).select_by_visible_text(group_name)
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        self.enter_parameters(contact)
+        wd.find_element_by_name("update").click()
+        self.return_to_homepage()

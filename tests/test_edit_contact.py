@@ -32,3 +32,17 @@ def test_edit_first_contact_from_details(gen):
                                                 group_name="", secondary_address="", secondary_home_phone="",
                                                 notes="", photo_path="\\tests\\test_data\\3.png"))
     gen.session.logout()
+
+
+def test_edit_first_contact_in_group(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.contact.edit_first_in_group(group_name="new_name",
+                                    contact=Contact(first_name="sbdhj", middle_name="wef", last_name="wf",
+                                                    nickname="xfs", title="dfb", company="", address="mdvknsl",
+                                                    home_phone="", mobile_phone="", work_phone="",
+                                                    fax="", primary_email="", secondary_email="", third_email="",
+                                                    homepage="", birth_day="22", birth_month="April", birth_year="1234",
+                                                    anniversary_day="3", anniversary_month="May", anniversary_year="77",
+                                                    group_name="", secondary_address="dfg", secondary_home_phone="55",
+                                                    notes="group", photo_path="\\tests\\test_data\\3.png"))
+    gen.session.logout()
