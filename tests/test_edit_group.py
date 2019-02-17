@@ -17,3 +17,9 @@ def test_update_first_group_without_changes(gen):
     gen.session.login(username="admin", password="secret")
     gen.group.update_first_wo_change()
     gen.session.logout()
+
+
+def test_update_all_groups(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.group.edit_all(Group(name="some_name", header="some_header_group", footer="changed_group"))
+    gen.session.logout()

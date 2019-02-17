@@ -104,3 +104,25 @@ class GroupManage:
         # submit group creation and return to group page
         wd.find_element_by_name("submit").click()
         self.return_to_groups_page()
+
+    def edit_all(self, group):
+        wd = self.gen.wd
+        self.open_groups_page()
+        # get group count
+        group_count = len(wd.find_elements_by_name("selected[]"))
+        # select all groups & init editing
+        for i in range(group_count):
+            wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i + 1)).click()
+        wd.find_element_by_name("edit").click()
+        # change group parameters
+        wd.find_element_by_name("group_name").click()
+        wd.find_element_by_name("group_name").clear()
+        wd.find_element_by_name("group_name").send_keys(group.name)
+        wd.find_element_by_name("group_header").click()
+        wd.find_element_by_name("group_header").clear()
+        wd.find_element_by_name("group_header").send_keys(group.header)
+        wd.find_element_by_name("group_footer").click()
+        wd.find_element_by_name("group_footer").clear()
+        wd.find_element_by_name("group_footer").send_keys(group.footer)
+        wd.find_element_by_name("update").click()
+        self.return_to_groups_page()
