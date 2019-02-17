@@ -137,3 +137,10 @@ class ContactManage:
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().dismiss()
+
+    def del_all(self):
+        wd = self.gen.wd
+        # select group & submit deletion
+        wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
+        wd.find_element_by_xpath("(//input[@value='Delete'])").click()
+        wd.switch_to_alert().accept()
