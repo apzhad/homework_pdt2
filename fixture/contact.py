@@ -85,6 +85,7 @@ class ContactManage:
         wd = self.gen.wd
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         self.enter_parameters(contact)
+        wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
 
@@ -105,8 +106,9 @@ class ContactManage:
         wd.find_element_by_name("nickname").send_keys(contact.nickname)
 
         # add photo
-        photo = wd.find_element_by_name("photo")
-        photo.send_keys(os.path.split(os.environ['VIRTUAL_ENV'])[0] + contact.photo_path)
+        if contact.photo_path:
+            photo = wd.find_element_by_name("photo")
+            photo.send_keys(os.path.split(os.environ['VIRTUAL_ENV'])[0] + contact.photo_path)
         """
         # code from recoder
         wd.find_element_by_name("photo").click()
@@ -203,6 +205,7 @@ class ContactManage:
         wd.find_element_by_xpath("//img[@alt='Details']").click()
         wd.find_element_by_name("modifiy").click()
         self.enter_parameters(contact)
+        wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
 
@@ -211,5 +214,6 @@ class ContactManage:
         Select(wd.find_element_by_name("group")).select_by_visible_text(group_name)
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         self.enter_parameters(contact)
+        wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
