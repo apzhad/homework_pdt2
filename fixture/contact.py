@@ -99,7 +99,6 @@ class ContactManage:
         # select group
         wd.find_element_by_name("new_group").click()
         Select(wd.find_element_by_name("new_group")).select_by_visible_text(contact.group_name)
-        # wd.find_element_by_xpath("//option[@value='%s']" % contact.group_name).click()
         # secondary info
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
@@ -161,7 +160,10 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
 
-    def del_from_group(self):
+    def del_all_from_group(self, group_name):
         wd = self.gen.wd
+        Select(wd.find_element_by_name("group")).select_by_visible_text(group_name)
+        # click "select all" & submit deletion
+        wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
