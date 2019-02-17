@@ -48,13 +48,19 @@ def test_edit_first_contact_in_group(gen):
     gen.session.logout()
 
 
-def test_move_all_contacts_to_group(gen):
+def test_add_all_contacts_to_group(gen):
     gen.session.login(username="admin", password="secret")
     gen.contact.add_to_group(group_name="new_name")
     gen.session.logout()
 
 
-def test_move_to_group_without_select_contact(gen):
+def test_add_to_group_without_select_contact(gen):
     gen.session.login(username="admin", password="secret")
     gen.contact.add_to_group(group_name="new_name")
+    gen.session.logout()
+
+
+def test_add_contacts_to_group_from_another_group(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.contact.add_to_group_from_another(group_from="new_name", group_to="last_name")
     gen.session.logout()

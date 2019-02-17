@@ -229,3 +229,11 @@ class ContactManage:
         wd = self.gen.wd
         Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_name)
         wd.find_element_by_name("add").click()
+
+    def add_to_group_from_another(self, group_from, group_to):
+        wd = self.gen.wd
+        Select(wd.find_element_by_name("group")).select_by_visible_text(group_from)
+        wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
+        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_to)
+        wd.find_element_by_name("add").click()
+        wd.find_element_by_link_text("group page \"%s\"" % group_to).click()
