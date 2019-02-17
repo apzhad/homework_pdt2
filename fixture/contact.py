@@ -217,3 +217,15 @@ class ContactManage:
         wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
+
+    def add_to_group(self, group_name):
+        wd = self.gen.wd
+        wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
+        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_name)
+        wd.find_element_by_name("add").click()
+        wd.find_element_by_link_text("group page \"%s\"" % group_name).click()
+
+    def add_to_group_unselected(self, group_name):
+        wd = self.gen.wd
+        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_name)
+        wd.find_element_by_name("add").click()

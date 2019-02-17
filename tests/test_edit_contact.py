@@ -46,3 +46,15 @@ def test_edit_first_contact_in_group(gen):
                                                     group_name="", secondary_address="dfg", secondary_home_phone="55",
                                                     notes="group", photo_path="\\tests\\test_data\\3.png"))
     gen.session.logout()
+
+
+def test_move_all_contacts_to_group(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.contact.add_to_group(group_name="new_name")
+    gen.session.logout()
+
+
+def test_move_to_group_without_select_contact(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.contact.add_to_group(group_name="new_name")
+    gen.session.logout()
