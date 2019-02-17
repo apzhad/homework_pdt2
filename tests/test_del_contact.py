@@ -21,3 +21,9 @@ def test_del_all_contacts_click(gen):
     gen.session.login(username="admin", password="secret")
     gen.contact.del_all_by_click()
     gen.session.logout()
+
+
+def test_del_unselected_contact(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.contact.del_unselected()
+    gen.session.logout()

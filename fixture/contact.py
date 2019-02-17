@@ -154,3 +154,8 @@ class ContactManage:
             wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i + 1)).click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+
+    def del_unselected(self):
+        wd = self.gen.wd
+        wd.find_element_by_xpath("(//input[@value='Delete'])").click()
+        wd.switch_to_alert().accept()
