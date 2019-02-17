@@ -70,3 +70,16 @@ def test_remove_contact_from_group(gen):
     gen.session.login(username="admin", password="secret")
     gen.contact.remove_from_group(group_name="new_name")
     gen.session.logout()
+
+
+def test_edit_first_found_contact(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.contact.edit_first_found(search="name",
+                                 contact=Contact(first_name="sbcghdhj", middle_name="j,lk", last_name="cgxh",
+                                                 nickname="", title="dfg", company="lkg", address="",
+                                                 home_phone="", mobile_phone="", work_phone="",
+                                                 fax="", primary_email="", secondary_email="", third_email="",
+                                                 homepage="", birth_day="22", birth_month="April", birth_year="1234",
+                                                 anniversary_day="3", anniversary_month="May", anniversary_year="77",
+                                                 group_name="", secondary_address="dfg", secondary_home_phone="55",
+                                                 notes="group", photo_path=""))

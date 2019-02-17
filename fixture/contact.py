@@ -255,3 +255,16 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+
+    def edit_first_found(self, search, contact):
+        wd = self.gen.wd
+        # find text
+        wd.find_element_by_name("searchstring").click()
+        wd.find_element_by_name("searchstring").clear()
+        wd.find_element_by_name("searchstring").send_keys(search)
+        # edit contact
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        self.enter_parameters(contact)
+        wd.find_element_by_name("delete_photo").click()
+        wd.find_element_by_name("update").click()
+        self.return_to_homepage()
