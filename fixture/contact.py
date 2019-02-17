@@ -98,7 +98,8 @@ class ContactManage:
         wd.find_element_by_name("ayear").send_keys(contact.anniversary_year)
         # select group
         wd.find_element_by_name("new_group").click()
-        wd.find_element_by_xpath("//option[@value='%s']" % contact.group_name).click()
+        Select(wd.find_element_by_name("new_group")).select_by_visible_text(contact.group_name)
+        # wd.find_element_by_xpath("//option[@value='%s']" % contact.group_name).click()
         # secondary info
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
@@ -156,6 +157,11 @@ class ContactManage:
         wd.switch_to_alert().accept()
 
     def del_unselected(self):
+        wd = self.gen.wd
+        wd.find_element_by_xpath("(//input[@value='Delete'])").click()
+        wd.switch_to_alert().accept()
+
+    def del_from_group(self):
         wd = self.gen.wd
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
