@@ -33,3 +33,9 @@ def test_del_all_contacts_from_group(gen):
     gen.session.login(username="admin", password="secret")
     gen.contact.del_all_from_group(group_name="new_name")
     gen.session.logout()
+
+
+def test_del_first_contact_from_group(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.contact.del_first_from_group(group_name="[none]")
+    gen.session.logout()
