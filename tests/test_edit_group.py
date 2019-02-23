@@ -41,3 +41,9 @@ def test_update_last_group_without_changes(gen):
     gen.session.login(username="admin", password="secret")
     gen.group.update_last_wo_change()
     gen.session.logout()
+
+
+def test_edit_first_group_name(gen):
+    gen.session.login(username="admin", password="secret")
+    gen.group.edit_first(Group(name="only_name"))
+    gen.session.logout()
