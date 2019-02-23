@@ -13,7 +13,7 @@ class ContactManage:
         # init new contact creation
         wd.find_element_by_link_text("add new").click()
         # enter contact parameters
-        self.enter_parameters(contact)
+        self.enter_contact_parameters(contact)
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.return_to_homepage()
@@ -88,26 +88,18 @@ class ContactManage:
     def edit_first(self, contact):
         wd = self.gen.wd
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
-        self.enter_parameters(contact)
+        self.enter_contact_parameters(contact)
         wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
 
-    def enter_parameters(self, contact):
+    def enter_contact_parameters(self, contact):
         wd = self.gen.wd
         # contact name
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.first_name)
-        wd.find_element_by_name("middlename").click()
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contact.middle_name)
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(contact.last_name)
-        wd.find_element_by_name("nickname").click()
-        wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys(contact.nickname)
+        self.set_field_value("firstname", contact.first_name)
+        self.set_field_value("middlename", contact.middle_name)
+        self.set_field_value("lastname", contact.last_name)
+        self.set_field_value("nickname", contact.nickname)
 
         # add photo
         if contact.photo_path:
@@ -121,43 +113,20 @@ class ContactManage:
         """
 
         # common info (company, address,title, etc.)
-        wd.find_element_by_name("title").click()
-        wd.find_element_by_name("title").clear()
-        wd.find_element_by_name("title").send_keys(contact.title)
-        wd.find_element_by_name("company").click()
-        wd.find_element_by_name("company").click()
-        wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys(contact.company)
-        wd.find_element_by_name("address").click()
-        wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(contact.address)
+        self.set_field_value("title", contact.title)
+        self.set_field_value("company", contact.company)
+        self.set_field_value("address", contact.address)
         # phone info
-        wd.find_element_by_name("home").click()
-        wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys(contact.home_phone)
-        wd.find_element_by_name("mobile").click()
-        wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys(contact.mobile_phone)
-        wd.find_element_by_name("work").click()
-        wd.find_element_by_name("work").clear()
-        wd.find_element_by_name("work").send_keys(contact.work_phone)
-        wd.find_element_by_name("fax").click()
-        wd.find_element_by_name("fax").clear()
-        wd.find_element_by_name("fax").send_keys(contact.fax)
+        self.set_field_value("home", contact.home_phone)
+        self.set_field_value("mobile", contact.mobile_phone)
+        self.set_field_value("work", contact.work_phone)
+        self.set_field_value("fax", contact.fax)
 
         # email info
-        wd.find_element_by_name("email").click()
-        wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(contact.primary_email)
-        wd.find_element_by_name("email2").click()
-        wd.find_element_by_name("email2").clear()
-        wd.find_element_by_name("email2").send_keys(contact.secondary_email)
-        wd.find_element_by_name("email3").click()
-        wd.find_element_by_name("email3").clear()
-        wd.find_element_by_name("email3").send_keys(contact.third_email)
-        wd.find_element_by_name("homepage").click()
-        wd.find_element_by_name("homepage").clear()
-        wd.find_element_by_name("homepage").send_keys(contact.homepage)
+        self.set_field_value("email", contact.primary_email)
+        self.set_field_value("email2", contact.secondary_email)
+        self.set_field_value("email3", contact.third_email)
+        self.set_field_value("homepage", contact.homepage)
 
         # birthday info
         wd.find_element_by_name("bday").click()
@@ -193,6 +162,13 @@ class ContactManage:
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.notes)
 
+    def set_field_value(self, field_name, text):
+        wd = self.gen.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
+
     def del_first_using_edit(self):
         wd = self.gen.wd
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
@@ -208,7 +184,7 @@ class ContactManage:
         wd = self.gen.wd
         wd.find_element_by_xpath("//img[@alt='Details']").click()
         wd.find_element_by_name("modifiy").click()
-        self.enter_parameters(contact)
+        self.enter_contact_parameters(contact)
         wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
@@ -217,7 +193,7 @@ class ContactManage:
         wd = self.gen.wd
         Select(wd.find_element_by_name("group")).select_by_visible_text(group_name)
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
-        self.enter_parameters(contact)
+        self.enter_contact_parameters(contact)
         wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
@@ -268,7 +244,7 @@ class ContactManage:
         wd.find_element_by_name("searchstring").send_keys(search)
         # edit contact
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
-        self.enter_parameters(contact)
+        self.enter_contact_parameters(contact)
         wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
