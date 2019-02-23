@@ -89,6 +89,16 @@ class GroupManage:
         self.open_groups_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    def get_group_list(self):
+        wd = self.gen.wd
+        self.open_groups_page()
+        group_list = []
+        group_count = self.get_group_count()
+        for i in range(group_count):
+            group_list.append(wd.find_element_by_xpath("//div[@id='content']/form/span[%s]" % (i + 1)).text)
+            # wd.find_elements_by_name("selected[]")
+        return group_list
+
     def del_last(self):
         wd = self.gen.wd
         self.open_groups_page()
