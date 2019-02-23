@@ -79,10 +79,15 @@ class GroupManage:
     def select_all_groups(self):
         wd = self.gen.wd
         # get group count
-        group_count = len(wd.find_elements_by_name("selected[]"))
+        group_count = self.get_group_count()
         # select all groups
         for i in range(group_count):
             wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i + 1)).click()
+
+    def get_group_count(self):
+        wd = self.gen.wd
+        self.open_groups_page()
+        return len(wd.find_elements_by_name("selected[]"))
 
     def del_last(self):
         wd = self.gen.wd
@@ -138,7 +143,7 @@ class GroupManage:
 
     def select_last_group(self):
         wd = self.gen.wd
-        group_count = len(wd.find_elements_by_name("selected[]"))
+        group_count = self.get_group_count()
         wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % group_count).click()
 
     def update_last_wo_change(self):
