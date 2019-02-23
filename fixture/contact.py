@@ -15,9 +15,16 @@ class ContactManage:
     def select_all_contact(self):
         wd = self.gen.wd
         # get contact count
-        contact_count = len(wd.find_elements_by_name("selected[]"))
+        contact_count = self.get_contact_count()
         for i in range(contact_count):
             wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i + 1)).click()
+
+    def get_contact_count(self, group_name=None):
+        wd = self.gen.wd
+        self.open_home_page()
+        if group_name is not None:
+            self.select_from_list("group", group_name)
+        return len(wd.find_elements_by_name("selected[]"))
 
     def enter_contact_parameters(self, contact):
         wd = self.gen.wd
@@ -79,8 +86,9 @@ class ContactManage:
 
     def select_from_list(self, list_name, text):
         wd = self.gen.wd
-        wd.find_element_by_name(list_name).click()
-        Select(wd.find_element_by_name(list_name)).select_by_visible_text(text)
+        if text is not None:
+            wd.find_element_by_name(list_name).click()
+            Select(wd.find_element_by_name(list_name)).select_by_visible_text(text)
 
     def set_field_value(self, field_name, text):
         wd = self.gen.wd
