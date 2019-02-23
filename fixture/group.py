@@ -31,8 +31,8 @@ class GroupManage:
         self.set_field_value("group_footer", group.footer)
 
     def set_field_value(self, field_name, text):
+        wd = self.gen.wd
         if text is not None:
-            wd = self.gen.wd
             wd.find_element_by_name(field_name).click()
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)

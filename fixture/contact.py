@@ -56,13 +56,16 @@ class ContactManage:
 
     def del_all_by_click(self):
         wd = self.gen.wd
-        # get contact count
-        contact_count = len(wd.find_elements_by_name("selected[]"))
-        # click each contact & submit deletion
-        for i in range(contact_count):
-            wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i + 1)).click()
+        self.select_all_contact()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+
+    def select_all_contact(self):
+        wd = self.gen.wd
+        # get contact count
+        contact_count = len(wd.find_elements_by_name("selected[]"))
+        for i in range(contact_count):
+            wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i + 1)).click()
 
     def del_unselected(self):
         wd = self.gen.wd
@@ -181,7 +184,7 @@ class ContactManage:
 
     def edit_first_in_group(self, group_name, contact):
         wd = self.gen.wd
-        Select(wd.find_element_by_name("group")).select_by_visible_text(group_name)
+        self.select_from_list("group", group_name)
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("delete_photo").click()
@@ -191,26 +194,26 @@ class ContactManage:
     def add_to_group(self, group_name):
         wd = self.gen.wd
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
-        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_name)
+        self.select_from_list("to_group", group_name)
         wd.find_element_by_name("add").click()
         wd.find_element_by_link_text("group page \"%s\"" % group_name).click()
 
     def add_to_group_unselected(self, group_name):
         wd = self.gen.wd
-        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_name)
+        self.select_from_list("to_group", group_name)
         wd.find_element_by_name("add").click()
 
     def add_to_group_from_another(self, group_from, group_to):
         wd = self.gen.wd
-        Select(wd.find_element_by_name("group")).select_by_visible_text(group_from)
+        self.select_from_list("group", group_from)
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
-        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_to)
+        self.select_from_list("to_group", group_to)
         wd.find_element_by_name("add").click()
         wd.find_element_by_link_text("group page \"%s\"" % group_to).click()
 
     def remove_from_group(self, group_name):
         wd = self.gen.wd
-        Select(wd.find_element_by_name("group")).select_by_visible_text(group_name)
+        self.select_from_list("group", group_name)
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_name("remove").click()
         wd.find_element_by_link_text("group page \"%s\"" % group_name).click()
@@ -218,9 +221,7 @@ class ContactManage:
     def del_all_found(self, search):
         wd = self.gen.wd
         # find text
-        wd.find_element_by_name("searchstring").click()
-        wd.find_element_by_name("searchstring").clear()
-        wd.find_element_by_name("searchstring").send_keys(search)
+        self.set_field_value("searchstring", search)
         # click "select all" & submit deletion
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
@@ -228,11 +229,8 @@ class ContactManage:
 
     def edit_first_found(self, search, contact):
         wd = self.gen.wd
-        # find text
-        wd.find_element_by_name("searchstring").click()
-        wd.find_element_by_name("searchstring").clear()
-        wd.find_element_by_name("searchstring").send_keys(search)
-        # edit contact
+        # find text & edit contact
+        self.set_field_value("searchstring", search)
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("delete_photo").click()
