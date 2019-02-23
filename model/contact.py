@@ -3,10 +3,11 @@
 
 class Contact:
 
-    def __init__(self, first_name, middle_name, last_name, nickname, title, company, address, home_phone, mobile_phone,
-                 work_phone, fax, primary_email, secondary_email, third_email, homepage, birth_day, birth_month,
-                 birth_year, anniversary_day, anniversary_month, anniversary_year, group_name, secondary_address,
-                 secondary_home_phone, notes, photo_path):
+    def __init__(self, first_name=None, middle_name=None, last_name=None, nickname=None, title=None, company=None,
+                 address=None, home_phone=None, mobile_phone=None, work_phone=None, fax=None, primary_email=None,
+                 secondary_email=None, third_email=None, homepage=None, birth_day=None, birth_month=None,
+                 birth_year=None, anniversary_day=None, anniversary_month=None, anniversary_year=None, group_name=None,
+                 secondary_address=None, secondary_home_phone=None, notes=None, photo_path=None, del_foto=False):
         self.first_name = first_name
         self.middle_name = middle_name
         self.last_name = last_name
@@ -33,3 +34,4 @@ class Contact:
         self.secondary_home_phone = secondary_home_phone
         self.notes = notes
         self.photo_path = photo_path
+        self.del_foto = del_foto

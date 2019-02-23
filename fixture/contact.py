@@ -92,7 +92,6 @@ class ContactManage:
         wd = self.gen.wd
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         self.enter_contact_parameters(contact)
-        wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
 
@@ -108,6 +107,10 @@ class ContactManage:
         if contact.photo_path:
             photo = wd.find_element_by_name("photo")
             photo.send_keys(os.path.split(os.environ['VIRTUAL_ENV'])[0] + contact.photo_path)
+
+        if contact.del_foto:
+            wd.find_element_by_name("delete_photo").click()
+
         """
         # code from recoder
         wd.find_element_by_name("photo").click()
@@ -178,7 +181,6 @@ class ContactManage:
         wd.find_element_by_xpath("//img[@alt='Details']").click()
         wd.find_element_by_name("modifiy").click()
         self.enter_contact_parameters(contact)
-        wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
 
@@ -187,7 +189,6 @@ class ContactManage:
         self.select_from_list("group", group_name)
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         self.enter_contact_parameters(contact)
-        wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
 
@@ -233,6 +234,5 @@ class ContactManage:
         self.set_field_value("searchstring", search)
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         self.enter_contact_parameters(contact)
-        wd.find_element_by_name("delete_photo").click()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()

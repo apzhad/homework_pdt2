@@ -30,7 +30,7 @@ def test_edit_first_contact_from_details(gen):
                                                 homepage="", birth_day="-", birth_month="-", birth_year="",
                                                 anniversary_day="-", anniversary_month="-", anniversary_year="",
                                                 group_name="", secondary_address="", secondary_home_phone="",
-                                                notes="", photo_path="\\tests\\test_data\\3.png"))
+                                                notes="", del_foto=True))
     gen.session.logout()
 
 
