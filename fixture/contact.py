@@ -129,38 +129,28 @@ class ContactManage:
         self.set_field_value("homepage", contact.homepage)
 
         # birthday info
-        wd.find_element_by_name("bday").click()
-        Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.birth_day)
-        wd.find_element_by_name("bmonth").click()
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.birth_month)
-        wd.find_element_by_name("byear").click()
-        wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys(contact.birth_year)
+        self.select_from_list("bday", contact.birth_day)
+        self.select_from_list("bmonth", contact.birth_month)
+        self.set_field_value("byear", contact.birth_year)
 
         # anniversary info
-        wd.find_element_by_name("aday").click()
-        Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.anniversary_day)
-        wd.find_element_by_name("amonth").click()
-        Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.anniversary_month)
-        wd.find_element_by_name("ayear").click()
-        wd.find_element_by_name("ayear").clear()
-        wd.find_element_by_name("ayear").send_keys(contact.anniversary_year)
+        self.select_from_list("aday", contact.anniversary_day)
+        self.select_from_list("amonth", contact.anniversary_month)
+        self.set_field_value("ayear", contact.anniversary_year)
 
         # select group
         if contact.group_name:
-            wd.find_element_by_name("new_group").click()
-            Select(wd.find_element_by_name("new_group")).select_by_visible_text(contact.group_name)
+            self.select_from_list("new_group", contact.group_name)
 
         # secondary info
-        wd.find_element_by_name("address2").click()
-        wd.find_element_by_name("address2").clear()
-        wd.find_element_by_name("address2").send_keys(contact.secondary_address)
-        wd.find_element_by_name("phone2").click()
-        wd.find_element_by_name("phone2").clear()
-        wd.find_element_by_name("phone2").send_keys(contact.secondary_home_phone)
-        wd.find_element_by_name("notes").click()
-        wd.find_element_by_name("notes").clear()
-        wd.find_element_by_name("notes").send_keys(contact.notes)
+        self.set_field_value("address2", contact.secondary_address)
+        self.set_field_value("phone2", contact.secondary_home_phone)
+        self.set_field_value("notes", contact.notes)
+
+    def select_from_list(self, list_name, text):
+        wd = self.gen.wd
+        wd.find_element_by_name(list_name).click()
+        Select(wd.find_element_by_name(list_name)).select_by_visible_text(text)
 
     def set_field_value(self, field_name, text):
         wd = self.gen.wd
