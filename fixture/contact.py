@@ -218,6 +218,7 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_name("remove").click()
         wd.find_element_by_link_text("group page \"%s\"" % group_name).click()
+        self.select_from_list("group", "[all]")
 
     def del_all_found(self, search):
         wd = self.gen.wd

@@ -3,7 +3,6 @@ from model.contact import Contact
 
 
 def test_add_contact(gen):
-    gen.session.login(username="admin", password="secret")
     gen.contact.create(Contact(first_name="first_name", middle_name="middle_name", last_name="last_name",
                                nickname="nickname", title="title", company="company", address="address",
                                home_phone="homephone", mobile_phone="mobilephone", work_phone="workphone",
@@ -13,11 +12,9 @@ def test_add_contact(gen):
                                anniversary_year="2000", group_name="[none]",
                                secondary_address="address secondary", secondary_home_phone="home secondary",
                                notes="notes", photo_path="\\tests\\test_data\\cat.jpg"))
-    gen.session.logout()
 
 
 def test_add_contact_into_group(gen):
-    gen.session.login(username="admin", password="secret")
     gen.contact.create(Contact(first_name="first_name", middle_name="middle_name", last_name="last_name",
                                nickname="nickname", title="title", company="company", address="address",
                                home_phone="homephone", mobile_phone="mobilephone", work_phone="workphone",
@@ -27,10 +24,7 @@ def test_add_contact_into_group(gen):
                                anniversary_year="2000", group_name="new_name",
                                secondary_address="address secondary", secondary_home_phone="home secondary",
                                notes="notes", photo_path="\\tests\\test_data\\cat.jpg"))
-    gen.session.logout()
 
 
 def test_add_empty_contact(gen):
-    gen.session.login(username="admin", password="secret")
     gen.contact.create_empty()
-    gen.session.logout()
