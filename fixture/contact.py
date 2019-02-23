@@ -32,14 +32,18 @@ class ContactManage:
     def del_first(self):
         wd = self.gen.wd
         # select first contact & submit deletion
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_contact()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+
+    def select_first_contact(self):
+        wd = self.gen.wd
+        wd.find_element_by_name("selected[]").click()
 
     def cancel_del_first(self):
         wd = self.gen.wd
         # select contact & submit deletion
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_contact()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().dismiss()
 
@@ -77,7 +81,7 @@ class ContactManage:
         wd = self.gen.wd
         Select(wd.find_element_by_name("group")).select_by_visible_text(group_name)
         # click "select all" & submit deletion
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_contact()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
 

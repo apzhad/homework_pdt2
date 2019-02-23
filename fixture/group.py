@@ -37,15 +37,19 @@ class GroupManage:
         wd = self.gen.wd
         self.open_groups_page()
         # select group & submit deletion
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_group()
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
+
+    def select_first_group(self):
+        wd = self.gen.wd
+        wd.find_element_by_name("selected[]").click()
 
     def edit_first(self, group):
         wd = self.gen.wd
         self.open_groups_page()
         # select group & init editing
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_group()
         wd.find_element_by_name("edit").click()
         # change group parameters
         wd.find_element_by_name("group_name").click()
@@ -64,7 +68,7 @@ class GroupManage:
         wd = self.gen.wd
         self.open_groups_page()
         # select group & init editing
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_group()
         wd.find_element_by_name("edit").click()
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
