@@ -72,21 +72,23 @@ class GroupManage:
     def del_all(self):
         wd = self.gen.wd
         self.open_groups_page()
-        # get group count
-        group_count = len(wd.find_elements_by_name("selected[]"))
-        # select all groups & submit deletion
-        for i in range(group_count):
-            wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i+1)).click()
+        self.select_all_groups()
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
+
+    def select_all_groups(self):
+        wd = self.gen.wd
+        # get group count
+        group_count = len(wd.find_elements_by_name("selected[]"))
+        # select all groups
+        for i in range(group_count):
+            wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i + 1)).click()
 
     def del_last(self):
         wd = self.gen.wd
         self.open_groups_page()
         # get group count
-        group_count = len(wd.find_elements_by_name("selected[]"))
-        # select last groups & submit deletion
-        wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % group_count).click()
+        self.select_last_group()
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
 
@@ -108,11 +110,7 @@ class GroupManage:
     def edit_all(self, group):
         wd = self.gen.wd
         self.open_groups_page()
-        # get group count
-        group_count = len(wd.find_elements_by_name("selected[]"))
-        # select all groups & init editing
-        for i in range(group_count):
-            wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i + 1)).click()
+        self.select_all_groups()
         wd.find_element_by_name("edit").click()
         # change group parameters
         self.enter_group_parameters(group)
@@ -122,11 +120,7 @@ class GroupManage:
     def edit_all_wo_change(self):
         wd = self.gen.wd
         self.open_groups_page()
-        # get group count
-        group_count = len(wd.find_elements_by_name("selected[]"))
-        # select all groups & init editing
-        for i in range(group_count):
-            wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % (i + 1)).click()
+        self.select_all_groups()
         wd.find_element_by_name("edit").click()
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
@@ -135,20 +129,23 @@ class GroupManage:
         wd = self.gen.wd
         self.open_groups_page()
         # select group & init editing
-        group_count = len(wd.find_elements_by_name("selected[]"))
-        wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % group_count).click()
+        self.select_last_group()
         wd.find_element_by_name("edit").click()
         # change group parameters
         self.enter_group_parameters(group)
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
 
+    def select_last_group(self):
+        wd = self.gen.wd
+        group_count = len(wd.find_elements_by_name("selected[]"))
+        wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % group_count).click()
+
     def update_last_wo_change(self):
         wd = self.gen.wd
         self.open_groups_page()
         # select group & init editing
-        group_count = len(wd.find_elements_by_name("selected[]"))
-        wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % group_count).click()
+        self.select_last_group()
         wd.find_element_by_name("edit").click()
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
