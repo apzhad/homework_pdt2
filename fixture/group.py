@@ -13,8 +13,7 @@ class GroupManage:
 
     def return_to_groups_page(self):
         wd = self.gen.wd
-        if wd.find_element_by_link_text("groups"):
-            wd.find_element_by_link_text("group page").click()
+        wd.find_element_by_link_text("group page").click()
 
     def create(self, group):
         wd = self.gen.wd
@@ -100,6 +99,13 @@ class GroupManage:
             # wd.find_elements_by_name("selected[]")
         return group_list
 
+    def get_group_value(self, group_name):
+        wd = self.gen.wd
+        self.open_groups_page()
+        for i in range(self.get_group_count()):
+            if group_name == wd.find_element_by_xpath("//div[@id='content']/form/span[%s]" % (i + 1)).text:
+                return wd.find_element_by_xpath("//div[@id='content']/form/span[%s]" % (i + 1)).get_attribute('value')
+
     def del_last(self):
         wd = self.gen.wd
         self.open_groups_page()
@@ -165,4 +171,3 @@ class GroupManage:
         wd.find_element_by_name("edit").click()
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
-

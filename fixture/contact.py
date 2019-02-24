@@ -124,8 +124,7 @@ class ContactManage:
 
     def return_to_homepage(self):
         wd = self.gen.wd
-        if wd.find_element_by_link_text("home page"):
-            wd.find_element_by_link_text("home page").click()
+        wd.find_element_by_link_text("home page").click()
 
     def select_first_contact(self):
         wd = self.gen.wd
