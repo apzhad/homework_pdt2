@@ -41,4 +41,4 @@ class SessionManage:
 
     def is_login_as(self, username):
         wd = self.gen.wd
-        return wd.find_element_by_xpath("//div[@id='top']/form/b").text == "("+username+")"
+        return wd.find_element_by_xpath("//div[@id='top']/form/b").text == "(" + username + ")"
