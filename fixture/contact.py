@@ -29,9 +29,11 @@ class ContactManage:
             self.select_from_list("group", group_name)
         return len(wd.find_elements_by_name("selected[]"))
 
-    def get_result_count(self, search=None):
+    def get_result_count(self, search, group_name=None):
         wd = self.gen.wd
         self.open_home_page()
+        if group_name is not None:  # if search in defined group
+            self.select_from_list("group", group_name)
         self.set_field_value("searchstring", search)
         return len(wd.find_elements_by_name("selected[]"))
 
@@ -117,7 +119,7 @@ class ContactManage:
 
     def init_create_contact(self):
         wd = self.gen.wd
-        if not (wd.current_url.endswith("//edit.php") and len(wd.find_elements_by_name("submit")) > 0):
+        if not (wd.current_url.endswith("/edit.php") and len(wd.find_elements_by_name("submit")) > 0):
             wd.find_element_by_link_text("add new").click()
 
     def return_to_homepage(self):
