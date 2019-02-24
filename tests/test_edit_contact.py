@@ -28,7 +28,7 @@ def test_edit_first_contact_in_group(gen):
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count(group_name=group) == 0:
         gen.contact.create(Contact(first_name="modify", last_name="status", group_name=group))
-    gen.contact.add_to_group(group_name=group)
+    gen.contact.edit_first_in_group(group_name=group)
 
 
 def test_edit_first_contact_from_details(gen):
@@ -52,7 +52,7 @@ def test_add_all_contacts_to_group(gen):
         gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group))
         gen.contact.create(Contact(first_name="modify_1", last_name="change_group_1", group_name="[none]"))
         gen.contact.create(Contact(first_name="modify_2", last_name="change_group_2"))
-    gen.contact.add_to_group(group_name=group)
+    gen.contact.add_all_to_group(group_name=group)
 
 
 def test_add_to_group_without_select_contact(gen):
@@ -61,7 +61,7 @@ def test_add_to_group_without_select_contact(gen):
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count() == 0:
         gen.contact.create(Contact(first_name="modify", last_name="change_group"))
-    gen.contact.add_to_group(group_name=group)
+    gen.contact.add_to_group_unselected(group_name=group)
 
 
 def test_add_contacts_to_group_from_another_group(gen):
