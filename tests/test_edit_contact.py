@@ -24,7 +24,7 @@ def test_edit_first_contact_without_change(gen):
 
 def test_edit_first_contact_in_group(gen):
     group = "new_name"
-    if group not in gen.group.get_group_list():
+    if group not in gen.group.get_group_list() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count(group_name=group) == 0:
         gen.contact.create(Contact(first_name="modify", last_name="status", group_name=group))
@@ -46,7 +46,7 @@ def test_edit_first_contact_from_details(gen):
 
 def test_add_all_contacts_to_group(gen):
     group = "new_name"
-    if group not in gen.group.get_group_list():
+    if group not in gen.group.get_group_list() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count() == 0:
         gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group))
@@ -57,7 +57,7 @@ def test_add_all_contacts_to_group(gen):
 
 def test_add_to_group_without_select_contact(gen):
     group = "new_name"
-    if group not in gen.group.get_group_list():
+    if group not in gen.group.get_group_list() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count() == 0:
         gen.contact.create(Contact(first_name="modify", last_name="change_group"))
@@ -67,9 +67,9 @@ def test_add_to_group_without_select_contact(gen):
 def test_add_contacts_to_group_from_another_group(gen):
     group_from = "new_name"
     group_to = "last_name"
-    if group_from not in gen.group.get_group_list():
+    if group_from not in gen.group.get_group_list() and group_from != "[all]" and group_from != "[none]":
         gen.group.create(group=Group(name=group_from))
-    if group_to not in gen.group.get_group_list():
+    if group_to not in gen.group.get_group_list() and group_to != "[all]" and group_to != "[none]":
         gen.group.create(group=Group(name=group_to))
     if gen.contact.get_contact_count() == 0:
         gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group_from))
@@ -78,7 +78,7 @@ def test_add_contacts_to_group_from_another_group(gen):
 
 def test_remove_contact_from_group(gen):
     group = "last_name"
-    if group not in gen.group.get_group_list():
+    if group not in gen.group.get_group_list() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count(group_name=group) == 0:
         gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group))
