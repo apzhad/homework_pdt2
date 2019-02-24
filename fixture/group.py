@@ -95,8 +95,7 @@ class GroupManage:
         wd = self.gen.wd
         self.open_groups_page()
         group_list = []
-        group_count = self.get_group_count()
-        for i in range(group_count):
+        for i in range(self.get_group_count()):
             group_list.append(wd.find_element_by_xpath("//div[@id='content']/form/span[%s]" % (i + 1)).text)
             # wd.find_elements_by_name("selected[]")
         return group_list
@@ -166,3 +165,4 @@ class GroupManage:
         wd.find_element_by_name("edit").click()
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
+

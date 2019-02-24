@@ -10,8 +10,10 @@ class ContactManage:
 
     def open_home_page(self):
         wd = self.gen.wd
-        if not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_xpath("(//input[@value='Delete'])")) > 0):
+        if not ("/addressbook/" in wd.current_url and len(wd.find_elements_by_xpath("(//input[@value='Delete'])")) > 0):
             wd.find_element_by_link_text("home").click()
+        elif "addressbook/?group=" in wd.current_url:
+            self.select_from_list("group", "[all]")
 
     def select_all_contact(self):
         wd = self.gen.wd
@@ -262,7 +264,6 @@ class ContactManage:
     def del_all_found(self, search):
         wd = self.gen.wd
         self.open_home_page()
-        self.select_from_list("group", "[all]")
         # find text
         self.set_field_value("searchstring", search)
         # click "select all" & submit deletion
@@ -273,6 +274,7 @@ class ContactManage:
     def edit_first_found(self, search, contact):
         wd = self.gen.wd
         # find text & edit contact
+
         self.set_field_value("searchstring", search)
         self.click_first_pencil_img()
         self.enter_contact_parameters(contact)
