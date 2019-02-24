@@ -106,18 +106,22 @@ class ContactManage:
 
     def create(self, contact):
         wd = self.gen.wd
-        # init new contact creation
-        if not (wd.current_url.endswith("//edit.php") and len(wd.find_elements_by_name("submit")) > 0):
-            wd.find_element_by_link_text("add new").click()
+        self.init_create_contact()
         # enter contact parameters
         self.enter_contact_parameters(contact)
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.return_to_homepage()
 
+    def init_create_contact(self):
+        wd = self.gen.wd
+        if not (wd.current_url.endswith("//edit.php") and len(wd.find_elements_by_name("submit")) > 0):
+            wd.find_element_by_link_text("add new").click()
+
     def return_to_homepage(self):
         wd = self.gen.wd
-        wd.find_element_by_link_text("home page").click()
+        if wd.find_element_by_link_text("home page"):
+            wd.find_element_by_link_text("home page").click()
 
     def select_first_contact(self):
         wd = self.gen.wd
@@ -126,7 +130,7 @@ class ContactManage:
     def create_empty(self):
         wd = self.gen.wd
         # init new contact creation
-        wd.find_element_by_link_text("add new").click()
+        self.init_create_contact()
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.return_to_homepage()
 
