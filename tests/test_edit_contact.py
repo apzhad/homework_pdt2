@@ -28,7 +28,8 @@ def test_edit_first_contact_in_group(gen):
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count(group_name=group) == 0:
         gen.contact.create(Contact(first_name="modify", last_name="status", group_name=group))
-    gen.contact.edit_first_in_group(group_name=group)
+    gen.contact.edit_first_in_group(group_name=group, contact=Contact(first_name="first", last_name="last",
+                                                                      address="gjh"))
 
 
 def test_edit_first_contact_from_details(gen):
@@ -89,7 +90,6 @@ def test_edit_first_found_contact(gen):
     search = "modify"
     if gen.contact.get_result_count(search) == 0:
         gen.contact.create(Contact(first_name=search, fax="573-092", nickname="1"))
-
     gen.contact.edit_first_found(search=search,
                                  contact=Contact(first_name="sbcghdhj", middle_name="j,lk", last_name="cgxh",
                                                  nickname="", title="dfg", company="lkg", address="",
