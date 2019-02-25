@@ -10,10 +10,11 @@ class ContactManage:
 
     def open_home_page(self):
         wd = self.gen.wd
-        if not ("/addressbook/" in wd.current_url and len(wd.find_elements_by_xpath("(//input[@value='Delete'])")) > 0):
-            wd.find_element_by_link_text("home").click()
-        elif "addressbook/?group=" in wd.current_url:
+        if "addressbook/?group=" in wd.current_url:
             self.select_from_list("group", "[all]")
+        elif not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_xpath("(//input[@value='Delete'])")) > 0):
+            wd.find_element_by_link_text("home").click()
+
 
     def select_all_contact(self):
         wd = self.gen.wd
@@ -35,7 +36,7 @@ class ContactManage:
         if group_name is not None:  # if search in defined group
             self.select_from_list("group", group_name)
         self.set_field_value("searchstring", search)
-        return len(wd.find_elements_by_name("selected[]"))
+        return len(wd.find_elements_by_id("search_count"))
 
     def enter_contact_parameters(self, contact):
         wd = self.gen.wd
@@ -176,17 +177,33 @@ class ContactManage:
 
     def del_all_from_group(self, group_name):
         wd = self.gen.wd
-        self.open_home_page()
-        self.select_from_list("group", group_name)
+        self.open_contact_group(group_name)
         # click "select all" & submit deletion
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
 
+    def open_contact_group(self, group_name):
+        wd = self.gen.wd
+        if len(wd.find_elements_by_xpath("(//input[@id='MassCB'])")) > 0 and len(wd.find_elements_by_name('searchstring')) > 0:
+            if not (wd.current_url.endswith("addressbook/?group=" + self.get_group_id(group_name))):
+                self.select_from_list("group", group_name)
+        else:
+            wd.find_element_by_link_text("home").click()
+            self.select_from_list("group", group_name)
+
+    def get_group_id(self, group):
+        wd = self.gen.wd
+        # todo: get id from fixture group. Maybe should use wd.back?
+        if wd.find_element_by_xpath('//select[@name="group"]'):
+            select = Select(wd.find_element_by_xpath('//select[@name="group"]'))
+            for option in select.options:
+                if option.text == group:
+                    return str(option.get_attribute('value'))
+
     def del_first_from_group(self, group_name):
         wd = self.gen.wd
-        self.open_home_page()
-        self.select_from_list("group", group_name)
+        self.open_contact_group(group_name)
         # click "select all" & submit deletion
         self.select_first_contact()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
@@ -224,14 +241,14 @@ class ContactManage:
 
     def edit_first_in_group(self, group_name, contact):
         wd = self.gen.wd
-        self.open_home_page()
+        self.open_contact_group(group_name)
         self.select_from_list("group", group_name)
         self.click_first_pencil_img()
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
 
-    def add_to_group(self, group_name):
+    def add_all_to_group(self, group_name):
         wd = self.gen.wd
         self.open_home_page()
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
@@ -247,8 +264,7 @@ class ContactManage:
 
     def add_to_group_from_another(self, group_from, group_to):
         wd = self.gen.wd
-        self.open_home_page()
-        self.select_from_list("group", group_from)
+        self.open_contact_group(group_from)
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         self.select_from_list("to_group", group_to)
         wd.find_element_by_name("add").click()
@@ -256,8 +272,7 @@ class ContactManage:
 
     def remove_from_group(self, group_name):
         wd = self.gen.wd
-        self.open_home_page()
-        self.select_from_list("group", group_name)
+        self.open_contact_group(group_name)
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_name("remove").click()
         wd.find_element_by_link_text("group page \"%s\"" % group_name).click()
@@ -275,7 +290,7 @@ class ContactManage:
     def edit_first_found(self, search, contact):
         wd = self.gen.wd
         # find text & edit contact
-
+        self.open_home_page()
         self.set_field_value("searchstring", search)
         self.click_first_pencil_img()
         self.enter_contact_parameters(contact)
