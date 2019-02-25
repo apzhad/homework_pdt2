@@ -36,7 +36,7 @@ class ContactManage:
         if group_name is not None:  # if search in defined group
             self.select_from_list("group", group_name)
         self.set_field_value("searchstring", search)
-        return len(wd.find_elements_by_id("search_count"))
+        return int(wd.find_element_by_id("search_count").text)
 
     def enter_contact_parameters(self, contact):
         wd = self.gen.wd
