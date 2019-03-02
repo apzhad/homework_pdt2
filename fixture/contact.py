@@ -13,7 +13,7 @@ class ContactManage:
         wd = self.gen.wd
         if "addressbook/?group=" in wd.current_url:
             self.select_from_list("group", "[all]")
-        elif not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_xpath("(//input[@value='Delete'])")) > 0):
+        elif not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name('searchstring')) > 0):
             wd.find_element_by_link_text("home").click()
 
 
@@ -243,8 +243,7 @@ class ContactManage:
     def edit_first_in_group(self, group_name, contact):
         wd = self.gen.wd
         self.open_contact_group(group_name)
-        self.select_from_list("group", group_name)
-        self.click_first_pencil_img()
+        self.click_first_pencil_img(group_name)
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
@@ -298,16 +297,19 @@ class ContactManage:
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
 
-    def click_first_pencil_img(self):
+    def click_first_pencil_img(self, group=None):
         wd = self.gen.wd
-        for i in range(self.get_contact_count()):
+        for i in range(self.get_contact_count(group)):
             if wd.find_element_by_xpath("(//img[@alt='Edit'])[%s]" % (i+1)):
                 wd.find_element_by_xpath("(//img[@alt='Edit'])[%s]" % (i+1)).click()
                 return
 
-    def get_contact_list(self):
+    def get_contact_list(self, group_name=None):
         wd = self.gen.wd
-        self.open_home_page()
+        if group_name is not None:
+            self.open_contact_group(group_name)
+        else:
+            self.open_home_page()
         contact_list = []
         for i in wd.find_elements_by_name("entry"):
             id = i.find_element_by_name("selected[]").get_attribute('value')
