@@ -7,7 +7,8 @@ class Contact:
                  address=None, home_phone=None, mobile_phone=None, work_phone=None, fax=None, primary_email=None,
                  secondary_email=None, third_email=None, homepage=None, birth_day=None, birth_month=None,
                  birth_year=None, anniversary_day=None, anniversary_month=None, anniversary_year=None, group_name=None,
-                 secondary_address=None, secondary_home_phone=None, notes=None, photo_path=None, del_foto=False):
+                 secondary_address=None, secondary_home_phone=None, notes=None, photo_path=None, del_foto=False,
+                 id=None):
         self.first_name = first_name
         self.middle_name = middle_name
         self.last_name = last_name
@@ -35,3 +36,4 @@ class Contact:
         self.notes = notes
         self.photo_path = photo_path
         self.del_foto = del_foto
+        self.id = id
