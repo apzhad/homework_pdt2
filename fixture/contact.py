@@ -13,8 +13,8 @@ class ContactManage:
         wd = self.gen.wd
         if "addressbook/?group=" in wd.current_url:
             self.select_from_list("group", "[all]")
-        elif not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name('searchstring')) > 0):
-            wd.find_element_by_link_text("home").click()
+        #elif not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name('searchstring')) > 0):
+        wd.find_element_by_link_text("home").click()
 
 
     def select_all_contact(self):
