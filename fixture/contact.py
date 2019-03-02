@@ -304,12 +304,14 @@ class ContactManage:
                 wd.find_element_by_xpath("(//img[@alt='Edit'])[%s]" % (i+1)).click()
                 return
 
-    def get_contact_list(self, group_name=None):
+    def get_contact_list(self, group_name=None, search=None):
         wd = self.gen.wd
         if group_name is not None:
             self.open_contact_group(group_name)
         else:
             self.open_home_page()
+        if search is not None:
+            self.set_field_value("searchstring", search)
         contact_list = []
         for i in wd.find_elements_by_name("entry"):
             id = i.find_element_by_name("selected[]").get_attribute('value')
