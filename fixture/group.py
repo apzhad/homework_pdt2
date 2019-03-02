@@ -27,6 +27,7 @@ class GroupManage:
         # submit group creation and return to group page
         wd.find_element_by_name("submit").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def enter_group_parameters(self, group):
         self.set_field_value("group_name", group.name)
@@ -47,6 +48,7 @@ class GroupManage:
         self.select_first_group()
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def select_first_group(self):
         wd = self.gen.wd
@@ -62,6 +64,7 @@ class GroupManage:
         self.enter_group_parameters(group)
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def update_first_wo_change(self):
         wd = self.gen.wd
@@ -71,6 +74,7 @@ class GroupManage:
         wd.find_element_by_name("edit").click()
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def del_all(self):
         wd = self.gen.wd
@@ -78,6 +82,7 @@ class GroupManage:
         self.select_all_groups()
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def select_all_groups(self):
         wd = self.gen.wd
@@ -92,15 +97,18 @@ class GroupManage:
         self.open_groups_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    group_cache = None
+
     def get_group_list(self):
-        wd = self.gen.wd
-        self.open_groups_page()
-        group_list = []
-        for i in wd.find_elements_by_css_selector("span.group"):
-            text = i.text
-            id = i.find_element_by_name("selected[]").get_attribute('value')
-            group_list.append(Group(name=text, id=id))
-        return group_list
+        if self.group_cache is None:
+            wd = self.gen.wd
+            self.open_groups_page()
+            self.group_cache = []
+            for i in wd.find_elements_by_css_selector("span.group"):
+                text = i.text
+                id = i.find_element_by_name("selected[]").get_attribute('value')
+                self.group_cache.append(Group(name=text, id=id))
+        return list(self.group_cache)
 
     def del_last(self):
         wd = self.gen.wd
@@ -109,12 +117,14 @@ class GroupManage:
         self.select_last_group()
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def del_not_choose(self):
         wd = self.gen.wd
         self.open_groups_page()
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def create_empty(self):
         wd = self.gen.wd
@@ -124,6 +134,7 @@ class GroupManage:
         # submit group creation and return to group page
         wd.find_element_by_name("submit").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def edit_all(self, group):
         wd = self.gen.wd
@@ -134,6 +145,7 @@ class GroupManage:
         self.enter_group_parameters(group)
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def edit_all_wo_change(self):
         wd = self.gen.wd
@@ -142,6 +154,7 @@ class GroupManage:
         wd.find_element_by_name("edit").click()
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def edit_last(self, group):
         wd = self.gen.wd
@@ -153,6 +166,7 @@ class GroupManage:
         self.enter_group_parameters(group)
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
+        self.group_cache = None
 
     def select_last_group(self):
         wd = self.gen.wd
@@ -167,3 +181,4 @@ class GroupManage:
         wd.find_element_by_name("edit").click()
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
+        self.group_cache = None
