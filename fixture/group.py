@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from model.group import Group
+
 
 class GroupManage:
 
@@ -94,20 +96,11 @@ class GroupManage:
         wd = self.gen.wd
         self.open_groups_page()
         group_list = []
-        for i in range(self.get_group_count()):
-            group_list.append(wd.find_element_by_xpath("//div[@id='content']/form/span[%s]" % (i + 1)).text)
-            # wd.find_elements_by_name("selected[]")
+        for i in wd.find_elements_by_css_selector("span.group"):
+            text = i.text
+            id = i.find_element_by_name("selected[]").get_attribute('value')
+            group_list.append(Group(name=text, id=id))
         return group_list
-
-    # """
-    # Trying get group id
-    def get_group_id(self, name):
-        wd = self.gen.wd
-        self.open_groups_page()
-        for i in range(self.get_group_count()):
-            if name == wd.find_element_by_xpath("//div[@id='content']/form/span[%s]" % (i + 1)).text:
-                return wd.find_element_by_xpath("//div[@id='content']/form/span[%s]" % (i + 1)).get_attribute('value')
-    # """
 
     def del_last(self):
         wd = self.gen.wd
