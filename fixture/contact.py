@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.support.ui import Select
 import os
+from model.contact import Contact
 
 
 class ContactManage:
@@ -303,3 +304,13 @@ class ContactManage:
             if wd.find_element_by_xpath("(//img[@alt='Edit'])[%s]" % (i+1)):
                 wd.find_element_by_xpath("(//img[@alt='Edit'])[%s]" % (i+1)).click()
                 return
+
+    def get_contact_list(self):
+        wd = self.gen.wd
+        self.open_home_page()
+        contact_list = []
+        for i in wd.find_elements_by_name("entry"):
+            id = i.find_element_by_name("selected[]").get_attribute('value')
+            cells = i.find_elements_by_tag_name("td")
+            contact_list.append(Contact(id=id, last_name=cells[1].text, first_name=cells[2].text))
+        return contact_list
