@@ -15,6 +15,7 @@ def test_edit_first_contact(gen):
                    anniversary_month="May", anniversary_year="2008",
                    secondary_address="sec_addr", secondary_home_phone="",
                    notes="s jv s\njsbej", photo_path="\\tests\\test_data\\3.png")
+    cont.id = old_contact_list[0].id
     gen.contact.edit_first(cont)
     new_contact_list = gen.contact.get_contact_list()
     assert len(old_contact_list) == len(new_contact_list)
@@ -40,6 +41,7 @@ def test_edit_first_contact_in_group(gen):
         gen.contact.create(Contact(first_name="modify", last_name="status", group_name=group))
     old_contact_list = gen.contact.get_contact_list(group_name=group)
     cont = Contact(first_name="first", last_name="last", address="gjh")
+    cont.id = old_contact_list[0].id
     gen.contact.edit_first_in_group(group_name=group, contact=cont)
     new_contact_list = gen.contact.get_contact_list(group_name=group)
     assert len(old_contact_list) == len(new_contact_list)
@@ -59,6 +61,7 @@ def test_edit_first_contact_from_details(gen):
                    anniversary_day="-", anniversary_month="-", anniversary_year="",
                    group_name="", secondary_address="", secondary_home_phone="",
                    notes="", del_foto=True)
+    cont.id = old_contact_list[0].id
     gen.contact.edit_first_from_details(cont)
     new_contact_list = gen.contact.get_contact_list()
     assert len(old_contact_list) == len(new_contact_list)
@@ -128,7 +131,7 @@ def test_edit_first_found_contact(gen):
     search = "modify"
     if gen.contact.get_result_count(search) == 0:
         gen.contact.create(Contact(first_name=search, fax="573-092", nickname="1"))
-    old_cont_list = gen.contact.get_contact_list(search=search)
+    old_contact_list = gen.contact.get_contact_list(search=search)
     cont = Contact(first_name="sbcghdhj", middle_name="j,lk", last_name="cgxh",
                    nickname="", title="dfg", company="lkg", address="",
                    home_phone="", work_phone="", fax="", homepage="", birth_day="22",
@@ -137,7 +140,8 @@ def test_edit_first_found_contact(gen):
                    group_name="", secondary_address="dfg", secondary_home_phone="55",
                    notes="group")
     gen.contact.edit_first_found(search=search, contact=cont)
-    new_cont_list = gen.contact.get_contact_list(search=cont.first_name)
-    assert len(old_cont_list) == len(new_cont_list)
-    old_cont_list[0] = cont
-    assert sorted(old_cont_list, key=Contact.id_or_max) == sorted(new_cont_list, key=Contact.id_or_max)
+    cont.id = old_contact_list[0].id
+    new_contact_list = gen.contact.get_contact_list(search=cont.first_name)
+    assert len(old_contact_list) == len(new_contact_list)
+    old_contact_list[0] = cont
+    assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
