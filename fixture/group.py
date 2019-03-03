@@ -42,17 +42,23 @@ class GroupManage:
             wd.find_element_by_name(field_name).send_keys(text)
 
     def del_first(self):
+        self.del_by_index(0)
+
+    def del_by_index(self, index):
         wd = self.gen.wd
         self.open_groups_page()
         # select group & submit deletion
-        self.select_first_group()
+        self.select_group_by_index(index)
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
         self.group_cache = None
 
     def select_first_group(self):
+        self.select_group_by_index(0)
+
+    def select_group_by_index(self, index):
         wd = self.gen.wd
-        wd.find_element_by_name("selected[]").click()
+        wd.find_elements_by_name("selected[]")[index].click()
 
     def edit_first(self, group):
         wd = self.gen.wd
@@ -111,13 +117,14 @@ class GroupManage:
         return list(self.group_cache)
 
     def del_last(self):
-        wd = self.gen.wd
-        self.open_groups_page()
+        self.del_by_index(self.get_group_count()-1)
+        #wd = self.gen.wd
+        #self.open_groups_page()
         # get group count
-        self.select_last_group()
-        wd.find_element_by_name("delete").click()
-        self.return_to_groups_page()
-        self.group_cache = None
+        #self.select_last_group()
+        #wd.find_element_by_name("delete").click()
+        #self.return_to_groups_page()
+        #self.group_cache = None
 
     def del_not_choose(self):
         wd = self.gen.wd
