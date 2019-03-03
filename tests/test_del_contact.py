@@ -113,6 +113,8 @@ def test_del_some_contact_from_group(gen):
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count(group_name=group) == 0:
         gen.contact.create(Contact(first_name="del_contact", fax="573-092", nickname="1", group_name=group))
+        gen.contact.create(Contact(first_name="del_contact", fax="573-092", nickname="1", group_name=group))
+        gen.contact.create(Contact(first_name="del_contact", fax="573-092", nickname="1", group_name=group))
     old_contact_list = gen.contact.get_contact_list(group_name=group)
     index = randrange(len(old_contact_list))
     gen.contact.del_from_group_by_index(index=index, group_name=group)
