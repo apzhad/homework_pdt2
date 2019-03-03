@@ -1,4 +1,5 @@
 from model.group import Group
+from random import randrange
 
 
 def test_edit_first_group(gen):
@@ -11,6 +12,20 @@ def test_edit_first_group(gen):
     assert len(old_group_list) == gen.group.get_group_count()
     new_group_list = gen.group.get_group_list()
     old_group_list[0] = group
+    assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
+
+
+def test_edit_some_group(gen):
+    if gen.group.get_group_count() == 0:
+        gen.group.create(Group(name="for_edit"))
+    old_group_list = gen.group.get_group_list()
+    group = Group(name="new_name", header="new_header_group", footer="changed_group")
+    index = randrange(len(old_group_list))
+    group.id = old_group_list[index].id
+    gen.group.edit_by_index(index, group)
+    assert len(old_group_list) == gen.group.get_group_count()
+    new_group_list = gen.group.get_group_list()
+    old_group_list[index] = group
     assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
 
 
@@ -27,11 +42,36 @@ def test_clear_first_group_params(gen):
     assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
 
 
+def test_clear_some_group_params(gen):
+    if gen.group.get_group_count() == 0:
+        gen.group.create(Group(name="for_edit", header="header", footer="footer"))
+    old_group_list = gen.group.get_group_list()
+    group = Group(name="", header="", footer="")
+    index = randrange(len(old_group_list))
+    group.id = old_group_list[index].id
+    gen.group.edit_by_index(index=index, group=group)
+    assert len(old_group_list) == gen.group.get_group_count()
+    new_group_list = gen.group.get_group_list()
+    old_group_list[index] = group
+    assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
+
+
 def test_update_first_group_without_changes(gen):
     if gen.group.get_group_count() == 0:
         gen.group.create(Group(name="for_edit", header="header", footer="footer"))
     old_group_list = gen.group.get_group_list()
     gen.group.update_first_wo_change()
+    assert len(old_group_list) == gen.group.get_group_count()
+    new_group_list = gen.group.get_group_list()
+    assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
+
+
+def test_update_some_group_without_changes(gen):
+    if gen.group.get_group_count() == 0:
+        gen.group.create(Group(name="for_edit", header="header", footer="footer"))
+    old_group_list = gen.group.get_group_list()
+    index = randrange(len(old_group_list))
+    gen.group.update_wo_change_by_index(index)
     assert len(old_group_list) == gen.group.get_group_count()
     new_group_list = gen.group.get_group_list()
     assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
@@ -99,4 +139,18 @@ def test_edit_first_group_name(gen):
     assert len(old_group_list) == gen.group.get_group_count()
     new_group_list = gen.group.get_group_list()
     old_group_list[0] = group
+    assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
+
+
+def test_edit_some_group_name(gen):
+    if gen.group.get_group_count() == 0:
+        gen.group.create(Group(name="for_edit", header="header", footer="footer"))
+    old_group_list = gen.group.get_group_list()
+    group = Group(name="only_name")
+    index = randrange(len(old_group_list))
+    group.id = old_group_list[index].id
+    gen.group.edit_by_index(index, group)
+    assert len(old_group_list) == gen.group.get_group_count()
+    new_group_list = gen.group.get_group_list()
+    old_group_list[index] = group
     assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
