@@ -17,8 +17,8 @@ def test_edit_first_contact(gen):
                    notes="s jv s\njsbej", photo_path="\\tests\\test_data\\3.png")
     cont.id = old_contact_list[0].id
     gen.contact.edit_first(cont)
+    assert len(old_contact_list) == gen.contact.get_contact_count()
     new_contact_list = gen.contact.get_contact_list()
-    assert len(old_contact_list) == len(new_contact_list)
     old_contact_list[0] = cont
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
@@ -28,8 +28,8 @@ def test_edit_first_contact_without_change(gen):
         gen.contact.create(Contact(first_name="modify", last_name="status"))
     old_contact_list = gen.contact.get_contact_list()
     gen.contact.edit_first_wo_change()
+    assert len(old_contact_list) == gen.contact.get_contact_count()
     new_contact_list = gen.contact.get_contact_list()
-    assert len(old_contact_list) == len(new_contact_list)
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
 
@@ -43,8 +43,8 @@ def test_edit_first_contact_in_group(gen):
     cont = Contact(first_name="first", last_name="last", address="gjh")
     cont.id = old_contact_list[0].id
     gen.contact.edit_first_in_group(group_name=group, contact=cont)
+    assert len(old_contact_list) == gen.contact.get_contact_count(group_name=group)
     new_contact_list = gen.contact.get_contact_list(group_name=group)
-    assert len(old_contact_list) == len(new_contact_list)
     old_contact_list[0] = cont
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
@@ -63,8 +63,8 @@ def test_edit_first_contact_from_details(gen):
                    notes="", del_foto=True)
     cont.id = old_contact_list[0].id
     gen.contact.edit_first_from_details(cont)
+    assert len(old_contact_list) == gen.contact.get_contact_count()
     new_contact_list = gen.contact.get_contact_list()
-    assert len(old_contact_list) == len(new_contact_list)
     old_contact_list[0] = cont
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
@@ -79,8 +79,8 @@ def test_add_all_contacts_to_group(gen):
         gen.contact.create(Contact(first_name="modify_2", last_name="change_group_2"))
     old_contact_list = gen.contact.get_contact_list()
     gen.contact.add_all_to_group(group_name=group)
+    assert len(old_contact_list) == gen.contact.get_contact_count()
     new_contact_list = gen.contact.get_contact_list(group_name=group)
-    assert len(old_contact_list) == len(new_contact_list)
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
 
@@ -92,8 +92,8 @@ def test_add_to_group_without_select_contact(gen):
         gen.contact.create(Contact(first_name="modify", last_name="change_group"))
     old_contact_list = gen.contact.get_contact_list(group_name=group)
     gen.contact.add_to_group_unselected(group_name=group)
+    assert len(old_contact_list) == gen.contact.get_contact_count()
     new_contact_list = gen.contact.get_contact_list(group_name=group)
-    assert len(old_contact_list) == len(new_contact_list)
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
 
@@ -109,10 +109,12 @@ def test_add_contacts_to_group_from_another_group(gen):
     from_list = gen.contact.get_contact_list(group_name=group_from)
     old_to_list = gen.contact.get_contact_list(group_name=group_to)
     gen.contact.add_to_group_from_another(group_from=group_from, group_to=group_to)
+    assert len(from_list) + len(old_to_list) == gen.contact.get_contact_count(group_name=group_to) or len(
+        from_list) == gen.contact.get_contact_count(group_name=group_to)
     new_to_list = gen.contact.get_contact_list(group_name=group_to)
-    assert len(from_list) + len(old_to_list) == len(new_to_list)
-    old_to_list = old_to_list + from_list
-    assert sorted(old_to_list, key=Contact.id_or_max) == sorted(new_to_list, key=Contact.id_or_max)
+    if sorted(old_to_list, key=Contact.id_or_max) != sorted(new_to_list, key=Contact.id_or_max):
+        old_to_list = old_to_list + from_list
+        assert sorted(old_to_list, key=Contact.id_or_max) == sorted(new_to_list, key=Contact.id_or_max)
 
 
 def test_remove_contact_from_group(gen):
@@ -122,8 +124,8 @@ def test_remove_contact_from_group(gen):
     if gen.contact.get_contact_count(group_name=group) == 0:
         gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group))
     gen.contact.remove_from_group(group_name=group)
+    assert 0 == gen.contact.get_contact_count(group_name=group)
     cont_group_list = gen.contact.get_contact_list(group_name=group)
-    assert 0 == len(cont_group_list)
     assert [] == cont_group_list
 
 
@@ -141,7 +143,7 @@ def test_edit_first_found_contact(gen):
                    notes="group")
     gen.contact.edit_first_found(search=search, contact=cont)
     cont.id = old_contact_list[0].id
+    assert len(old_contact_list) == gen.contact.get_contact_count()
     new_contact_list = gen.contact.get_contact_list(search=cont.first_name)
-    assert len(old_contact_list) == len(new_contact_list)
     old_contact_list[0] = cont
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)

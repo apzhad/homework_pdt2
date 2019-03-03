@@ -13,8 +13,8 @@ class ContactManage:
         wd = self.gen.wd
         if "addressbook/?group=" in wd.current_url:
             self.select_from_list("group", "[all]")
-        #elif not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name('searchstring')) > 0):
-        wd.find_element_by_link_text("home").click()
+        elif not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name('searchstring')) > 0):
+            wd.find_element_by_link_text("home").click()
 
 
     def select_all_contact(self):
@@ -26,9 +26,12 @@ class ContactManage:
 
     def get_contact_count(self, group_name=None):
         wd = self.gen.wd
-        self.open_home_page()
+        # wd.find_element_by_link_text("home").click()
         if group_name is not None:
-            self.select_from_list("group", group_name)
+            self.open_contact_group(group_name)
+            #self.select_from_list("group", group_name)
+        else:
+            self.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
     def get_result_count(self, search, group_name=None):
@@ -118,6 +121,7 @@ class ContactManage:
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.return_to_homepage()
+        self.contact_cache = None
 
     def init_create_contact(self):
         wd = self.gen.wd
@@ -138,6 +142,7 @@ class ContactManage:
         self.init_create_contact()
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.return_to_homepage()
+        self.contact_cache = None
 
     def del_first(self):
         wd = self.gen.wd
@@ -146,6 +151,7 @@ class ContactManage:
         self.select_first_contact()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
 
     def cancel_del_first(self):
         wd = self.gen.wd
@@ -154,6 +160,7 @@ class ContactManage:
         self.select_first_contact()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().dismiss()
+        self.contact_cache = None
 
     def del_by_select_all(self):
         wd = self.gen.wd
@@ -162,6 +169,7 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
 
     def del_all_by_click(self):
         wd = self.gen.wd
@@ -169,12 +177,14 @@ class ContactManage:
         self.select_all_contact()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
 
     def del_unselected(self):
         wd = self.gen.wd
         self.open_home_page()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
 
     def del_all_from_group(self, group_name):
         wd = self.gen.wd
@@ -183,6 +193,7 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
 
     def open_contact_group(self, group_name):
         wd = self.gen.wd
@@ -209,6 +220,7 @@ class ContactManage:
         self.select_first_contact()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
 
     def edit_first(self, contact):
         wd = self.gen.wd
@@ -217,12 +229,14 @@ class ContactManage:
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
+        self.contact_cache = None
 
     def del_first_using_edit(self):
         wd = self.gen.wd
         self.open_home_page()
         self.click_first_pencil_img()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
+        self.contact_cache = None
 
     def edit_first_wo_change(self):
         wd = self.gen.wd
@@ -230,6 +244,7 @@ class ContactManage:
         self.click_first_pencil_img()
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
+        self.contact_cache = None
 
     def edit_first_from_details(self, contact):
         wd = self.gen.wd
@@ -239,6 +254,7 @@ class ContactManage:
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
+        self.contact_cache = None
 
     def edit_first_in_group(self, group_name, contact):
         wd = self.gen.wd
@@ -247,6 +263,7 @@ class ContactManage:
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
+        self.contact_cache = None
 
     def add_all_to_group(self, group_name):
         wd = self.gen.wd
@@ -255,12 +272,14 @@ class ContactManage:
         self.select_from_list("to_group", group_name)
         wd.find_element_by_name("add").click()
         wd.find_element_by_link_text("group page \"%s\"" % group_name).click()
+        self.contact_cache = None
 
     def add_to_group_unselected(self, group_name):
         wd = self.gen.wd
         self.open_home_page()
         self.select_from_list("to_group", group_name)
         wd.find_element_by_name("add").click()
+        self.contact_cache = None
 
     def add_to_group_from_another(self, group_from, group_to):
         wd = self.gen.wd
@@ -269,6 +288,7 @@ class ContactManage:
         self.select_from_list("to_group", group_to)
         wd.find_element_by_name("add").click()
         wd.find_element_by_link_text("group page \"%s\"" % group_to).click()
+        self.contact_cache = None
 
     def remove_from_group(self, group_name):
         wd = self.gen.wd
@@ -276,6 +296,7 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_name("remove").click()
         wd.find_element_by_link_text("group page \"%s\"" % group_name).click()
+        self.contact_cache = None
 
     def del_all_found(self, search):
         wd = self.gen.wd
@@ -286,6 +307,7 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
 
     def edit_first_found(self, search, contact):
         wd = self.gen.wd
@@ -296,6 +318,7 @@ class ContactManage:
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
+        self.contact_cache = None
 
     def click_first_pencil_img(self, group=None):
         wd = self.gen.wd
@@ -304,17 +327,20 @@ class ContactManage:
                 wd.find_element_by_xpath("(//img[@alt='Edit'])[%s]" % (i+1)).click()
                 return
 
+    contact_cache = None
+
     def get_contact_list(self, group_name=None, search=None):
-        wd = self.gen.wd
-        if group_name is not None:
-            self.open_contact_group(group_name)
-        else:
-            self.open_home_page()
-        if search is not None:
-            self.set_field_value("searchstring", search)
-        contact_list = []
-        for i in wd.find_elements_by_name("entry"):
-            id = i.find_element_by_name("selected[]").get_attribute('value')
-            cells = i.find_elements_by_tag_name("td")
-            contact_list.append(Contact(id=id, last_name=cells[1].text, first_name=cells[2].text))
-        return contact_list
+        if self.contact_cache is None:
+            wd = self.gen.wd
+            if group_name is not None:
+                self.open_contact_group(group_name)
+            else:
+                self.open_home_page()
+            if search is not None:
+                self.set_field_value("searchstring", search)
+            self.contact_cache = []
+            for i in wd.find_elements_by_name("entry"):
+                id = i.find_element_by_name("selected[]").get_attribute('value')
+                cells = i.find_elements_by_tag_name("td")
+                self.contact_cache.append(Contact(id=id, last_name=cells[1].text, first_name=cells[2].text))
+        return self.contact_cache
