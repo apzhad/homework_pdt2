@@ -1,4 +1,5 @@
 from model.group import Group
+from random import randrange
 
 
 def test_del_first_group(gen):
@@ -44,4 +45,16 @@ def test_del_without_choice_group(gen):
     gen.group.del_not_choose()
     assert len(old_group_list) == gen.group.get_group_count()
     new_group_list = gen.group.get_group_list()
+    assert old_group_list == new_group_list
+
+
+def test_del_some_group(gen):
+    if gen.group.get_group_count() == 0:
+        gen.group.create(Group(name="for_del"))
+    old_group_list = gen.group.get_group_list()
+    index = randrange(len(old_group_list))
+    gen.group.del_by_index(index)
+    assert len(old_group_list) - 1 == gen.group.get_group_count()
+    new_group_list = gen.group.get_group_list()
+    old_group_list[index:index+1] = []
     assert old_group_list == new_group_list
