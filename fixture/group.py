@@ -54,17 +54,21 @@ class GroupManage:
         self.group_cache = None
 
     def select_first_group(self):
-        self.select_group_by_index(0)
+        wd = self.gen.wd
+        wd.find_element_by_name("selected[]").click()
 
     def select_group_by_index(self, index):
         wd = self.gen.wd
         wd.find_elements_by_name("selected[]")[index].click()
 
     def edit_first(self, group):
+        self.edit_by_index(0, group)
+
+    def edit_by_index(self, index, group):
         wd = self.gen.wd
         self.open_groups_page()
         # select group & init editing
-        self.select_first_group()
+        self.select_group_by_index(index)
         wd.find_element_by_name("edit").click()
         # change group parameters
         self.enter_group_parameters(group)
@@ -73,10 +77,13 @@ class GroupManage:
         self.group_cache = None
 
     def update_first_wo_change(self):
+        self.update_wo_change_by_index(0)
+
+    def update_wo_change_by_index(self, index):
         wd = self.gen.wd
         self.open_groups_page()
         # select group & init editing
-        self.select_first_group()
+        self.select_group_by_index(index)
         wd.find_element_by_name("edit").click()
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
@@ -118,13 +125,6 @@ class GroupManage:
 
     def del_last(self):
         self.del_by_index(self.get_group_count()-1)
-        #wd = self.gen.wd
-        #self.open_groups_page()
-        # get group count
-        #self.select_last_group()
-        #wd.find_element_by_name("delete").click()
-        #self.return_to_groups_page()
-        #self.group_cache = None
 
     def del_not_choose(self):
         wd = self.gen.wd
@@ -164,16 +164,7 @@ class GroupManage:
         self.group_cache = None
 
     def edit_last(self, group):
-        wd = self.gen.wd
-        self.open_groups_page()
-        # select group & init editing
-        self.select_last_group()
-        wd.find_element_by_name("edit").click()
-        # change group parameters
-        self.enter_group_parameters(group)
-        wd.find_element_by_name("update").click()
-        self.return_to_groups_page()
-        self.group_cache = None
+        self.edit_by_index((self.get_group_count() - 1), group)
 
     def select_last_group(self):
         wd = self.gen.wd
@@ -181,11 +172,4 @@ class GroupManage:
         wd.find_element_by_xpath("(//input[@name='selected[]'])[%s]" % group_count).click()
 
     def update_last_wo_change(self):
-        wd = self.gen.wd
-        self.open_groups_page()
-        # select group & init editing
-        self.select_last_group()
-        wd.find_element_by_name("edit").click()
-        wd.find_element_by_name("update").click()
-        self.return_to_groups_page()
-        self.group_cache = None
+        self.update_wo_change_by_index(self.get_group_count() - 1)
