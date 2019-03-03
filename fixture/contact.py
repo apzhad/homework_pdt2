@@ -236,33 +236,45 @@ class ContactManage:
         self.contact_cache = None
 
     def del_first_using_edit(self):
+        self.del_using_edit_by_index(0)
+
+    def del_using_edit_by_index(self, index):
         wd = self.gen.wd
         self.open_home_page()
-        self.click_first_pencil_img()
+        self.click_pencil_img(index)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         self.contact_cache = None
 
     def edit_first(self, contact):
+        self.edit_by_index(0, contact)
+
+    def edit_by_index(self, index, contact):
         wd = self.gen.wd
         self.open_home_page()
-        self.click_first_pencil_img()
+        self.click_pencil_img(index)
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
         self.contact_cache = None
 
     def edit_first_wo_change(self):
+        self.edit_wo_change_by_index(0)
+
+    def edit_wo_change_by_index(self, index):
         wd = self.gen.wd
         self.open_home_page()
-        self.click_first_pencil_img()
+        self.click_pencil_img(index)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
         self.contact_cache = None
 
     def edit_first_from_details(self, contact):
+        self.edit_from_details_by_index(0, contact)
+
+    def edit_from_details_by_index(self, index, contact):
         wd = self.gen.wd
         self.open_home_page()
-        wd.find_element_by_xpath("//img[@alt='Details']").click()
+        wd.find_elements_by_xpath("//img[@alt='Details']")[index].click()
         wd.find_element_by_name("modifiy").click()
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
@@ -270,9 +282,12 @@ class ContactManage:
         self.contact_cache = None
 
     def edit_first_in_group(self, group_name, contact):
+        self.edit_in_group_by_index(0, group_name, contact)
+
+    def edit_in_group_by_index(self, index, group_name, contact):
         wd = self.gen.wd
         self.open_contact_group(group_name)
-        self.click_first_pencil_img(group_name)
+        self.click_pencil_img(index)
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
@@ -339,6 +354,10 @@ class ContactManage:
             if wd.find_element_by_xpath("(//img[@alt='Edit'])[%s]" % (i+1)):
                 wd.find_element_by_xpath("(//img[@alt='Edit'])[%s]" % (i+1)).click()
                 return
+
+    def click_pencil_img(self, index):
+        wd = self.gen.wd
+        wd.find_elements_by_xpath("(//img[@alt='Edit'])")[index].click()
 
     contact_cache = None
 
