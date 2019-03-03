@@ -136,6 +136,10 @@ class ContactManage:
         wd = self.gen.wd
         wd.find_element_by_name("selected[]").click()
 
+    def select_contact_by_index(self, index):
+        wd = self.gen.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
     def create_empty(self):
         wd = self.gen.wd
         # init new contact creation
@@ -145,19 +149,25 @@ class ContactManage:
         self.contact_cache = None
 
     def del_first(self):
+        self.del_by_index(0)
+
+    def del_by_index(self, index):
         wd = self.gen.wd
         self.open_home_page()
         # select first contact & submit deletion
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
     def cancel_del_first(self):
+        self.cancel_del_by_index(0)
+
+    def cancel_del_by_index(self, index):
         wd = self.gen.wd
         self.open_home_page()
         # select contact & submit deletion
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().dismiss()
         self.contact_cache = None
@@ -214,12 +224,22 @@ class ContactManage:
                     return str(option.get_attribute('value'))
 
     def del_first_from_group(self, group_name):
+        self.del_from_group_by_index(0, group_name)
+
+    def del_from_group_by_index(self, index, group_name):
         wd = self.gen.wd
         self.open_contact_group(group_name)
         # click "select all" & submit deletion
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
+
+    def del_first_using_edit(self):
+        wd = self.gen.wd
+        self.open_home_page()
+        self.click_first_pencil_img()
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
         self.contact_cache = None
 
     def edit_first(self, contact):
@@ -229,13 +249,6 @@ class ContactManage:
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
-        self.contact_cache = None
-
-    def del_first_using_edit(self):
-        wd = self.gen.wd
-        self.open_home_page()
-        self.click_first_pencil_img()
-        wd.find_element_by_xpath("//input[@value='Delete']").click()
         self.contact_cache = None
 
     def edit_first_wo_change(self):
