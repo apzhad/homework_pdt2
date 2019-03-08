@@ -371,5 +371,8 @@ class ContactManage:
                 last_name = cells[1].text
                 first_name = cells[2].text
                 all_phones = cells[5].text
-                self.contact_cache.append(Contact(id=id, last_name=last_name, first_name=first_name, all_phones=all_phones))
+                all_emails = cells[4].text
+                address = cells[3].text
+                self.contact_cache.append(Contact(id=id, last_name=last_name, first_name=first_name,
+                                                  all_phones=all_phones, all_email=all_emails, address=address))
         return list(self.contact_cache)
