@@ -81,7 +81,7 @@ def test_del_unselected_contact(gen):
 
 def test_del_all_contacts_from_group(gen):
     group = "new_name"
-    if group not in str(gen.group.get_group_list()) and group != "[all]" and group != "[none]":
+    if group not in gen.group.get_groups_names()and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count(group_name=group) == 0:
         gen.contact.create(Contact(first_name="del_contact", fax="573-092", nickname="1", group_name=group))
@@ -95,7 +95,7 @@ def test_del_all_contacts_from_group(gen):
 
 def test_del_first_contact_from_group(gen):
     group = "group"
-    if group not in str(gen.group.get_group_list()) and group != "[all]" and group != "[none]":
+    if group not in gen.group.get_groups_names() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count(group_name=group) == 0:
         gen.contact.create(Contact(first_name="del_contact", fax="573-092", nickname="1", group_name=group))
@@ -109,7 +109,7 @@ def test_del_first_contact_from_group(gen):
 
 def test_del_some_contact_from_group(gen):
     group = "group"
-    if group not in str(gen.group.get_group_list()) and group != "[all]" and group != "[none]":
+    if group not in gen.group.get_groups_names() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count(group_name=group) == 0:
         gen.contact.create(Contact(first_name="del_contact", fax="573-092", nickname="1", group_name=group))
