@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 import os
 from model.contact import Contact
 
@@ -12,9 +15,11 @@ class ContactManage:
     def open_home_page(self):
         wd = self.gen.wd
         if "addressbook/?group=" in wd.current_url:
-            self.select_from_list("group", "[all]")
+            self.select_from_list(list_name="group", text="[all]")
+            self.contact_cache = None
         elif not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name('searchstring')) > 0):
             wd.find_element_by_link_text("home").click()
+        wd.find_element_by_link_text('Last name')
 
     def select_all_contact(self):
         wd = self.gen.wd
@@ -28,7 +33,6 @@ class ContactManage:
         # wd.find_element_by_link_text("home").click()
         if group_name is not None:
             self.open_contact_group(group_name)
-            #self.select_from_list("group", group_name)
         else:
             self.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
@@ -123,6 +127,7 @@ class ContactManage:
     def return_to_homepage(self):
         wd = self.gen.wd
         wd.find_element_by_link_text("home page").click()
+        wd.find_element_by_link_text('Last name')
 
     def select_first_contact(self):
         wd = self.gen.wd
@@ -150,7 +155,16 @@ class ContactManage:
         self.select_contact_by_index(index)
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.wait_close_message_box()
         self.contact_cache = None
+
+    def wait_close_message_box(self):
+        wd = self.gen.wd
+        try:
+            WebDriverWait(wd, 10).until(EC.invisibility_of_element((By.CLASS_NAME, 'msgbox')))
+        except:
+            print("Failed to return to homepage")
+        wd.find_element_by_link_text('Last name')
 
     def cancel_del_first(self):
         self.cancel_del_by_index(0)
@@ -171,6 +185,7 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.wait_close_message_box()
         self.contact_cache = None
 
     def del_all_by_click(self):
@@ -179,6 +194,7 @@ class ContactManage:
         self.select_all_contact()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.wait_close_message_box()
         self.contact_cache = None
 
     def del_unselected(self):
@@ -195,6 +211,7 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.wait_close_message_box()
         self.contact_cache = None
 
     def open_contact_group(self, group_name):
@@ -202,6 +219,7 @@ class ContactManage:
         if len(wd.find_elements_by_xpath("(//input[@id='MassCB'])")) > 0 and len(wd.find_elements_by_name('searchstring')) > 0:
             if not (wd.current_url.endswith("addressbook/?group=" + self.get_group_id(group_name))):
                 self.select_from_list("group", group_name)
+                self.contact_cache = None
         else:
             wd.find_element_by_link_text("home").click()
             self.select_from_list("group", group_name)
@@ -225,6 +243,7 @@ class ContactManage:
         self.select_contact_by_index(index)
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.wait_close_message_box()
         self.contact_cache = None
 
     def del_first_using_edit(self):
@@ -234,6 +253,7 @@ class ContactManage:
         wd = self.gen.wd
         self.open_edit(index)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
+        self.wait_close_message_box()
         self.contact_cache = None
 
     def open_edit(self, index):
@@ -263,6 +283,7 @@ class ContactManage:
         self.contact_cache = None
 
     def edit_first_from_details(self, contact):
+        wd = self.gen.wd
         self.edit_from_details_by_index(0, contact)
 
     def edit_from_details_by_index(self, index, contact):
@@ -329,6 +350,7 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
+        self.wait_close_message_box()
         self.contact_cache = None
 
     def edit_first_found(self, search, contact):
