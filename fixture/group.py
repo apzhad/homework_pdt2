@@ -16,6 +16,7 @@ class GroupManage:
     def return_to_groups_page(self):
         wd = self.gen.wd
         wd.find_element_by_link_text("group page").click()
+        wd.find_element_by_name("new")
 
     def create(self, group):
         wd = self.gen.wd
@@ -122,6 +123,13 @@ class GroupManage:
                 id = i.find_element_by_name("selected[]").get_attribute('value')
                 self.group_cache.append(Group(name=text, id=id))
         return list(self.group_cache)
+
+    def get_groups_names(self):
+        group_list = self.get_group_list()
+        group_name = []
+        for i in range(len(group_list)):
+            group_name.append(group_list[i].name)
+        return group_name
 
     def del_last(self):
         self.del_by_index(self.get_group_count()-1)
