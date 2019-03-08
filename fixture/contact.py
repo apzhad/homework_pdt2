@@ -16,7 +16,6 @@ class ContactManage:
         elif not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name('searchstring')) > 0):
             wd.find_element_by_link_text("home").click()
 
-
     def select_all_contact(self):
         wd = self.gen.wd
         # get contact count
@@ -233,18 +232,21 @@ class ContactManage:
 
     def del_using_edit_by_index(self, index):
         wd = self.gen.wd
-        self.open_home_page()
-        self.click_pencil_img(index)
+        self.open_edit(index)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         self.contact_cache = None
+
+    def open_edit(self, index):
+        wd = self.gen.wd
+        self.open_home_page()
+        self.click_pencil_img(index)
 
     def edit_first(self, contact):
         self.edit_by_index(0, contact)
 
     def edit_by_index(self, index, contact):
         wd = self.gen.wd
-        self.open_home_page()
-        self.click_pencil_img(index)
+        self.open_edit(index)
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
@@ -255,8 +257,7 @@ class ContactManage:
 
     def edit_wo_change_by_index(self, index):
         wd = self.gen.wd
-        self.open_home_page()
-        self.click_pencil_img(index)
+        self.open_edit(index)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
         self.contact_cache = None
