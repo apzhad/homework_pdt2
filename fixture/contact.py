@@ -368,5 +368,8 @@ class ContactManage:
             for i in wd.find_elements_by_name("entry"):
                 id = i.find_element_by_name("selected[]").get_attribute('value')
                 cells = i.find_elements_by_tag_name("td")
-                self.contact_cache.append(Contact(id=id, last_name=cells[1].text, first_name=cells[2].text))
-        return self.contact_cache
+                last_name = cells[1].text
+                first_name = cells[2].text
+                all_phones = cells[5].text
+                self.contact_cache.append(Contact(id=id, last_name=last_name, first_name=first_name, all_phones=all_phones))
+        return list(self.contact_cache)
