@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import os
 from model.contact import Contact
+import re
 
 
 class ContactManage:
@@ -14,12 +15,12 @@ class ContactManage:
 
     def open_home_page(self):
         wd = self.gen.wd
-        if "addressbook/?group=" in wd.current_url:
+        if "?group=" in wd.current_url and len(wd.find_elements_by_name('searchstring')) > 0:
             self.select_from_list(list_name="group", text="[all]")
             self.contact_cache = None
         elif not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name('searchstring')) > 0):
             wd.find_element_by_link_text("home").click()
-        wd.find_element_by_link_text('Last name')
+        WebDriverWait(wd, 10).until(EC.presence_of_element_located((By.LINK_TEXT, 'Last name')))
 
     def select_all_contact(self):
         wd = self.gen.wd
@@ -127,7 +128,7 @@ class ContactManage:
     def return_to_homepage(self):
         wd = self.gen.wd
         wd.find_element_by_link_text("home page").click()
-        wd.find_element_by_link_text('Last name')
+        WebDriverWait(wd, 10).until(EC.presence_of_element_located((By.LINK_TEXT, 'Last name')))
 
     def select_first_contact(self):
         wd = self.gen.wd
@@ -164,7 +165,6 @@ class ContactManage:
             WebDriverWait(wd, 10).until(EC.invisibility_of_element((By.CLASS_NAME, 'msgbox')))
         except:
             print("Failed to return to homepage")
-        wd.find_element_by_link_text('Last name')
 
     def cancel_del_first(self):
         self.cancel_del_by_index(0)
@@ -256,9 +256,14 @@ class ContactManage:
         self.wait_close_message_box()
         self.contact_cache = None
 
-    def open_edit(self, index):
+    def open_edit(self, index, group=None, search=None):
         wd = self.gen.wd
-        self.open_home_page()
+        if group is not None:
+            self.open_contact_group(group)
+        else:
+            self.open_home_page()
+        if search is not None:
+            self.set_field_value("searchstring", search)
         self.click_pencil_img(index)
 
     def edit_first(self, contact):
@@ -288,21 +293,24 @@ class ContactManage:
 
     def edit_from_details_by_index(self, index, contact):
         wd = self.gen.wd
-        self.open_home_page()
-        wd.find_elements_by_xpath("//img[@alt='Details']")[index].click()
+        self.open_details(index)
         wd.find_element_by_name("modifiy").click()
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
         self.contact_cache = None
 
+    def open_details(self, index):
+        wd = self.gen.wd
+        self.open_home_page()
+        wd.find_elements_by_xpath("//img[@alt='Details']")[index].click()
+
     def edit_first_in_group(self, group_name, contact):
         self.edit_in_group_by_index(0, group_name, contact)
 
     def edit_in_group_by_index(self, index, group_name, contact):
         wd = self.gen.wd
-        self.open_contact_group(group_name)
-        self.click_pencil_img(index)
+        self.open_edit(index, group_name)
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
@@ -356,9 +364,7 @@ class ContactManage:
     def edit_first_found(self, search, contact):
         wd = self.gen.wd
         # find text & edit contact
-        self.open_home_page()
-        self.set_field_value("searchstring", search)
-        self.click_first_pencil_img()
+        self.open_edit(index=0, search=search)
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
@@ -416,3 +422,15 @@ class ContactManage:
         return Contact(id=id, last_name=lastname, first_name=firstname, home_phone=home, mobile_phone=mobile,
                        work_phone=work, secondary_home_phone=phone2, primary_email=email, secondary_email=email2,
                        third_email=email3, address=address)
+
+    def get_info_from_details(self, index):
+        wd = self.gen.wd
+        self.open_details(index)
+        text = wd.find_element_by_id("content").text
+        home = re.search("H: (.*)", text).group(1)
+        mobile = re.search("M: (.*)", text).group(1)
+        work = re.search("W: (.*)", text).group(1)
+        phone = re.search("P: (.*)", text).group(1)
+        return Contact(home_phone=home, mobile_phone=mobile,
+                       work_phone=work, secondary_home_phone=phone)
+
