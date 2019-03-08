@@ -12,6 +12,7 @@ class GroupManage:
         wd = self.gen.wd
         if not (wd.current_url.endswith("/group.php") and len(wd.find_elements_by_name("new")) > 0):
             wd.find_element_by_link_text("groups").click()
+        wd.find_element_by_name("new")
 
     def return_to_groups_page(self):
         wd = self.gen.wd
