@@ -58,13 +58,6 @@ class ContactManage:
         if contact.del_foto:
             wd.find_element_by_name("delete_photo").click()
 
-        """
-        # code from recoder
-        wd.find_element_by_name("photo").click()
-        wd.find_element_by_name("photo").clear()
-        wd.find_element_by_name("photo").send_keys(os.getcwd() + "\\test_data\\cat.jpg")
-        """
-
         # common info (company, address,title, etc.)
         self.set_field_value("title", contact.title)
         self.set_field_value("company", contact.company)
@@ -299,7 +292,7 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         self.select_from_list("to_group", group_name)
         wd.find_element_by_name("add").click()
-        wd.find_element_by_link_text("group page \"%s\"" % group_name).click()
+        wd.find_element_by_link_text('group page "%s"' % group_name).click()
         self.contact_cache = None
 
     def add_to_group_unselected(self, group_name):
@@ -315,7 +308,7 @@ class ContactManage:
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         self.select_from_list("to_group", group_to)
         wd.find_element_by_name("add").click()
-        wd.find_element_by_link_text("group page \"%s\"" % group_to).click()
+        wd.find_element_by_link_text('group page "%s"' % group_to).click()
         self.contact_cache = None
 
     def remove_from_group(self, group_name):
@@ -323,7 +316,7 @@ class ContactManage:
         self.open_contact_group(group_name)
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_name("remove").click()
-        wd.find_element_by_link_text("group page \"%s\"" % group_name).click()
+        wd.find_element_by_link_text('group page "%s"' % group_name).click()
         self.contact_cache = None
 
     def del_all_found(self, search):
