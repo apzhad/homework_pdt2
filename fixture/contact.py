@@ -376,3 +376,21 @@ class ContactManage:
                 self.contact_cache.append(Contact(id=id, last_name=last_name, first_name=first_name,
                                                   all_phones=all_phones, all_email=all_emails, address=address))
         return list(self.contact_cache)
+
+    def get_info_from_edit(self, index):
+        wd = self.gen.wd
+        self.open_edit(index)
+        firstname = wd.find_element_by_name('firstname').get_attribute('value')
+        lastname = wd.find_element_by_name('lastname').get_attribute('value')
+        id = wd.find_element_by_name('id').get_attribute('value')
+        home = wd.find_element_by_name('home').get_attribute('value')
+        mobile = wd.find_element_by_name('mobile').get_attribute('value')
+        work = wd.find_element_by_name('work').get_attribute('value')
+        phone2 = wd.find_element_by_name('phone2').get_attribute('value')
+        email = wd.find_element_by_name('email').get_attribute('value')
+        email2 = wd.find_element_by_name('email2').get_attribute('value')
+        email3 = wd.find_element_by_name('email3').get_attribute('value')
+        address = wd.find_element_by_name('address').get_attribute('value')
+        return Contact(id=id, last_name=lastname, first_name=firstname, home_phone=home, mobile_phone=mobile,
+                       work_phone=work, secondary_home_phone=phone2, primary_email=email, secondary_email=email2,
+                       third_email=email3, address=address)
