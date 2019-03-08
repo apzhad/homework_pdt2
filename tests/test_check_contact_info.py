@@ -13,6 +13,19 @@ def test_info_on_homepage(gen):
     assert info_on_homepage.all_phones == merge_phone(info_from_edit)
 
 
+"""
+def test_info_in_details(gen):
+    #index = randrange(len(gen.contact.get_contact_list()))
+    for index in range(len(gen.contact.get_contact_list())):
+        info_from_details = gen.contact.get_info_from_details(index)
+        info_from_edit = gen.contact.get_info_from_edit(index)
+    #assert info_from_details.first_name == info_from_edit.first_name
+    #assert info_from_details.last_name == info_from_edit.last_name
+    #assert info_from_details.address == info_from_edit.address
+    #assert info_from_details.all_email == merge_email(info_from_edit)
+        assert merge_phone(info_from_details) == merge_phone(info_from_edit)
+"""
+
 def clear_spec_symbol(s):
     return re.sub("[() -]", "", s)
 
