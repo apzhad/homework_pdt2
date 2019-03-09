@@ -7,8 +7,18 @@ from fixture.contact import ContactManage
 
 class Generic:
 
-    def __init__(self):
-        self.wd = webdriver.Firefox()
+    def __init__(self, browser, base_url):
+        if browser == "firefox":
+            self.wd = webdriver.Firefox()
+        elif browser == "chrome":
+            self.wd = webdriver.Chrome()
+        elif browser == "edge":
+            self.wd = webdriver.Edge()
+        elif browser == "ie":
+            self.wd = webdriver.Ie()
+        else:
+            raise ValueError("Unrecognized browser %s" % browser)
+        self.base_url = base_url
         self.wd.implicitly_wait(1)
         self.session = SessionManage(self)
         self.group = GroupManage(self)
@@ -16,7 +26,7 @@ class Generic:
 
     def open_home_page(self):
         wd = self.wd
-        wd.get("http://localhost/addressbook/")
+        wd.get(self.base_url)
 
     def finish(self):
         self.wd.quit()

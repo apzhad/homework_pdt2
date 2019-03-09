@@ -37,7 +37,6 @@ def test_add_group(gen, group):
     assert len(old_group_list) + 1 == gen.group.get_group_count()
     new_group_list = gen.group.get_group_list()
     old_group_list.append(normalize_name(group))
-    print(old_group_list)
     assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
 
 
