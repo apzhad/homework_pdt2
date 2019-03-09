@@ -223,6 +223,7 @@ class ContactManage:
         else:
             wd.find_element_by_link_text("home").click()
             self.select_from_list("group", group_name)
+            self.contact_cache = None
 
     def get_group_id(self, group):
         wd = self.gen.wd

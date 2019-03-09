@@ -130,7 +130,7 @@ class GroupManage:
         group_name = []
         for i in range(len(group_list)):
             group_name.append(group_list[i].name)
-        return group_name
+        return list(group_name)
 
     def del_last(self):
         self.del_by_index(self.get_group_count()-1)
