@@ -1,19 +1,22 @@
 import pytest
 from fixture.generic import Generic
+import json
 
 fixture = None
+settings = None
 
 
 @pytest.fixture
 def gen(request):
     global fixture
+    global settings
     browser = request.config.getoption("--browser")
-    base_url = request.config.getoption("--base_url")
-    if fixture is None:
-        fixture = Generic(browser=browser, base_url=base_url)
-    elif not fixture.is_valid():
-        fixture = Generic(browser=browser, base_url=base_url)
-    fixture.session.ensure_login(username="admin", password="secret")
+    if settings is None:
+        with open(request.config.getoption("--settings")) as config_file:
+            settings = json.load(config_file)
+    if fixture is None or not fixture.is_valid():
+        fixture = Generic(browser=browser, base_url=settings["base_url"])
+    fixture.session.ensure_login(username=settings["username"], password=settings["password"])
     return fixture
 
 
@@ -28,4 +31,4 @@ def stop(request):
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="firefox")
-    parser.addoption("--base_url", action="store", default="http://localhost/addressbook/")
+    parser.addoption("--settings", action="store", default="settings.json")
