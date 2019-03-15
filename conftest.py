@@ -1,6 +1,7 @@
 import pytest
 from fixture.generic import Generic
 import json
+import os.path
 
 fixture = None
 settings = None
@@ -12,8 +13,9 @@ def gen(request):
     global settings
     browser = request.config.getoption("--browser")
     if settings is None:
-        with open(request.config.getoption("--settings")) as config_file:
-            settings = json.load(config_file)
+        config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), request.config.getoption("--settings"))
+        with open(config_file) as f:
+            settings = json.load(f)
     if fixture is None or not fixture.is_valid():
         fixture = Generic(browser=browser, base_url=settings["base_url"])
     fixture.session.ensure_login(username=settings["username"], password=settings["password"])
