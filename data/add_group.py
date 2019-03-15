@@ -3,6 +3,13 @@ import random
 import string
 
 
+const_data = [
+    Group(name="gr_name", header="gr_header", footer="gr_footer"),
+    Group(name="name", footer="ftr"),
+    Group(header="hdr")
+]
+
+
 def random_string(prefix, max_length):
     symbols = string.ascii_letters + string.digits + ' '*10
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(max_length))])
