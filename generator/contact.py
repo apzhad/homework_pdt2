@@ -69,4 +69,9 @@ test_data = [Contact(first_name="", last_name="")] + [
     for k in range(cc)
 ]
 
+data_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", fc)
+
+with open(data_file, "w") as data:
+    jsonpickle.set_encoder_options("json", indent=2)
+    data.write(jsonpickle.encode(test_data))
 
