@@ -15,7 +15,7 @@ def test_edit_first_contact(gen):
                    birth_month="July", birth_year="1978", anniversary_day="9",
                    anniversary_month="May", anniversary_year="2008",
                    secondary_address="sec_addr", secondary_home_phone="",
-                   notes="s jv s\njsbej", photo_path="\\tests\\test_data\\3.png")
+                   notes="s jv s\njsbej", photo_path="3.png")
     cont.id = old_contact_list[0].id
     gen.contact.edit_first(cont)
     assert len(old_contact_list) == gen.contact.get_contact_count()
@@ -37,7 +37,7 @@ def test_edit_some_contact(gen):
                    birth_month="July", birth_year="1978", anniversary_day="9",
                    anniversary_month="May", anniversary_year="2008",
                    secondary_address="sec_addr", secondary_home_phone="",
-                   notes="s jv s\njsbej", photo_path="\\tests\\test_data\\3.png")
+                   notes="s jv s\njsbej", photo_path="3.png")
     cont.id = old_contact_list[index].id
     gen.contact.edit_by_index(index, cont)
     assert len(old_contact_list) == gen.contact.get_contact_count()
