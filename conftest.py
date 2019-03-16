@@ -2,6 +2,7 @@ import pytest
 from fixture.generic import Generic
 import json
 import os.path
+import importlib
 
 fixture = None
 settings = None
@@ -34,3 +35,21 @@ def stop(request):
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="firefox")
     parser.addoption("--settings", action="store", default="settings.json")
+
+
+def pytest_generate_tests(metafunc):
+    """
+    This allows us to load tests from external files by
+    parametrizing tests with each test case found in a data_X
+    file
+    https://remusao.github.io/posts/pytest-param.html
+    """
+    for fixture in metafunc.fixturenames:
+        if fixture.startswith('data_'):
+            # Load associated test data
+            testdata = load_from_module(fixture[5:])
+            metafunc.parametrize(fixture, testdata, ids=[str(x) for x in testdata])
+
+
+def load_from_module(module):
+    return importlib.import_module("data.%s" % module).test_data

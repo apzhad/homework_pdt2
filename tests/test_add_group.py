@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from model.group import Group
-import pytest
 import re
-from data.add_group import test_data
 
 
 def delete_whitespace(s):
@@ -14,12 +12,15 @@ def delete_whitespace(s):
 
 
 def normalize_name(group):
-    group.name = delete_whitespace(group.name)
+    if group.name is not None:
+        group.name = delete_whitespace(group.name)
+    else:
+        group.name = ""
     return group
 
 
-@pytest.mark.parametrize("group", test_data, ids=[repr(x) for x in test_data])
-def test_add_group(gen, group):
+def test_add_group(gen, data_groups):
+    group = data_groups
     old_group_list = gen.group.get_group_list()
     gen.group.create(group)
     assert len(old_group_list) + 1 == gen.group.get_group_count()
