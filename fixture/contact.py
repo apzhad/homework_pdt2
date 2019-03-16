@@ -57,7 +57,8 @@ class ContactManage:
         # add photo
         if contact.photo_path:
             photo = wd.find_element_by_name("photo")
-            photo.send_keys(os.path.split(os.environ['VIRTUAL_ENV'])[0] + contact.photo_path)
+            photo.send_keys(os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "..\\data\\contact_foto\\%s" % contact.photo_path))
 
         if contact.del_foto:
             wd.find_element_by_name("delete_photo").click()
