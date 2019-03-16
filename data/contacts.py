@@ -9,5 +9,6 @@ test_data = [
             birth_month="May", birth_year="1950", anniversary_day="15", anniversary_month="June",
             anniversary_year="2000", secondary_address="address secondary",
             secondary_home_phone="home secondary", notes="notes", photo_path="cat.jpg"),
-    Contact(first_name="test")
+    Contact(first_name="test"),
+    Contact(first_name="fname ", last_name="lname", address="adr\nto\nsource", home_phone="78204")
     ]
