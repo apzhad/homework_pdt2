@@ -28,6 +28,18 @@ def normalize_contact_for_check(contact):
     return contact
 
 
+def test_add_contact_using_json(gen, json_contact):
+    contact = json_contact
+    old_contact_list = gen.contact.get_contact_list()
+    group = gen.group.get_groups_names() + ["[none]"]
+    contact.group_name = random.choice(group)
+    gen.contact.create(contact)
+    assert len(old_contact_list) + 1 == gen.contact.get_contact_count()
+    new_contact_list = gen.contact.get_contact_list()
+    old_contact_list.append(normalize_contact_for_check(contact))
+    assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+
+
 def test_add_contact_using_module(gen, data_contacts):
     contact = data_contacts
     old_contact_list = gen.contact.get_contact_list()
