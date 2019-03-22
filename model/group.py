@@ -28,8 +28,7 @@ class Group:
         if name is not None:
             if len(name) > 0:
                 name = re.sub('\s+', ' ', name)
-                if name[-1] == " ":
-                    name = name[:-1]
+                name = name.strip()
         else:
             name = ""
         return name
