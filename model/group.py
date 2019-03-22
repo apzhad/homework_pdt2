@@ -23,7 +23,8 @@ class Group:
         else:
             return maxsize
 
-    def normalize_name(self, name):
+    @staticmethod
+    def normalize_name(name):
         if name is not None:
             if len(name) > 0:
                 name = re.sub('\s+', ' ', name)
