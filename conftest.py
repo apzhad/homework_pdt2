@@ -34,7 +34,7 @@ def gen(request):
 def db(request):
     db_conf = load_config(request.config.getoption("--settings"))["db"]
     dbfixture = DbFixture(host=db_conf["host"], name=db_conf["name"], user=db_conf["username"],
-                          password=db_conf[["password"]])
+                          password=db_conf["password"])
 
     def fin():
         dbfixture.finish()
