@@ -1,5 +1,6 @@
 import pytest
 from fixture.generic import Generic
+from fixture.db import DbFixture
 import json
 import os.path
 import importlib
@@ -9,19 +10,36 @@ fixture = None
 settings = None
 
 
+def load_config(file):
+    global settings
+    if settings is None:
+        config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), file)
+        with open(config_file) as f:
+            settings = json.load(f)
+    return settings
+
+
 @pytest.fixture
 def gen(request):
     global fixture
-    global settings
     browser = request.config.getoption("--browser")
-    if settings is None:
-        config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), request.config.getoption("--settings"))
-        with open(config_file) as f:
-            settings = json.load(f)
+    web_conf = load_config(request.config.getoption("--settings"))["web"]
     if fixture is None or not fixture.is_valid():
-        fixture = Generic(browser=browser, base_url=settings["base_url"])
-    fixture.session.ensure_login(username=settings["username"], password=settings["password"])
+        fixture = Generic(browser=browser, base_url=web_conf["base_url"])
+    fixture.session.ensure_login(username=web_conf["username"], password=web_conf["password"])
     return fixture
+
+
+@pytest.fixture(scope="session")
+def db(request):
+    db_conf = load_config(request.config.getoption("--settings"))["db"]
+    dbfixture = DbFixture(host=db_conf["host"], name=db_conf["name"], user=db_conf["username"],
+                          password=db_conf[["password"]])
+
+    def fin():
+        dbfixture.finish()
+    request.addfinalizer(fin)
+    return dbfixture
 
 
 @pytest.fixture(scope="session", autouse=True)
