@@ -1,31 +1,10 @@
 # -*- coding: utf-8 -*-
 from model.contact import Contact
 import random
-import re
 
 
 month = ("January", "February", "March", "April", "May", "June", "July",
          "August", "September", "October", "November", "December")
-
-
-def delete_whitespace(s):
-    if len(s) > 0:
-        s = re.sub('\s+', ' ', s)
-        if s[-1] == " ":
-            s = s[:-1]
-    return s
-
-
-def normalize_contact_for_check(contact):
-    if contact.first_name is not None:
-        contact.first_name = delete_whitespace(contact.first_name)
-    else:
-        contact.first_name = ""
-    if contact.last_name is not None:
-        contact.last_name = delete_whitespace(contact.last_name)
-    else:
-        contact.last_name = ""
-    return contact
 
 
 def test_add_contact_using_json(gen, json_contact):
@@ -36,7 +15,7 @@ def test_add_contact_using_json(gen, json_contact):
     gen.contact.create(contact)
     assert len(old_contact_list) + 1 == gen.contact.get_contact_count()
     new_contact_list = gen.contact.get_contact_list()
-    old_contact_list.append(normalize_contact_for_check(contact))
+    old_contact_list.append(contact)
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
 
@@ -48,7 +27,7 @@ def test_add_contact_using_module(gen, data_contacts):
     gen.contact.create(contact)
     assert len(old_contact_list) + 1 == gen.contact.get_contact_count()
     new_contact_list = gen.contact.get_contact_list()
-    old_contact_list.append(normalize_contact_for_check(contact))
+    old_contact_list.append(contact)
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
 
@@ -66,7 +45,7 @@ def test_add_contact_into_group(gen):
     gen.contact.create(cont)
     assert len(old_contact_list) + 1 == gen.contact.get_contact_count()
     new_contact_list = gen.contact.get_contact_list()
-    old_contact_list.append(normalize_contact_for_check(cont))
+    old_contact_list.append(cont)
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
 
