@@ -164,6 +164,16 @@ class ContactManage:
         self.wait_close_message_box()
         self.contact_cache = None
 
+    def del_by_id(self, id):
+        wd = self.gen.wd
+        self.open_home_page()
+        # select first contact & submit deletion
+        self.select_contact_by_id(id)
+        wd.find_element_by_xpath("(//input[@value='Delete'])").click()
+        wd.switch_to_alert().accept()
+        self.wait_close_message_box()
+        self.contact_cache = None
+
     def wait_close_message_box(self):
         wd = self.gen.wd
         try:
@@ -179,6 +189,15 @@ class ContactManage:
         self.open_home_page()
         # select contact & submit deletion
         self.select_contact_by_index(index)
+        wd.find_element_by_xpath("(//input[@value='Delete'])").click()
+        wd.switch_to_alert().dismiss()
+        self.contact_cache = None
+
+    def cancel_del_by_id(self, id):
+        wd = self.gen.wd
+        self.open_home_page()
+        # select contact & submit deletion
+        self.select_contact_by_id(id)
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().dismiss()
         self.contact_cache = None
@@ -383,9 +402,10 @@ class ContactManage:
                 wd.find_element_by_xpath("(//img[@alt='Edit'])[%s]" % (i+1)).click()
                 return
 
-    def click_pencil_img(self, index):
+    def click_pencil_img(self, id):
         wd = self.gen.wd
-        wd.find_elements_by_xpath("(//img[@alt='Edit'])")[index].click()
+        wd.find_element_by_link_text("edit.php?id=%s" % id)
+        # wd.find_elements_by_xpath("(//img[@alt='Edit'])")[index].click()
 
     contact_cache = None
 
