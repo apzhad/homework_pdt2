@@ -2,18 +2,20 @@ from model.group import Group
 import random
 
 
-def test_del_first_group(gen, db):
+def test_del_first_group(gen, db, check_ui):
     if len(db.get_group_list()) == 0:
         gen.group.create(Group(name="for_del"))
-    old_group_list = gen.group.get_group_list()
+    old_group_list = db.get_sorted_group_list()
     gen.group.del_first()
     assert len(old_group_list) - 1 == len(db.get_group_list())
-    new_group_list = gen.group.get_group_list()
+    new_group_list = db.get_group_list()
     old_group_list[0:1] = []
     assert old_group_list == new_group_list
+    if check_ui:
+        assert sorted(new_group_list, key=Group.id_or_max) == sorted(gen.group.get_group_list(), key=Group.id_or_max)
 
 
-def test_del_all_group(gen, db):
+def test_del_all_group(gen, db, check_ui):
     if len(db.get_group_list()) == 0:
         gen.group.create(Group(name="for_del_1"))
         gen.group.create(Group(name="for_del_2"))
@@ -21,22 +23,26 @@ def test_del_all_group(gen, db):
     gen.group.del_all()
     new_group_list = db.get_group_list()
     assert [] == new_group_list
+    if check_ui:
+        assert sorted(new_group_list, key=Group.id_or_max) == sorted(gen.group.get_group_list(), key=Group.id_or_max)
 
 
-def test_del_last_group(gen, db):
+def test_del_last_group(gen, db, check_ui):
     if len(db.get_group_list()) == 0:
         gen.group.create(Group(name="for_del_1"))
         gen.group.create(Group(name="for_del_2"))
         gen.group.create(Group(name="for_del_3"))
-    old_group_list = gen.group.get_group_list()
+    old_group_list = db.get_sorted_group_list()
     gen.group.del_last()
     assert len(old_group_list) - 1 == len(db.get_group_list())
-    new_group_list = gen.group.get_group_list()
+    new_group_list = db.get_group_list()
     old_group_list[-1:] = []
     assert old_group_list == new_group_list
+    if check_ui:
+        assert sorted(new_group_list, key=Group.id_or_max) == sorted(gen.group.get_group_list(), key=Group.id_or_max)
 
 
-def test_del_without_choice_group(gen, db):
+def test_del_without_choice_group(gen, db, check_ui):
     if len(db.get_group_list()) == 0:
         gen.group.create(Group(name="for_del_1"))
         gen.group.create(Group(name="for_del_2"))
@@ -44,6 +50,8 @@ def test_del_without_choice_group(gen, db):
     gen.group.del_not_choose()
     new_group_list = db.get_group_list()
     assert old_group_list == new_group_list
+    if check_ui:
+        assert sorted(new_group_list, key=Group.id_or_max) == sorted(gen.group.get_group_list(), key=Group.id_or_max)
 
 
 def test_del_some_group(gen, db, check_ui):
