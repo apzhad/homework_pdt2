@@ -24,6 +24,19 @@ class DbFixture:
             cursor.close()
         return group_list
 
+    def get_sorted_group_list(self):
+        cursor = self.connection.cursor()
+        group_list = []
+        try:
+            cursor.execute("select group_id, group_name, group_header, group_footer from group_list "
+                           "ORDER BY group_name")
+            for row in cursor:
+                (id, name, header, footer) = row
+                group_list.append(Group(id=str(id), name=name, header=header, footer=footer))
+        finally:
+            cursor.close()
+        return group_list
+
     def get_contact_list(self):
         cursor = self.connection.cursor()
         contact_list = []
