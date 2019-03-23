@@ -2,36 +2,44 @@
 from model.group import Group
 
 
-def test_add_group_using_json(gen, db, json_group):
+def test_add_group_using_json(gen, db, json_group, check_ui):
     group = json_group
     old_group_list = db.get_group_list()
     gen.group.create(group)
     new_group_list = db.get_group_list()
     old_group_list.append(group)
     assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
+    if check_ui:
+        assert sorted(new_group_list, key=Group.id_or_max) == sorted(gen.group.get_group_list(), key=Group.id_or_max)
 
 
-def test_add_group_using_module(gen, db, data_groups):
+def test_add_group_using_module(gen, db, data_groups, check_ui):
     group = data_groups
     old_group_list = db.get_group_list()
     gen.group.create(group)
     new_group_list = db.get_group_list()
     old_group_list.append(group)
     assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
+    if check_ui:
+        assert sorted(new_group_list, key=Group.id_or_max) == sorted(gen.group.get_group_list(), key=Group.id_or_max)
 
 
-def test_add_group_with_whitespace(gen, db):
+def test_add_group_with_whitespace(gen, db, check_ui):
     old_group_list = db.get_group_list()
     group = Group(name="name  E7zwRa ", header="header_groupISZ", footer="footer1S tph")
     gen.group.create(group)
     new_group_list = db.get_group_list()
     old_group_list.append(group)
     assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
+    if check_ui:
+        assert sorted(new_group_list, key=Group.id_or_max) == sorted(gen.group.get_group_list(), key=Group.id_or_max)
 
 
-def test_add_empty_v2(gen, db):
+def test_add_empty_v2(gen, db, check_ui):
     old_group_list = db.get_group_list()
     gen.group.create_empty()
     new_group_list = db.get_group_list()
     old_group_list.append(Group(name=""))
     assert sorted(old_group_list, key=Group.id_or_max) == sorted(new_group_list, key=Group.id_or_max)
+    if check_ui:
+        assert sorted(new_group_list, key=Group.id_or_max) == sorted(gen.group.get_group_list(), key=Group.id_or_max)
