@@ -28,24 +28,17 @@ class DbFixture:
             cursor.close()
         return group_list
 
-    def get_contact_list(self):
+    def get_contact_list(self, sorted=False):
         cursor = self.connection.cursor()
         contact_list = []
         try:
-            cursor.execute("select id, firstname, lastname from addressbook where deprecated = '0000-00-00 00:00:00'")
-            for row in cursor:
-                (id, firstname, lastname) = row
-                contact_list.append(Contact(id=str(id), first_name=firstname, last_name=lastname))
-        finally:
-            cursor.close()
-        return contact_list
-
-    def get_sorted_contact_list(self):
-        cursor = self.connection.cursor()
-        contact_list = []
-        try:
-            cursor.execute("select id, firstname, lastname from addressbook where deprecated = '0000-00-00 00:00:00' "
-                           "ORDER BY firstname, lastname")
+            if not sorted:
+                cursor.execute("select id, firstname, lastname from addressbook "
+                               "where deprecated = '0000-00-00 00:00:00'")
+            else:
+                cursor.execute(
+                    "select id, firstname, lastname from addressbook where deprecated = '0000-00-00 00:00:00' "
+                    "ORDER BY firstname, lastname")
             for row in cursor:
                 (id, firstname, lastname) = row
                 contact_list.append(Contact(id=str(id), first_name=firstname, last_name=lastname))

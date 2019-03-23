@@ -6,9 +6,9 @@ import random
 def test_del_first_contact(gen, check_ui, db):
     if len(db.get_contact_list()) == 0:
         gen.contact.create(Contact(first_name="del_contact", fax="573-092", nickname="1"))
-    old_contact_list = db.get_sorted_contact_list()
+    old_contact_list = db.get_contact_list(sorted=True)
     gen.contact.del_first()
-    assert len(old_contact_list) - 1 == len(db.get_sorted_contact_list())
+    assert len(old_contact_list) - 1 == len(db.get_contact_list())
     new_contact_list = db.get_contact_list()
     old_contact_list[0:1] = []
     assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
@@ -148,7 +148,7 @@ def test_del_some_contact_from_group(gen, db, check_ui):
 def test_del_first_contact_using_edit(gen, db, check_ui):
     if len(db.get_contact_list()) == 0:
         gen.contact.create(Contact(first_name="del_contact", fax="573-092", nickname="1"))
-    old_contact_list = db.get_sorted_contact_list()
+    old_contact_list = db.get_contact_list(sorted=True)
     gen.contact.del_first_using_edit()
     assert len(old_contact_list) - 1 == len(db.get_contact_list())
     new_contact_list = db.get_contact_list()
