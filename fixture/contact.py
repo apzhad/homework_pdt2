@@ -291,6 +291,16 @@ class ContactManage:
             self.set_field_value("searchstring", search)
         self.click_pencil_img(index)
 
+    def open_edit_by_id(self, id, group=None, search=None):
+        wd = self.gen.wd
+        if group is not None:
+            self.open_contact_group(group)
+        else:
+            self.open_home_page()
+        if search is not None:
+            self.set_field_value("searchstring", search)
+        self.click_pencil_by_id(id)
+
     def edit_first(self, contact):
         self.edit_by_index(0, contact)
 
@@ -402,10 +412,13 @@ class ContactManage:
                 wd.find_element_by_xpath("(//img[@alt='Edit'])[%s]" % (i+1)).click()
                 return
 
-    def click_pencil_img(self, id):
+    def click_pencil_img(self, index):
+        wd = self.gen.wd
+        wd.find_elements_by_xpath("(//img[@alt='Edit'])")[index].click()
+
+    def click_pencil_by_id(self, id):
         wd = self.gen.wd
         wd.find_element_by_link_text("edit.php?id=%s" % id)
-        # wd.find_elements_by_xpath("(//img[@alt='Edit'])")[index].click()
 
     contact_cache = None
 
