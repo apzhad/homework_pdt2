@@ -1,12 +1,21 @@
 from model.contact import Contact
 from model.group import Group
-from random import randrange
+import random
 
 
-def test_edit_first_contact(gen):
-    if gen.contact.get_contact_count() == 0:
+def find_index(contacts, id):
+    index = 0
+    for c in contacts:
+        if c.id == id:
+            break
+        index += 1
+    return index
+
+
+def test_edit_first_contact(gen, check_ui, db):
+    if len(db.get_contact_list()) == 0:
         gen.contact.create(Contact(first_name="modify"))
-    old_contact_list = gen.contact.get_contact_list()
+    old_contact_list = db.get_contact_list(sorted=True)
     cont = Contact(first_name="new_name", middle_name="new_middle_name", last_name="lastname",
                    nickname="nick", title="title234", company="company2", address="address12",
                    home_phone="home", mobile_phone="mobile", work_phone="work",
@@ -18,17 +27,20 @@ def test_edit_first_contact(gen):
                    notes="s jv s\njsbej", photo_path="3.png")
     cont.id = old_contact_list[0].id
     gen.contact.edit_first(cont)
-    assert len(old_contact_list) == gen.contact.get_contact_count()
-    new_contact_list = gen.contact.get_contact_list()
+    assert len(old_contact_list) == len(db.get_contact_list())
+    new_contact_list = db.get_contact_list()
     old_contact_list[0] = cont
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                         key=Contact.id_or_max)
 
 
-def test_edit_some_contact(gen):
-    if gen.contact.get_contact_count() == 0:
+def test_edit_some_contact(gen, check_ui, db):
+    if len(db.get_contact_list()) == 0:
         gen.contact.create(Contact(first_name="modify"))
-    old_contact_list = gen.contact.get_contact_list()
-    index = randrange(len(old_contact_list))
+    old_contact_list = db.get_contact_list()
+    cid = random.choice(old_contact_list).id
     cont = Contact(first_name="new_name", middle_name="new_middle_name", last_name="lastname",
                    nickname="nick", title="title234", company="company2", address="address12",
                    home_phone="home", mobile_phone="mobile", work_phone="work",
@@ -37,37 +49,46 @@ def test_edit_some_contact(gen):
                    birth_month="July", birth_year="1978", anniversary_day="9",
                    anniversary_month="May", anniversary_year="2008",
                    secondary_address="sec_addr", secondary_home_phone="",
-                   notes="s jv s\njsbej", photo_path="3.png")
-    cont.id = old_contact_list[index].id
-    gen.contact.edit_by_index(index, cont)
-    assert len(old_contact_list) == gen.contact.get_contact_count()
-    new_contact_list = gen.contact.get_contact_list()
+                   notes="s jv s\njsbej", photo_path="3.png", id=cid)
+    gen.contact.edit_by_id(cid, cont)
+    index = find_index(old_contact_list, cid)
+    assert len(old_contact_list) == len(db.get_contact_list())
+    new_contact_list = db.get_contact_list()
     old_contact_list[index] = cont
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                         key=Contact.id_or_max)
 
 
-def test_edit_first_contact_without_change(gen):
-    if gen.contact.get_contact_count() == 0:
+def test_edit_first_contact_without_change(gen, check_ui, db):
+    if len(db.get_contact_list()) == 0:
         gen.contact.create(Contact(first_name="modify", last_name="status"))
-    old_contact_list = gen.contact.get_contact_list()
+    old_contact_list = db.get_contact_list(sorted=True)
     gen.contact.edit_first_wo_change()
-    assert len(old_contact_list) == gen.contact.get_contact_count()
-    new_contact_list = gen.contact.get_contact_list()
+    assert len(old_contact_list) == len(db.get_contact_list())
+    new_contact_list = db.get_contact_list()
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                         key=Contact.id_or_max)
 
 
-def test_edit_some_contact_without_change(gen):
-    if gen.contact.get_contact_count() == 0:
+def test_edit_some_contact_without_change(gen, check_ui, db):
+    if len(db.get_contact_list()) == 0:
         gen.contact.create(Contact(first_name="modify", last_name="status"))
-    old_contact_list = gen.contact.get_contact_list()
-    index = randrange(len(old_contact_list))
-    gen.contact.edit_wo_change_by_index(index)
-    assert len(old_contact_list) == gen.contact.get_contact_count()
-    new_contact_list = gen.contact.get_contact_list()
+    old_contact_list = db.get_contact_list()
+    cid = random.choice(old_contact_list).id
+    gen.contact.edit_wo_change_by_id(cid)
+    assert len(old_contact_list) == len(db.get_contact_list())
+    new_contact_list = db.get_contact_list()
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                         key=Contact.id_or_max)
 
 
-def test_edit_first_contact_in_group(gen):
+def test_edit_first_contact_in_group(gen, check_ui, db):
     group = "new_name"
     if group not in gen.group.get_groups_names() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
@@ -83,14 +104,14 @@ def test_edit_first_contact_in_group(gen):
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
 
-def test_edit_some_contact_in_group(gen):
+def test_edit_some_contact_in_group(gen, check_ui, db):
     group = "new_name"
     if group not in gen.group.get_groups_names() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
     if gen.contact.get_contact_count(group_name=group) == 0:
         gen.contact.create(Contact(first_name="modify", last_name="status", group_name=group))
     old_contact_list = gen.contact.get_contact_list(group_name=group)
-    index = randrange(len(old_contact_list))
+    index = random.randrange(len(old_contact_list))
     cont = Contact(first_name="first", last_name="last", address="gjh")
     cont.id = old_contact_list[index].id
     gen.contact.edit_in_group_by_index(index=index, group_name=group, contact=cont)
@@ -100,48 +121,52 @@ def test_edit_some_contact_in_group(gen):
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
 
-def test_edit_first_contact_from_details(gen):
-    if gen.contact.get_contact_count() == 0:
+def test_edit_first_contact_from_details(gen, check_ui, db):
+    if len(db.get_contact_list()) == 0:
         gen.contact.create(Contact(first_name="modify", last_name="status"))
-    old_contact_list = gen.contact.get_contact_list()
+    old_contact_list = db.get_contact_list(sorted=True)
     cont = Contact(first_name="name", middle_name="middle", last_name="last",
                    nickname="", title="", company="cmp", address="none",
                    home_phone="32445", mobile_phone="", work_phone="763728",
-                   fax="", primary_email="", secondary_email="", third_email="",
                    homepage="", birth_day="-", birth_month="-", birth_year="",
                    anniversary_day="-", anniversary_month="-", anniversary_year="",
                    group_name="", secondary_address="", secondary_home_phone="",
                    notes="", del_foto=True)
     cont.id = old_contact_list[0].id
     gen.contact.edit_first_from_details(cont)
-    assert len(old_contact_list) == gen.contact.get_contact_count()
-    new_contact_list = gen.contact.get_contact_list()
+    assert len(old_contact_list) == len(db.get_contact_list())
+    new_contact_list = db.get_contact_list()
     old_contact_list[0] = cont
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                         key=Contact.id_or_max)
 
 
-def test_edit_some_contact_from_details(gen):
-    if gen.contact.get_contact_count() == 0:
+def test_edit_some_contact_from_details(gen, check_ui, db):
+    if len(db.get_contact_list()) == 0:
         gen.contact.create(Contact(first_name="modify", last_name="status"))
-    old_contact_list = gen.contact.get_contact_list()
-    index = randrange(len(old_contact_list))
+    old_contact_list = db.get_contact_list()
+    cid = random.choice(old_contact_list).id
+    index = find_index(old_contact_list, cid)
     cont = Contact(first_name="name", middle_name="middle", last_name="last",
                    nickname="", title="", company="cmp", address="none",
                    home_phone="32445", mobile_phone="", work_phone="763728",
-                   fax="", primary_email="", secondary_email="", third_email="",
                    homepage="", birth_day="-", birth_month="-", birth_year="",
                    anniversary_day="-", anniversary_month="-", anniversary_year="",
                    group_name="", secondary_address="", secondary_home_phone="",
-                   notes="", del_foto=True)
-    cont.id = old_contact_list[index].id
-    gen.contact.edit_from_details_by_index(index, cont)
-    assert len(old_contact_list) == gen.contact.get_contact_count()
-    new_contact_list = gen.contact.get_contact_list()
+                   notes="", del_foto=True, id=cid)
+    gen.contact.edit_from_details_by_id(cid, cont)
+    assert len(old_contact_list) == len(db.get_contact_list())
+    new_contact_list = db.get_contact_list()
     old_contact_list[index] = cont
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                         key=Contact.id_or_max)
 
 
-def test_add_all_contacts_to_group(gen):
+def test_add_all_contacts_to_group(gen, check_ui, db):
     group = "new_name"
     if group not in gen.group.get_groups_names() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
@@ -156,7 +181,7 @@ def test_add_all_contacts_to_group(gen):
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
 
-def test_add_to_group_without_select_contact(gen):
+def test_add_to_group_without_select_contact(gen, check_ui, db):
     group = "new_name"
     if group not in gen.group.get_groups_names() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
@@ -169,7 +194,7 @@ def test_add_to_group_without_select_contact(gen):
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 
 
-def test_add_contacts_to_group_from_another_group(gen):
+def test_add_contacts_to_group_from_another_group(gen, check_ui, db):
     group_from = "new_name"
     group_to = "last_name"
     if group_from not in gen.group.get_groups_names() and group_from != "[all]" and group_from != "[none]":
@@ -189,7 +214,7 @@ def test_add_contacts_to_group_from_another_group(gen):
         assert sorted(old_to_list, key=Contact.id_or_max) == sorted(new_to_list, key=Contact.id_or_max)
 
 
-def test_remove_contact_from_group(gen):
+def test_remove_contact_from_group(gen, check_ui, db):
     group = "last_name"
     if group not in gen.group.get_groups_names() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))
@@ -201,7 +226,7 @@ def test_remove_contact_from_group(gen):
     assert [] == cont_group_list
 
 
-def test_edit_first_found_contact(gen):
+def test_edit_first_found_contact(gen, check_ui, db):
     search = "modify"
     if gen.contact.get_result_count(search) == 0:
         gen.contact.create(Contact(first_name=search, fax="573-092", nickname="1"))
