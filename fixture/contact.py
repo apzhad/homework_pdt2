@@ -357,10 +357,24 @@ class ContactManage:
         self.return_to_homepage()
         self.contact_cache = None
 
+    def edit_from_details_by_id(self, id, contact):
+        wd = self.gen.wd
+        self.open_home_page()
+        self.open_details_by_id(id)
+        wd.find_element_by_name("modifiy").click()
+        self.enter_contact_parameters(contact)
+        wd.find_element_by_name("update").click()
+        self.return_to_homepage()
+        self.contact_cache = None
+
     def open_details(self, index):
         wd = self.gen.wd
         self.open_home_page()
         wd.find_elements_by_xpath("//img[@alt='Details']")[index].click()
+
+    def open_details_by_id(self, id):
+        wd = self.gen.wd
+        wd.find_element_by_xpath("//a[@href='view.php?id=%s']" % id).click()
 
     def edit_first_in_group(self, group_name, contact):
         self.edit_in_group_by_index(0, group_name, contact)
