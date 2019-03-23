@@ -281,6 +281,13 @@ class ContactManage:
         self.wait_close_message_box()
         self.contact_cache = None
 
+    def del_using_edit_by_id(self, id):
+        wd = self.gen.wd
+        self.open_edit_by_id(id)
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        self.wait_close_message_box()
+        self.contact_cache = None
+
     def open_edit(self, index, group=None, search=None):
         wd = self.gen.wd
         if group is not None:
