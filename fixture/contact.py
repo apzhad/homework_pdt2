@@ -139,6 +139,10 @@ class ContactManage:
         wd = self.gen.wd
         wd.find_elements_by_name("selected[]")[index].click()
 
+    def select_contact_by_id(self, id):
+        wd = self.gen.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
     def create_empty(self):
         wd = self.gen.wd
         # init new contact creation
