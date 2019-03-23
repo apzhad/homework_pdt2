@@ -425,7 +425,7 @@ class ContactManage:
 
     def click_pencil_by_id(self, id):
         wd = self.gen.wd
-        wd.find_element_by_link_text("edit.php?id=%s" % id)
+        wd.find_element_by_xpath("//a[@href='edit.php?id=%s']" % id).click()
 
     contact_cache = None
 
