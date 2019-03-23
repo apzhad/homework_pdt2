@@ -14,7 +14,7 @@ def find_index(group, id):
 def test_edit_first_group(gen, db, check_ui):
     if len(db.get_group_list()) == 0:
         gen.group.create(Group(name="for_edit"))
-    old_group_list = db.get_sorted_group_list()
+    old_group_list = db.get_group_list(sorted=True)
     group = Group(name="new_name", header="new_header_group", footer="changed_group")
     group.id = old_group_list[0].id
     gen.group.edit_first(group)
@@ -45,7 +45,7 @@ def test_edit_some_group(gen, db, check_ui):
 def test_clear_first_group_params(gen, db, check_ui):
     if len(db.get_group_list()) == 0:
         gen.group.create(Group(name="for_edit", header="header", footer="footer"))
-    old_group_list = db.get_sorted_group_list()
+    old_group_list = db.get_group_list(sorted=True)
     group = Group(name="", header="", footer="")
     group.id = old_group_list[0].id
     gen.group.edit_first(group)
@@ -103,7 +103,7 @@ def test_update_all_groups(gen, db, check_ui):
         gen.group.create(Group(name="for_edit", header="header", footer="footer"))
         gen.group.create(Group(name="for_edit_1", header="header_1", footer="footer_1"))
         gen.group.create(Group(name="for_edit_2", header="header_2", footer="footer_2"))
-    old_group_list = db.get_sorted_group_list()
+    old_group_list = db.get_group_list(sorted=True)
     group = Group(name="some_name", header="some_header_group", footer="changed_group")
     group.id = old_group_list[0].id
     gen.group.edit_all(group)
@@ -133,7 +133,7 @@ def test_update_last_group(gen, db, check_ui):
     if len(db.get_group_list()) == 0:
         gen.group.create(Group(name="for_edit", header="header", footer="footer"))
         gen.group.create(Group(name="for_edit_1", header="header_1", footer="footer_1"))
-    old_group_list = db.get_sorted_group_list()
+    old_group_list = db.get_group_list(sorted=True)
     group = Group(name="last_name", header="last_header_group", footer="last_group")
     group.id = old_group_list[-1].id
     gen.group.edit_last(group)
@@ -149,7 +149,7 @@ def test_update_last_group_without_changes(gen, db, check_ui):
     if len(db.get_group_list()) == 0:
         gen.group.create(Group(name="for_edit", header="header", footer="footer"))
         gen.group.create(Group(name="for_edit_1", header="header_1", footer="footer_1"))
-    old_group_list = db.get_sorted_group_list()
+    old_group_list = db.get_group_list(sorted=True)
     gen.group.update_last_wo_change()
     assert len(old_group_list) == len(db.get_group_list())
     new_group_list = db.get_group_list()
@@ -161,7 +161,7 @@ def test_update_last_group_without_changes(gen, db, check_ui):
 def test_edit_first_group_name(gen, db, check_ui):
     if len(db.get_group_list()) == 0:
         gen.group.create(Group(name="for_edit", header="header", footer="footer"))
-    old_group_list = db.get_sorted_group_list()
+    old_group_list = db.get_group_list(sorted=True)
     group = Group(name="only_name")
     group.id = old_group_list[0].id
     gen.group.edit_first(group)

@@ -5,7 +5,7 @@ import random
 def test_del_first_group(gen, db, check_ui):
     if len(db.get_group_list()) == 0:
         gen.group.create(Group(name="for_del"))
-    old_group_list = db.get_sorted_group_list()
+    old_group_list = db.get_group_list(sorted=True)
     gen.group.del_first()
     assert len(old_group_list) - 1 == len(db.get_group_list())
     new_group_list = db.get_group_list()
@@ -32,7 +32,7 @@ def test_del_last_group(gen, db, check_ui):
         gen.group.create(Group(name="for_del_1"))
         gen.group.create(Group(name="for_del_2"))
         gen.group.create(Group(name="for_del_3"))
-    old_group_list = db.get_sorted_group_list()
+    old_group_list = db.get_group_list(sorted=True)
     gen.group.del_last()
     assert len(old_group_list) - 1 == len(db.get_group_list())
     new_group_list = db.get_group_list()
