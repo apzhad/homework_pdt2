@@ -427,6 +427,13 @@ class ContactManage:
         wd.find_element_by_name("add").click()
         self.contact_cache = None
 
+    def add_to_group_unselected_using_id(self, group_id):
+        wd = self.gen.wd
+        self.open_home_page()
+        self.select_from_list_by_id("to_group", group_id)
+        wd.find_element_by_name("add").click()
+        self.contact_cache = None
+
     def add_to_group_from_another(self, group_from, group_to):
         wd = self.gen.wd
         self.open_contact_group(group_from)
@@ -434,6 +441,15 @@ class ContactManage:
         self.select_from_list("to_group", group_to)
         wd.find_element_by_name("add").click()
         wd.find_element_by_link_text('group page "%s"' % group_to).click()
+        self.contact_cache = None
+
+    def add_to_group_from_another_using_id(self, id_from, id_to):
+        wd = self.gen.wd
+        self.open_contact_group(id_from)
+        wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
+        self.select_from_list_by_id("to_group", id_to)
+        wd.find_element_by_name("add").click()
+        wd.find_element_by_xpath("//a[@href='./?group=%s']" % id_to).click()
         self.contact_cache = None
 
     def remove_from_group(self, group_name):
