@@ -516,11 +516,11 @@ class ContactManage:
 
     contact_cache = None
 
-    def get_contact_list(self, group_name=None, search=None):
+    def get_contact_list(self, group_id=None, search=None):
         if self.contact_cache is None:
             wd = self.gen.wd
-            if group_name is not None:
-                self.open_contact_group(group_name)
+            if group_id is not None:
+                self.open_contact_group(group_id)
             else:
                 self.open_home_page()
             if search is not None:

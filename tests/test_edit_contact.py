@@ -102,8 +102,8 @@ def test_edit_first_contact_in_group(gen, check_ui, orm):
     old_contact_list[0] = cont
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
     if check_ui:
-        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
-                                                                         key=Contact.id_or_max)
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(
+            group_id=group.id), key=Contact.id_or_max)
 
 
 def test_edit_some_contact_in_group(gen, check_ui, orm):
@@ -120,8 +120,8 @@ def test_edit_some_contact_in_group(gen, check_ui, orm):
     old_contact_list[index] = cont
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
     if check_ui:
-        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
-                                                                         key=Contact.id_or_max)
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(
+            group_id=group.id), key=Contact.id_or_max)
 
 
 def test_edit_first_contact_from_details(gen, check_ui, db):
@@ -181,8 +181,8 @@ def test_add_all_contacts_to_group(gen, check_ui, orm):
     new_contact_list = orm.get_contact_in_group(group=group)
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
     if check_ui:
-        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
-                                                                         key=Contact.id_or_max)
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(
+            gen.contact.get_contact_list(group_id=group.id), key=Contact.id_or_max)
 
 
 def test_add_some_contact_to_group(gen, check_ui, orm):
@@ -202,8 +202,8 @@ def test_add_some_contact_to_group(gen, check_ui, orm):
     old_contact_list.append(contact)
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
     if check_ui:
-        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
-                                                                         key=Contact.id_or_max)
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(
+            gen.contact.get_contact_list(group_id=group.id), key=Contact.id_or_max)
 
 
 def test_add_to_group_without_select_contact(gen, check_ui, orm):
@@ -216,8 +216,8 @@ def test_add_to_group_without_select_contact(gen, check_ui, orm):
     new_contact_list = orm.get_contact_in_group(group)
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
     if check_ui:
-        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
-                                                                         key=Contact.id_or_max)
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(
+            gen.contact.get_contact_list(group_id=group.id), key=Contact.id_or_max)
 
 
 def test_add_all_contacts_to_group_from_another_group(gen, check_ui, orm):
@@ -235,8 +235,8 @@ def test_add_all_contacts_to_group_from_another_group(gen, check_ui, orm):
         old_to_list = old_to_list + from_list
         assert sorted(old_to_list, key=Contact.id_or_max) == sorted(new_to_list, key=Contact.id_or_max)
     if check_ui:
-        assert sorted(new_to_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
-                                                                    key=Contact.id_or_max)
+        assert sorted(new_to_list, key=Contact.id_or_max) == sorted(
+            gen.contact.get_contact_list(group_id=group_to.id), key=Contact.id_or_max)
 
 
 def test_add_some_contact_to_group_from_another_group(gen, check_ui, orm):
@@ -257,8 +257,8 @@ def test_add_some_contact_to_group_from_another_group(gen, check_ui, orm):
         old_to_list.append(contact)
         assert sorted(old_to_list, key=Contact.id_or_max) == sorted(new_to_list, key=Contact.id_or_max)
     if check_ui:
-        assert sorted(new_to_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
-                                                                    key=Contact.id_or_max)
+        assert sorted(new_to_list, key=Contact.id_or_max) == sorted(
+            gen.contact.get_contact_list(group_id=group_to.id), key=Contact.id_or_max)
 
 
 def test_remove_contact_from_group(gen, check_ui, orm):
