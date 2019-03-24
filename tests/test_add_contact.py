@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from model.contact import Contact
+from model.group import Group
 import random
 
 
@@ -7,11 +8,18 @@ month = ("January", "February", "March", "April", "May", "June", "July",
          "August", "September", "October", "November", "December")
 
 
+def test_t(db):
+    gr = db.get_group_list()
+    ident = random.choice(gr).id
+    print(ident)
+
+
 def test_add_contact_using_json(gen, db, json_contact, check_ui):
     contact = json_contact
     old_contact_list = db.get_contact_list()
-    group = gen.group.get_groups_names() + ["[none]"]
-    contact.group_name = random.choice(group)
+    group = db.get_group_list()
+    group.append(Group(id="[none]", name="[none]"))
+    contact.group_name = random.choice(group).id
     gen.contact.create(contact)
     assert len(old_contact_list) + 1 == len(db.get_contact_list())
     new_contact_list = db.get_contact_list()
@@ -25,8 +33,9 @@ def test_add_contact_using_json(gen, db, json_contact, check_ui):
 def test_add_contact_using_module(gen, data_contacts, check_ui, db):
     contact = data_contacts
     old_contact_list = db.get_contact_list()
-    group = gen.group.get_groups_names() + ["[none]"]
-    contact.group_name = random.choice(group)
+    group = db.get_group_list()
+    group.append(Group(id="[none]", name="[none]"))
+    contact.group_name = random.choice(group).id
     gen.contact.create(contact)
     assert len(old_contact_list) + 1 == len(db.get_contact_list())
     new_contact_list = db.get_contact_list()
@@ -38,7 +47,8 @@ def test_add_contact_using_module(gen, data_contacts, check_ui, db):
 
 
 def test_add_contact_into_group(gen, db, check_ui):
-    group = gen.group.get_groups_names() + ["[none]"]
+    group = db.get_group_list()
+    group.append(Group(id="[none]", name="[none]"))
     old_contact_list = db.get_contact_list()
     cont = Contact(first_name="first_name ", middle_name="middle_name", last_name="last_name", nickname="nickname",
                    title="title", company="company", address="address", home_phone="homephone",
@@ -47,7 +57,7 @@ def test_add_contact_into_group(gen, db, check_ui):
                    birth_month=random.choice(month), birth_year="1950", anniversary_day="15", anniversary_month="June",
                    anniversary_year="2000", secondary_address="address secondary",
                    secondary_home_phone="home secondary", notes="notes", photo_path="cat.jpg")
-    cont.group_name = random.choice(group)
+    cont.group_name = random.choice(group).id
     gen.contact.create(cont)
     assert len(old_contact_list) + 1 == len(db.get_contact_list())
     new_contact_list = db.get_contact_list()

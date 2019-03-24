@@ -89,9 +89,9 @@ class ContactManage:
         self.select_from_list("amonth", contact.anniversary_month)
         self.set_field_value("ayear", contact.anniversary_year)
 
-        # select group
+        # select group using group_id
         if contact.group_name:
-            self.select_from_list("new_group", contact.group_name)
+            self.select_from_list_by_id("new_group", contact.group_name)
 
         # secondary info
         self.set_field_value("address2", contact.secondary_address)
@@ -103,6 +103,12 @@ class ContactManage:
         if text is not None:
             wd.find_element_by_name(list_name).click()
             Select(wd.find_element_by_name(list_name)).select_by_visible_text(text)
+
+    def select_from_list_by_id(self, list_name, id):
+        wd = self.gen.wd
+        if id is not None:
+            wd.find_element_by_name(list_name).click()
+            wd.find_element_by_xpath("//option[@value='%s']" % id).click()
 
     def set_field_value(self, field_name, text):
         wd = self.gen.wd
@@ -240,7 +246,8 @@ class ContactManage:
 
     def open_contact_group(self, group_name):
         wd = self.gen.wd
-        if len(wd.find_elements_by_xpath("(//input[@id='MassCB'])")) > 0 and len(wd.find_elements_by_name('searchstring')) > 0:
+        if len(wd.find_elements_by_xpath("(//input[@id='MassCB'])")) > 0 and \
+                len(wd.find_elements_by_name('searchstring')) > 0:
             if not (wd.current_url.endswith("addressbook/?group=" + self.get_group_id(group_name))):
                 self.select_from_list("group", group_name)
                 self.contact_cache = None
