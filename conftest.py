@@ -1,6 +1,7 @@
 import pytest
 from fixture.generic import Generic
 from fixture.db import DbFixture
+from fixture.orm import ORMFixture
 import json
 import os.path
 import importlib
@@ -40,6 +41,14 @@ def db(request):
         dbfixture.finish()
     request.addfinalizer(fin)
     return dbfixture
+
+
+@pytest.fixture(scope="session")
+def orm(request):
+    orm_conf = load_config(request.config.getoption("--settings"))["db"]
+    ormfixture = ORMFixture(host=orm_conf["host"], name=orm_conf["name"], user=orm_conf["username"],
+                            password=orm_conf["password"])
+    return ormfixture
 
 
 @pytest.fixture(scope="session", autouse=True)
