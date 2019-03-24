@@ -58,8 +58,8 @@ class ORMFixture:
                 select(c for c in ORMFixture.ORMContact if c.deprecated is None and orm_group in c.groups))
         else:
             return self.convert_cont_to_model(
-                select(c for c in ORMFixture.ORMContact if c.deprecated is None and orm_group not in c.groups).order_by(
-                    ORMFixture.ORMContact.lastname,ORMFixture.ORMContact.firstname))
+                select(c for c in ORMFixture.ORMContact if c.deprecated is None and orm_group in c.groups).order_by(
+                    ORMFixture.ORMContact.lastname, ORMFixture.ORMContact.firstname))
 
     @db_session
     def get_contact_not_in_group(self, group):
