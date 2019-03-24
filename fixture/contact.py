@@ -108,7 +108,7 @@ class ContactManage:
         wd = self.gen.wd
         if id is not None:
             wd.find_element_by_name(list_name).click()
-            wd.find_element_by_xpath("//option[@value='%s']" % id).click()
+            wd.find_element_by_css_selector("select[name='%s'] > option[value='%s']" % (list_name, id)).click()
 
     def set_field_value(self, field_name, text):
         wd = self.gen.wd
@@ -409,6 +409,15 @@ class ContactManage:
         self.select_from_list("to_group", group_name)
         wd.find_element_by_name("add").click()
         wd.find_element_by_link_text('group page "%s"' % group_name).click()
+        self.contact_cache = None
+
+    def add_all_to_group_using_id(self, group_id):
+        wd = self.gen.wd
+        self.open_home_page()
+        wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
+        self.select_from_list_by_id("to_group", group_id)
+        wd.find_element_by_name("add").click()
+        wd.find_element_by_xpath("//a[@href='./?group=%s']" % group_id).click()
         self.contact_cache = None
 
     def add_to_group_unselected(self, group_name):
