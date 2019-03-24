@@ -8,12 +8,6 @@ month = ("January", "February", "March", "April", "May", "June", "July",
          "August", "September", "October", "November", "December")
 
 
-def test_t(db):
-    gr = db.get_group_list()
-    ident = random.choice(gr).id
-    print(ident)
-
-
 def test_add_contact_using_json(gen, db, json_contact, check_ui):
     contact = json_contact
     old_contact_list = db.get_contact_list()
