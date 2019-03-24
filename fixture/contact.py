@@ -244,16 +244,16 @@ class ContactManage:
         self.wait_close_message_box()
         self.contact_cache = None
 
-    def open_contact_group(self, group_name):
+    def open_contact_group(self, group_id):
         wd = self.gen.wd
         if len(wd.find_elements_by_xpath("(//input[@id='MassCB'])")) > 0 and \
                 len(wd.find_elements_by_name('searchstring')) > 0:
-            if not (wd.current_url.endswith("addressbook/?group=" + self.get_group_id(group_name))):
-                self.select_from_list("group", group_name)
+            if not (wd.current_url.endswith("addressbook/?group=" + group_id)):
+                self.select_from_list_by_id("group", group_id)
                 self.contact_cache = None
         else:
             wd.find_element_by_link_text("home").click()
-            self.select_from_list("group", group_name)
+            self.select_from_list_by_id("group", group_id)
             self.contact_cache = None
 
     def get_group_id(self, group):
@@ -389,6 +389,14 @@ class ContactManage:
     def edit_in_group_by_index(self, index, group_name, contact):
         wd = self.gen.wd
         self.open_edit(index, group_name)
+        self.enter_contact_parameters(contact)
+        wd.find_element_by_name("update").click()
+        self.return_to_homepage()
+        self.contact_cache = None
+
+    def edit_in_group_by_id(self, id, group_id, contact):
+        wd = self.gen.wd
+        self.open_edit_by_id(id, group_id)
         self.enter_contact_parameters(contact)
         wd.find_element_by_name("update").click()
         self.return_to_homepage()
