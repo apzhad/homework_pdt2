@@ -199,7 +199,7 @@ def test_add_to_group_without_select_contact(gen, check_ui, orm):
                                                                          key=Contact.id_or_max)
 
 
-def test_add_contacts_to_group_from_another_group(gen, check_ui, orm):
+def test_add_all_contacts_to_group_from_another_group(gen, check_ui, orm):
     group_from = random.choice(orm.get_group_list())
     group_to = random.choice(orm.get_group_list())
     if len(orm.get_contact_in_group(group_from)) == 0:
@@ -218,7 +218,29 @@ def test_add_contacts_to_group_from_another_group(gen, check_ui, orm):
                                                                     key=Contact.id_or_max)
 
 
-def test_remove_contact_from_group(gen, check_ui, db):
+def test_add_some_contact_to_group_from_another_group(gen, check_ui, orm):
+    group_from = random.choice(orm.get_group_list())
+    group_to = random.choice(orm.get_group_list())
+    if len(orm.get_contact_in_group(group_from)) == 0:
+        gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group_from.id))
+    from_list = orm.get_contact_in_group(group_from)
+    contact = random.choice(from_list)
+    old_to_list = orm.get_contact_in_group(group_to)
+    gen.contact.add_some_contact_to_group_from_another(contact_id=contact.id, id_from=group_from.id, id_to=group_to.id)
+    if contact in old_to_list:
+        assert len(old_to_list) == len(orm.get_contact_in_group(group_to))
+    else:
+        assert len(old_to_list) + 1 == len(orm.get_contact_in_group(group_to))
+    new_to_list = orm.get_contact_in_group(group_to)
+    if sorted(old_to_list, key=Contact.id_or_max) != sorted(new_to_list, key=Contact.id_or_max):
+        old_to_list.append(contact)
+        assert sorted(old_to_list, key=Contact.id_or_max) == sorted(new_to_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_to_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                    key=Contact.id_or_max)
+
+
+def test_remove_contact_from_group(gen, check_ui, orm):
     group = "last_name"
     if group not in gen.group.get_groups_names() and group != "[all]" and group != "[none]":
         gen.group.create(group=Group(name=group))

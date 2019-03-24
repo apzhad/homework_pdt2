@@ -452,6 +452,15 @@ class ContactManage:
         wd.find_element_by_xpath("//a[@href='./?group=%s']" % id_to).click()
         self.contact_cache = None
 
+    def add_some_contact_to_group_from_another(self, contact_id, id_from, id_to):
+        wd = self.gen.wd
+        self.open_contact_group(id_from)
+        self.select_contact_by_id(contact_id)
+        self.select_from_list_by_id("to_group", id_to)
+        wd.find_element_by_name("add").click()
+        wd.find_element_by_xpath("//a[@href='./?group=%s']" % id_to).click()
+        self.contact_cache = None
+
     def remove_from_group(self, group_name):
         wd = self.gen.wd
         self.open_contact_group(group_name)
