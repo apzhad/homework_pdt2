@@ -185,6 +185,27 @@ def test_add_all_contacts_to_group(gen, check_ui, orm):
                                                                          key=Contact.id_or_max)
 
 
+def test_add_some_contact_to_group(gen, check_ui, orm):
+    group = random.choice(orm.get_group_list())
+    if len(orm.get_contact_list()) == 0:
+        gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group.id))
+        gen.contact.create(Contact(first_name="modify_1", last_name="change_group_1", group_name="[none]"))
+        gen.contact.create(Contact(first_name="modify_2", last_name="change_group_2"))
+    old_contact_list = orm.get_contact_in_group(group)
+    contact = random.choice(orm.get_contact_list())
+    gen.contact.add_some_to_group_using_id(group_id=group.id, contact_id=contact.id)
+    if contact in old_contact_list:
+        assert len(old_contact_list) == len(orm.get_contact_in_group(group))
+    else:
+        assert len(old_contact_list)+1 == len(orm.get_contact_in_group(group))
+    new_contact_list = orm.get_contact_in_group(group=group)
+    old_contact_list.append(contact)
+    assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                         key=Contact.id_or_max)
+
+
 def test_add_to_group_without_select_contact(gen, check_ui, orm):
     group = random.choice(orm.get_group_list())
     if len(orm.get_contact_list()) == 0:

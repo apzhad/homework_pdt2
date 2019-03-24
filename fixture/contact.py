@@ -420,6 +420,15 @@ class ContactManage:
         wd.find_element_by_xpath("//a[@href='./?group=%s']" % group_id).click()
         self.contact_cache = None
 
+    def add_some_to_group_using_id(self, group_id, contact_id):
+        wd = self.gen.wd
+        self.open_home_page()
+        self.select_contact_by_id(contact_id)
+        self.select_from_list_by_id("to_group", group_id)
+        wd.find_element_by_name("add").click()
+        wd.find_element_by_xpath("//a[@href='./?group=%s']" % group_id).click()
+        self.contact_cache = None
+
     def add_to_group_unselected(self, group_name):
         wd = self.gen.wd
         self.open_home_page()
