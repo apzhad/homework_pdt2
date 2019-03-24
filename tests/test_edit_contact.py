@@ -261,16 +261,37 @@ def test_add_some_contact_to_group_from_another_group(gen, check_ui, orm):
             gen.contact.get_contact_list(group_id=group_to.id), key=Contact.id_or_max)
 
 
-def test_remove_contact_from_group(gen, check_ui, orm):
-    group = "last_name"
-    if group not in gen.group.get_groups_names() and group != "[all]" and group != "[none]":
-        gen.group.create(group=Group(name=group))
-    if gen.contact.get_contact_count(group_name=group) == 0:
-        gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group))
-    gen.contact.remove_from_group(group_name=group)
-    assert 0 == gen.contact.get_contact_count(group_name=group)
-    cont_group_list = gen.contact.get_contact_list(group_name=group)
+def test_remove_all_contacts_from_group(gen, check_ui, orm):
+    group = random.choice(orm.get_group_list())
+    if len(orm.get_contact_in_group(group)) == 0:
+        gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group.id))
+        gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group.id))
+        gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group.id))
+    gen.contact.remove_all_from_group(group_id=group.id)
+    assert 0 == len(orm.get_contact_in_group(group))
+    cont_group_list = orm.get_contact_in_group(group)
     assert [] == cont_group_list
+    if check_ui:
+        assert sorted(cont_group_list, key=Contact.id_or_max) == sorted(
+            gen.contact.get_contact_list(group_id=group.id), key=Contact.id_or_max)
+
+
+def test_remove_some_contact_from_group(gen, check_ui, orm):
+    group = random.choice(orm.get_group_list())
+    if len(orm.get_contact_in_group(group)) == 0:
+        gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group.id))
+        gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group.id))
+        gen.contact.create(Contact(first_name="modify", last_name="change_group", group_name=group.id))
+    old_contact_list = orm.get_contact_in_group(group)
+    contact = random.choice(orm.get_contact_in_group(group))
+    gen.contact.remove_some_from_group(group_id=group.id, contact_id=contact.id)
+    assert len(old_contact_list)-1 == len(orm.get_contact_in_group(group))
+    new_contact_list = orm.get_contact_in_group(group)
+    old_contact_list.remove(contact)
+    assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(
+            gen.contact.get_contact_list(group_id=group.id), key=Contact.id_or_max)
 
 
 def test_edit_first_found_contact(gen, check_ui, db):

@@ -478,6 +478,22 @@ class ContactManage:
         wd.find_element_by_link_text('group page "%s"' % group_name).click()
         self.contact_cache = None
 
+    def remove_all_from_group(self, group_id):
+        wd = self.gen.wd
+        self.open_contact_group(group_id)
+        wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
+        wd.find_element_by_name("remove").click()
+        wd.find_element_by_xpath("//a[@href='./?group=%s']" % group_id).click()
+        self.contact_cache = None
+
+    def remove_some_from_group(self, group_id, contact_id):
+        wd = self.gen.wd
+        self.open_contact_group(group_id)
+        self.select_contact_by_id(contact_id)
+        wd.find_element_by_name("remove").click()
+        wd.find_element_by_xpath("//a[@href='./?group=%s']" % group_id).click()
+        self.contact_cache = None
+
     def del_all_found(self, search):
         wd = self.gen.wd
         self.open_home_page()
