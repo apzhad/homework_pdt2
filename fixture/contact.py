@@ -234,9 +234,9 @@ class ContactManage:
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
-    def del_all_from_group(self, group_name):
+    def del_all_from_group(self, group_id):
         wd = self.gen.wd
-        self.open_contact_group(group_name)
+        self.open_contact_group(group_id)
         # click "select all" & submit deletion
         wd.find_element_by_xpath("(//input[@id='MassCB'])").click()
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
@@ -273,6 +273,15 @@ class ContactManage:
         self.open_contact_group(group_name)
         # click "select all" & submit deletion
         self.select_contact_by_index(index)
+        wd.find_element_by_xpath("(//input[@value='Delete'])").click()
+        wd.switch_to_alert().accept()
+        self.wait_close_message_box()
+        self.contact_cache = None
+
+    def del_from_group_by_id(self, contact_id, group_id):
+        wd = self.gen.wd
+        self.open_contact_group(group_id)
+        self.select_contact_by_id(contact_id)
         wd.find_element_by_xpath("(//input[@value='Delete'])").click()
         wd.switch_to_alert().accept()
         self.wait_close_message_box()
