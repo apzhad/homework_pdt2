@@ -1,16 +1,17 @@
-from random import randrange
 import re
+from model.contact import Contact
 
 
-def test_info_on_homepage(gen):
-    index = randrange(len(gen.contact.get_contact_list()))
-    info_on_homepage = gen.contact.get_contact_list()[index]
-    info_from_edit = gen.contact.get_info_from_edit(index)
-    assert info_on_homepage.first_name == info_from_edit.first_name
-    assert info_on_homepage.last_name == info_from_edit.last_name
-    assert info_on_homepage.address == info_from_edit.address
-    assert info_on_homepage.all_email == merge_email(info_from_edit)
-    assert info_on_homepage.all_phones == merge_phone(info_from_edit)
+def test_info_on_homepage(gen, orm):
+    info_in_db = sorted(orm.get_contact_list(), key=Contact.id_or_max)
+    info_on_homepage = sorted(gen.contact.get_contact_list(), key=Contact.id_or_max)
+    assert len(info_in_db) == len(info_on_homepage)
+    for i in range(len(info_on_homepage)):
+        assert info_on_homepage[i].first_name == info_in_db[i].first_name
+        assert info_on_homepage[i].last_name == info_in_db[i].last_name
+        assert info_on_homepage[i].address == info_in_db[i].address
+        assert info_on_homepage[i].all_email == merge_email(info_in_db[i])
+        assert info_on_homepage[i].all_phones == merge_phone(info_in_db[i])
 
 
 """
@@ -25,6 +26,7 @@ def test_info_in_details(gen):
     #assert info_from_details.all_email == merge_email(info_from_edit)
         assert merge_phone(info_from_details) == merge_phone(info_from_edit)
 """
+
 
 def clear_spec_symbol(s):
     return re.sub("[() -]", "", s)
