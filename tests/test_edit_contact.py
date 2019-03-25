@@ -1,5 +1,4 @@
 from model.contact import Contact
-from model.group import Group
 import random
 
 
@@ -194,12 +193,12 @@ def test_add_some_contact_to_group(gen, check_ui, orm):
     old_contact_list = orm.get_contact_in_group(group)
     contact = random.choice(orm.get_contact_list())
     gen.contact.add_some_to_group_using_id(group_id=group.id, contact_id=contact.id)
-    if contact in old_contact_list:
-        assert len(old_contact_list) == len(orm.get_contact_in_group(group))
+    if contact not in old_contact_list:
+        assert len(old_contact_list) + 1 == len(orm.get_contact_in_group(group))
+        old_contact_list.append(contact)
     else:
-        assert len(old_contact_list)+1 == len(orm.get_contact_in_group(group))
+        assert len(old_contact_list) == len(orm.get_contact_in_group(group))
     new_contact_list = orm.get_contact_in_group(group=group)
-    old_contact_list.append(contact)
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
     if check_ui:
         assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(
@@ -296,6 +295,12 @@ def test_remove_some_contact_from_group(gen, check_ui, orm):
 
 def test_edit_first_found_contact(gen, check_ui, db):
     search = "modify"
+    """
+    query from database looks like 
+    
+    "SELECT `firstname` FROM `addressbook` 
+    WHERE `firstname` LIKE '%name%' AND `lastname` LIKE '%name%' AND `deprecated` IS NULL "
+    """
     if gen.contact.get_result_count(search) == 0:
         gen.contact.create(Contact(first_name=search, fax="573-092", nickname="1"))
     old_contact_list = gen.contact.get_contact_list(search=search)

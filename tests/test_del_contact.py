@@ -180,8 +180,6 @@ def test_del_some_contact_using_edit(gen, db, check_ui):
                                                                          key=Contact.id_or_max)
 
 
-"""
-Commented while search method in database not found
 def test_del_all_search_result(gen, db, check_ui):
     search = "lastname"
     if gen.contact.get_result_count(search=search) == 0:
@@ -194,4 +192,3 @@ def test_del_all_search_result(gen, db, check_ui):
     gen.contact.del_all_found(search)
     assert 0 == gen.contact.get_result_count(search)
     # new_contact_list = gen.contact.get_contact_list()
-"""

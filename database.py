@@ -8,13 +8,11 @@ db = ORMFixture(host="127.0.0.1", name="addressbook", user="root", password="")
 
 try:
     group = Group(id="300")
-    l = db.get_contact_in_group(group)
-    s = db.get_contact_in_group(group, sorted=True)
-    for item in l:
+    c = db.get_contact_list(search="name")
+    for item in c:
         print(item)
-    print(len(l))
-    print(l)
-    print(s)
+    print(len(c))
+
 
 finally:
     pass
