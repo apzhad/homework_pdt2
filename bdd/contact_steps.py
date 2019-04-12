@@ -115,6 +115,11 @@ def verify_empty_list(db, check_ui, gen):
                                                                          key=Contact.id_or_max)
 
 
+@when('I open details and modify the contact from the list')
+def open_datails_and_modify(gen, random_contact, modify_data):
+    gen.contact.edit_from_details_by_id(random_contact.id, modify_data)
+
+
 def find_index(contacts, id):
     index = 0
     for c in contacts:
