@@ -59,9 +59,41 @@ def verify_modifed_contact(non_empty_contact_list, db, modify_data, check_ui, ge
     assert len(old_contact_list) == len(new_contact_list)
     index = find_index(old_contact_list, random_contact.id)
     modify_data.id = random_contact.id
-    print(old_contact_list[index], modify_data)
     old_contact_list[index] = modify_data
-    print(old_contact_list[index], new_contact_list[index])
+    assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                         key=Contact.id_or_max)
+
+
+@when('I delete the contact from the list')
+def delete_contact(gen, random_contact):
+    gen.contact.del_by_id(random_contact.id)
+
+
+@then('the new contact list is equal to the old list without the deleted contact')
+def verify_contact_deleted(non_empty_contact_list, db, random_contact, check_ui, gen):
+    old_contact_list = non_empty_contact_list
+    cid = int(random_contact.id)
+    assert len(old_contact_list) - 1 == len(db.get_contact_list())
+    new_contact_list = db.get_contact_list()
+    old_contact_list[cid:cid + 1] = []
+    assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                         key=Contact.id_or_max)
+
+
+@when('I delete the contact from the list and cancel deletion')
+def cancel_del_contact(gen, random_contact):
+    gen.contact.cancel_del_by_id(random_contact.id)
+
+
+@then('the new contact list is equal to the old list without changes')
+def verify_modifed_contact(non_empty_contact_list, db, check_ui, gen):
+    old_contact_list = non_empty_contact_list
+    assert len(old_contact_list) == len(db.get_contact_list())
+    new_contact_list = db.get_contact_list()
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
     if check_ui:
         assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),

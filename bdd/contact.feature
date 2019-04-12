@@ -20,3 +20,15 @@ Scenario Outline: Modify contact
   | first_name | last_name  | address    | home_phone |
   | modify_fn1 | modify_ln1 | some_addr1 | 29-789-45  |
   | modify_fn2 | modify_ln2 | some_addr2 | 8347894    |
+
+Scenario: Delete contact
+  Given a non-empty contact list
+  Given a random contact from the list
+  When I delete the contact from the list
+  Then the new contact list is equal to the old list without the deleted contact
+
+Scenario: Cancel delete contact
+  Given a non-empty contact list
+  Given a random contact from the list
+  When I delete the contact from the list and cancel deletion
+  Then the new contact list is equal to the old list without changes
