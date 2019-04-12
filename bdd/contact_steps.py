@@ -28,3 +28,50 @@ def verify_contact_added(contact_list, db, new_contact, check_ui, gen):
     if check_ui:
         assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
                                                                          key=Contact.id_or_max)
+
+
+@given('a non-empty contact list')
+def non_empty_contact_list(db, gen):
+    if len(db.get_contact_list()) == 0:
+        gen.contact.create(Contact(first_name="modify"))
+    return db.get_contact_list()
+
+
+@given('a random contact from the list')
+def random_contact(non_empty_contact_list):
+    return random.choice(non_empty_contact_list)
+
+
+@given('a <first_name>, <last_name>, <address> and <home_phone> for modify')
+def modify_data(first_name, last_name, address, home_phone):
+    return Contact(first_name=first_name, last_name=last_name, address=address, home_phone=home_phone)
+
+
+@when('I modify the contact from the list')
+def modify_contact(gen, modify_data, random_contact):
+    gen.contact.edit_by_id(random_contact.id, modify_data)
+
+
+@then('the new contact list is equal to the old list')
+def verify_modifed_contact(non_empty_contact_list, db, modify_data, check_ui, gen, random_contact):
+    old_contact_list = non_empty_contact_list
+    new_contact_list = db.get_contact_list()
+    assert len(old_contact_list) == len(new_contact_list)
+    index = find_index(old_contact_list, random_contact.id)
+    modify_data.id = random_contact.id
+    print(old_contact_list[index], modify_data)
+    old_contact_list[index] = modify_data
+    print(old_contact_list[index], new_contact_list[index])
+    assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                         key=Contact.id_or_max)
+
+
+def find_index(contacts, id):
+    index = 0
+    for c in contacts:
+        if c.id == id:
+            break
+        index += 1
+    return index
