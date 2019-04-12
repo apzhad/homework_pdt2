@@ -20,3 +20,8 @@ def test_delete_contact():
 @scenario('contact.feature', 'Cancel delete contact')
 def test_delete_contact():
     pass
+
+
+@scenario('contact.feature', 'Delete all contacts')
+def test_delete_contact():
+    pass

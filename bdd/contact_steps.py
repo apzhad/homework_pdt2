@@ -100,6 +100,21 @@ def verify_modifed_contact(non_empty_contact_list, db, check_ui, gen):
                                                                          key=Contact.id_or_max)
 
 
+@when('I click on "Select all" and then delete contacts')
+def delete_all_contact(gen):
+    gen.contact.del_by_select_all()
+
+
+@then('the new contact list is empty')
+def verify_empty_list(db, check_ui, gen):
+    assert 0 == len(db.get_contact_list())
+    new_contact_list = db.get_contact_list()
+    assert [] == new_contact_list
+    if check_ui:
+        assert sorted(new_contact_list, key=Contact.id_or_max) == sorted(gen.contact.get_contact_list(),
+                                                                         key=Contact.id_or_max)
+
+
 def find_index(contacts, id):
     index = 0
     for c in contacts:

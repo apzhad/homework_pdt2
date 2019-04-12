@@ -32,3 +32,8 @@ Scenario: Cancel delete contact
   Given a random contact from the list
   When I delete the contact from the list and cancel deletion
   Then the new contact list is equal to the old list without changes
+
+Scenario: Delete all contacts
+  Given a non-empty contact list
+  When I click on "Select all" and then delete contacts
+  Then the new contact list is empty
