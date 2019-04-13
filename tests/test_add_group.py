@@ -7,7 +7,7 @@ def test_add_group_using_json(gen, db, json_group, check_ui):
     group = json_group
     with allure.step('Given a group list'):
         old_group_list = db.get_group_list()
-    with allure.step('When I add the group %s to the list' % group):
+    with allure.step('When I add the group "%s" to the list' % group):
         gen.group.create(group)
     with allure.step('Then the new group list is equal to the old list with the added group'):
         new_group_list = db.get_group_list()
@@ -22,7 +22,7 @@ def test_add_group_using_module(gen, db, data_groups, check_ui):
     group = data_groups
     with allure.step('Given a group list'):
         old_group_list = db.get_group_list()
-    with allure.step('When I add the group %s to the list' % group):
+    with allure.step('When I add the group "%s" to the list' % group):
         gen.group.create(group)
     with allure.step('Then the new group list is equal to the old list with the added group'):
         new_group_list = db.get_group_list()
@@ -37,7 +37,7 @@ def test_add_group_with_whitespace(gen, db, check_ui):
     with allure.step('Given a group list'):
         old_group_list = db.get_group_list()
     group = Group(name="name  E7zwRa ", header="header_groupISZ", footer="footer1S tph")
-    with allure.step('When I add the group %s to the list' % group):
+    with allure.step('When I add the group "%s" to the list' % group):
         gen.group.create(group)
     with allure.step('Then the new group list is equal to the old list with the added group'):
         new_group_list = db.get_group_list()

@@ -18,7 +18,7 @@ def test_add_contact_using_json(gen, db, json_contact, check_ui):
         group.append(Group(id="[none]", name="[none]"))
         group = random.choice(group)
         contact.group_name = group.id
-    with allure.step('When I add the contact %s to the list and into the group "%s"' % (contact, group.name)):
+    with allure.step('When I add the contact "%s" to the list and into the group "%s"' % (contact, group.name)):
         gen.contact.create(contact)
     with allure.step('Then the new contact list is equal to the old list with the added contact'):
         assert len(old_contact_list) + 1 == len(db.get_contact_list())
@@ -39,7 +39,7 @@ def test_add_contact_using_module(gen, data_contacts, check_ui, db):
         group.append(Group(id="[none]", name="[none]"))
         group = random.choice(group)
         contact.group_name = group.id
-    with allure.step('When I add the contact %s to the list and into the group "%s"' % (contact, group.name)):
+    with allure.step('When I add the contact "%s" to the list and into the group "%s"' % (contact, group.name)):
         gen.contact.create(contact)
     with allure.step('Then the new contact list is equal to the old list with the added contact'):
         assert len(old_contact_list) + 1 == len(db.get_contact_list())
@@ -67,7 +67,7 @@ def test_add_contact_into_group(gen, db, check_ui):
         group.append(Group(id="[none]", name="[none]"))
         group = random.choice(group)
         cont.group_name = group.id
-    with allure.step('When I add the contact %s to the list and into the group "%s"' % (cont, group.name)):
+    with allure.step('When I add the contact "%s" to the list and into the group "%s"' % (cont, group.name)):
         gen.contact.create(cont)
     with allure.step('Then the new contact list is equal to the old list with the added contact'):
         assert len(old_contact_list) + 1 == len(db.get_contact_list())
