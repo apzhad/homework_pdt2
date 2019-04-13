@@ -14,7 +14,7 @@ Scenario Outline: Modify contact
   Given a random contact from the list
   Given a <first_name>, <last_name>, <address> and <home_phone> for modify
   When I modify the contact from the list
-  Then the new contact list is equal to the old list
+  Then the new contact list is equal to the old list with modified contact
 
   Examples:
   | first_name | last_name  | address    | home_phone |
@@ -26,7 +26,7 @@ Scenario Outline: Modify contact from detail
   Given a random contact from the list
   Given a <first_name>, <last_name>, <address> and <home_phone> for modify
   When I open details and modify the contact from the list
-  Then the new contact list is equal to the old list
+  Then the new contact list is equal to the old list with modified contact
 
   Examples:
   | first_name | last_name  | address    | home_phone |

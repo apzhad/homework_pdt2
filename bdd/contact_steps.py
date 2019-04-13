@@ -52,7 +52,7 @@ def modify_contact(gen, modify_data, random_contact):
     gen.contact.edit_by_id(random_contact.id, modify_data)
 
 
-@then('the new contact list is equal to the old list')
+@then('the new contact list is equal to the old list  with modified contact')
 def verify_modifed_contact(non_empty_contact_list, db, modify_data, check_ui, gen, random_contact):
     old_contact_list = non_empty_contact_list
     new_contact_list = db.get_contact_list()
