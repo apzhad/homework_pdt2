@@ -225,7 +225,7 @@ def test_del_some_contact_using_edit(gen, db, check_ui):
 
 
 def test_del_all_search_result(gen, db, check_ui):
-    with allure.step('Given a contact list and search string for it'):
+    with allure.step('Given a non-empty contact list and search string for it'):
         search = "lastname"
         if gen.contact.get_result_count(search=search) == 0:
             gen.contact.create(Contact(first_name="lastname", fax="573-092", nickname="1"))
