@@ -1,0 +1,169 @@
+{
+  "uid" : "82caa8490c52cdb5",
+  "name" : "test_edit_some_contact_without_change",
+  "fullName" : "tests.test_edit_contact#test_edit_some_contact_without_change",
+  "historyId" : "3073b568e6982514c6760b5a5c22298a",
+  "time" : {
+    "start" : 1555186542474,
+    "stop" : 1555186544340,
+    "duration" : 1866
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "gen",
+    "time" : {
+      "start" : 1555186542295,
+      "stop" : 1555186542473,
+      "duration" : 178
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "db",
+    "time" : {
+      "start" : 1555186251284,
+      "stop" : 1555186251353,
+      "duration" : 69
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "check_ui",
+    "time" : {
+      "start" : 1555186542474,
+      "stop" : 1555186542474,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "stop",
+    "time" : {
+      "start" : 1555186251283,
+      "stop" : 1555186251283,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "34ee7e0e58a1f600",
+      "name" : "log",
+      "source" : "34ee7e0e58a1f600.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "ba97cab8fda53653",
+      "name" : "stdout",
+      "source" : "ba97cab8fda53653.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "2f0cd7a771dbd527",
+      "name" : "stderr",
+      "source" : "2f0cd7a771dbd527.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "db::fin",
+    "time" : {
+      "start" : 1555186622911,
+      "stop" : 1555186622911,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "stop::fin",
+    "time" : {
+      "start" : 1555186622913,
+      "stop" : 1555186626120,
+      "duration" : 3207
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_edit_contact"
+  }, {
+    "name" : "host",
+    "value" : "Anna"
+  }, {
+    "name" : "thread",
+    "value" : "12472-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.test_edit_contact"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "82caa8490c52cdb5.json",
+  "parameterValues" : [ ]
+}

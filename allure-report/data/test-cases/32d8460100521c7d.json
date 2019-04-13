@@ -1,0 +1,243 @@
+{
+  "uid" : "32d8460100521c7d",
+  "name" : "test_add_group_using_json[None:namefu5:header_groupMX 2J:footernpPSYtyTlLgnh]",
+  "fullName" : "tests.test_add_group#test_add_group_using_json[None:namefu5:header_groupMX 2J:footernpPSYtyTlLgnh]",
+  "historyId" : "ce5cacf34de6b4d88cc0c8493a2a3493",
+  "time" : {
+    "start" : 1555195448749,
+    "stop" : 1555195450783,
+    "duration" : 2034
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "stop",
+    "time" : {
+      "start" : 1555195302296,
+      "stop" : 1555195302296,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "gen",
+    "time" : {
+      "start" : 1555195448615,
+      "stop" : 1555195448748,
+      "duration" : 133
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "db",
+    "time" : {
+      "start" : 1555195302297,
+      "stop" : 1555195302311,
+      "duration" : 14
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "check_ui",
+    "time" : {
+      "start" : 1555195448748,
+      "stop" : 1555195448748,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given a group list",
+      "time" : {
+        "start" : 1555195448749,
+        "stop" : 1555195448750,
+        "duration" : 1
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "When I add the group \"None:namefu5:header_groupMX 2J:footernpPSYtyTlLgnh\" to the list",
+      "time" : {
+        "start" : 1555195448750,
+        "stop" : 1555195450782,
+        "duration" : 2032
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "Then the new group list is equal to the old list with the added group",
+      "time" : {
+        "start" : 1555195450782,
+        "stop" : 1555195450783,
+        "duration" : 1
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "3f6ae912e3a57490",
+      "name" : "log",
+      "source" : "3f6ae912e3a57490.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "89fdf0ddfa881f13",
+      "name" : "stdout",
+      "source" : "89fdf0ddfa881f13.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "557439cf9cd5158d",
+      "name" : "stderr",
+      "source" : "557439cf9cd5158d.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 3,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "stop::fin",
+    "time" : {
+      "start" : 1555195732212,
+      "stop" : 1555195737697,
+      "duration" : 5485
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "db::fin",
+    "time" : {
+      "start" : 1555195732207,
+      "stop" : 1555195732207,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_add_group"
+  }, {
+    "name" : "host",
+    "value" : "Anna"
+  }, {
+    "name" : "thread",
+    "value" : "9412-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.test_add_group"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "json_group",
+    "value" : "None:namefu5:header_groupMX 2J:footernpPSYtyTlLgnh"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "acc730fcf681c0f9",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555193301193,
+        "stop" : 1555193303534,
+        "duration" : 2341
+      }
+    }, {
+      "uid" : "235834e098214c3",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555186373927,
+        "stop" : 1555186375628,
+        "duration" : 1701
+      }
+    }, {
+      "uid" : "2632058850af83fe",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555182436795,
+        "stop" : 1555182438934,
+        "duration" : 2139
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "32d8460100521c7d.json",
+  "parameterValues" : [ "None:namefu5:header_groupMX 2J:footernpPSYtyTlLgnh" ]
+}

@@ -1,0 +1,262 @@
+{
+  "uid" : "4be1c57b2f9e96ab",
+  "name" : "test_edit_some_contact_in_group",
+  "fullName" : "tests.test_edit_contact#test_edit_some_contact_in_group",
+  "historyId" : "e9e78a422e619167d983f923ed3b9224",
+  "time" : {
+    "start" : 1555195647503,
+    "stop" : 1555195650504,
+    "duration" : 3001
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "stop",
+    "time" : {
+      "start" : 1555195302296,
+      "stop" : 1555195302296,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "orm",
+    "time" : {
+      "start" : 1555195468824,
+      "stop" : 1555195468940,
+      "duration" : 116
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "gen",
+    "time" : {
+      "start" : 1555195647190,
+      "stop" : 1555195647502,
+      "duration" : 312
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "check_ui",
+    "time" : {
+      "start" : 1555195647502,
+      "stop" : 1555195647502,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given a random group with contacts",
+      "time" : {
+        "start" : 1555195647503,
+        "stop" : 1555195647508,
+        "duration" : 5
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "Given contact list from the group \"for_del_1\"",
+      "time" : {
+        "start" : 1555195647508,
+        "stop" : 1555195647517,
+        "duration" : 9
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "Given a random contact from the list",
+      "time" : {
+        "start" : 1555195647517,
+        "stop" : 1555195647517,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "Given a data for modify contact",
+      "time" : {
+        "start" : 1555195647517,
+        "stop" : 1555195647517,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "When I modify the contact in the group \"for_del_1\"",
+      "time" : {
+        "start" : 1555195647517,
+        "stop" : 1555195650477,
+        "duration" : 2960
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "Then the new contact list is equal to the old list with modified contact",
+      "time" : {
+        "start" : 1555195650477,
+        "stop" : 1555195650503,
+        "duration" : 26
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "cbf10c6b55abd69d",
+      "name" : "log",
+      "source" : "cbf10c6b55abd69d.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "57a0663370ec8a82",
+      "name" : "stdout",
+      "source" : "57a0663370ec8a82.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "5448c61c4b804df4",
+      "name" : "stderr",
+      "source" : "5448c61c4b804df4.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 6,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "stop::fin",
+    "time" : {
+      "start" : 1555195732212,
+      "stop" : 1555195737697,
+      "duration" : 5485
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_edit_contact"
+  }, {
+    "name" : "host",
+    "value" : "Anna"
+  }, {
+    "name" : "thread",
+    "value" : "9412-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.test_edit_contact"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "fe232a2d9dd3937",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555193558954,
+        "stop" : 1555193564267,
+        "duration" : 5313
+      }
+    }, {
+      "uid" : "4517452116c5f685",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555186550274,
+        "stop" : 1555186552681,
+        "duration" : 2407
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "4be1c57b2f9e96ab.json",
+  "parameterValues" : [ ]
+}

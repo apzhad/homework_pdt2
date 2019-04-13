@@ -1,0 +1,232 @@
+{
+  "uid" : "af02cd6cd5163ceb",
+  "name" : "test_add_contact_using_json[None: last_name first_nameRfg23Qj8yd0y XicC]",
+  "fullName" : "tests.test_add_contact#test_add_contact_using_json[None: last_name first_nameRfg23Qj8yd0y XicC]",
+  "historyId" : "bdfce8d51be6e50e2f326e8286f844c2",
+  "time" : {
+    "start" : 1555180897998,
+    "stop" : 1555180904295,
+    "duration" : 6297
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "gen",
+    "time" : {
+      "start" : 1555180895575,
+      "stop" : 1555180897995,
+      "duration" : 2420
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "stop",
+    "time" : {
+      "start" : 1555180865536,
+      "stop" : 1555180865536,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "check_ui",
+    "time" : {
+      "start" : 1555180897996,
+      "stop" : 1555180897996,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "db",
+    "time" : {
+      "start" : 1555180865536,
+      "stop" : 1555180865549,
+      "duration" : 13
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given a contact list",
+      "time" : {
+        "start" : 1555180897998,
+        "stop" : 1555180898159,
+        "duration" : 161
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "Given a group list and choose a group from it",
+      "time" : {
+        "start" : 1555180898159,
+        "stop" : 1555180898163,
+        "duration" : 4
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "When I add the contact None: last_name first_nameRfg23Qj8yd0y XicC to the list into 497 group",
+      "time" : {
+        "start" : 1555180898163,
+        "stop" : 1555180904207,
+        "duration" : 6044
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "Then the new contact list is equal to the old list with the added contac",
+      "time" : {
+        "start" : 1555180904207,
+        "stop" : 1555180904295,
+        "duration" : 88
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "6efe94774eede9bc",
+      "name" : "log",
+      "source" : "6efe94774eede9bc.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "7729f603dd1e6e5f",
+      "name" : "stdout",
+      "source" : "7729f603dd1e6e5f.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "c2fd46553bfe33f9",
+      "name" : "stderr",
+      "source" : "c2fd46553bfe33f9.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "stop::fin",
+    "time" : {
+      "start" : 1555181028784,
+      "stop" : 1555181034250,
+      "duration" : 5466
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "db::fin",
+    "time" : {
+      "start" : 1555181028782,
+      "stop" : 1555181028782,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_add_contact"
+  }, {
+    "name" : "host",
+    "value" : "Anna"
+  }, {
+    "name" : "thread",
+    "value" : "932-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.test_add_contact"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "json_contact",
+    "value" : "None: last_name first_nameRfg23Qj8yd0y XicC"
+  } ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "af02cd6cd5163ceb.json",
+  "parameterValues" : [ "None: last_name first_nameRfg23Qj8yd0y XicC" ]
+}

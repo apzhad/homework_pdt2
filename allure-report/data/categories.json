@@ -1,0 +1,47 @@
+{
+  "uid" : "4b4757e66a1912dae1a509f688f20b0f",
+  "name" : "categories",
+  "children" : [ {
+    "name" : "Product defects",
+    "children" : [ {
+      "name" : "AssertionError: assert 'address' == 'address '\n  - address\n  + address \n  ?        +",
+      "children" : [ {
+        "name" : "test_info_on_homepage",
+        "uid" : "8d2afe76b7d3457c",
+        "parentUid" : "464611ecdb22978817773989f65ba968",
+        "status" : "failed",
+        "time" : {
+          "start" : 1555195469150,
+          "stop" : 1555195475129,
+          "duration" : 5979
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "464611ecdb22978817773989f65ba968"
+    } ],
+    "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
+  }, {
+    "name" : "Test defects",
+    "children" : [ {
+      "name" : "selenium.common.exceptions.ElementNotInteractableException: Message: Element <img src=\"icons/pencil.png\"> could not be scrolled into view",
+      "children" : [ {
+        "name" : "test_edit_first_found_contact",
+        "uid" : "ef488c177d643f3d",
+        "parentUid" : "313709e8625a7577298faaf9b8f6c930",
+        "status" : "broken",
+        "time" : {
+          "start" : 1555195700680,
+          "stop" : 1555195706306,
+          "duration" : 5626
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "313709e8625a7577298faaf9b8f6c930"
+    } ],
+    "uid" : "bdbf199525818fae7a8651db9eafe741"
+  } ]
+}

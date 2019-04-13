@@ -1,0 +1,243 @@
+{
+  "uid" : "ae0da64a7bf82c89",
+  "name" : "test_add_group_using_json[None:nameM t9G:header_groupcB9L IvlsuBvpcf6T3W:footerCAOg5]",
+  "fullName" : "tests.test_add_group#test_add_group_using_json[None:nameM t9G:header_groupcB9L IvlsuBvpcf6T3W:footerCAOg5]",
+  "historyId" : "90aa22aca078d29e8a3e36f28b3a62a6",
+  "time" : {
+    "start" : 1555195457729,
+    "stop" : 1555195459709,
+    "duration" : 1980
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "stop",
+    "time" : {
+      "start" : 1555195302296,
+      "stop" : 1555195302296,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "check_ui",
+    "time" : {
+      "start" : 1555195457728,
+      "stop" : 1555195457728,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "gen",
+    "time" : {
+      "start" : 1555195457595,
+      "stop" : 1555195457727,
+      "duration" : 132
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "db",
+    "time" : {
+      "start" : 1555195302297,
+      "stop" : 1555195302311,
+      "duration" : 14
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given a group list",
+      "time" : {
+        "start" : 1555195457729,
+        "stop" : 1555195457730,
+        "duration" : 1
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "When I add the group \"None:nameM t9G:header_groupcB9L IvlsuBvpcf6T3W:footerCAOg5\" to the list",
+      "time" : {
+        "start" : 1555195457730,
+        "stop" : 1555195459705,
+        "duration" : 1975
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "Then the new group list is equal to the old list with the added group",
+      "time" : {
+        "start" : 1555195459706,
+        "stop" : 1555195459708,
+        "duration" : 2
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "d97ec8bc0008518f",
+      "name" : "log",
+      "source" : "d97ec8bc0008518f.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "13625678054bed5a",
+      "name" : "stdout",
+      "source" : "13625678054bed5a.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "425ae8ff1e97173b",
+      "name" : "stderr",
+      "source" : "425ae8ff1e97173b.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 3,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "stop::fin",
+    "time" : {
+      "start" : 1555195732212,
+      "stop" : 1555195737697,
+      "duration" : 5485
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "db::fin",
+    "time" : {
+      "start" : 1555195732207,
+      "stop" : 1555195732207,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_add_group"
+  }, {
+    "name" : "host",
+    "value" : "Anna"
+  }, {
+    "name" : "thread",
+    "value" : "9412-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.test_add_group"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "json_group",
+    "value" : "None:nameM t9G:header_groupcB9L IvlsuBvpcf6T3W:footerCAOg5"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "4a5c467b66ffed75",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555193311024,
+        "stop" : 1555193312932,
+        "duration" : 1908
+      }
+    }, {
+      "uid" : "391e6c139534b6e0",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555186381728,
+        "stop" : 1555186383571,
+        "duration" : 1843
+      }
+    }, {
+      "uid" : "cbd8db6ddd27594a",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555182446437,
+        "stop" : 1555182448422,
+        "duration" : 1985
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "ae0da64a7bf82c89.json",
+  "parameterValues" : [ "None:nameM t9G:header_groupcB9L IvlsuBvpcf6T3W:footerCAOg5" ]
+}

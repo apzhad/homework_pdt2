@@ -1,0 +1,283 @@
+{
+  "uid" : "5c26b9f5114e9284",
+  "name" : "test_add_contact_using_json[None: last_nametR ]",
+  "fullName" : "tests.test_add_contact#test_add_contact_using_json[None: last_nametR ]",
+  "historyId" : "e6b9c36ef7544edc6d463d056e42bd0f",
+  "time" : {
+    "start" : 1555195391754,
+    "stop" : 1555195397624,
+    "duration" : 5870
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "check_ui",
+    "time" : {
+      "start" : 1555195391753,
+      "stop" : 1555195391753,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "stop",
+    "time" : {
+      "start" : 1555195302296,
+      "stop" : 1555195302296,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "gen",
+    "time" : {
+      "start" : 1555195391010,
+      "stop" : 1555195391753,
+      "duration" : 743
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "db",
+    "time" : {
+      "start" : 1555195302297,
+      "stop" : 1555195302311,
+      "duration" : 14
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Given a contact list",
+      "time" : {
+        "start" : 1555195391755,
+        "stop" : 1555195391760,
+        "duration" : 5
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "Given a group list and choose a group from it",
+      "time" : {
+        "start" : 1555195391760,
+        "stop" : 1555195391761,
+        "duration" : 1
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "When I add the contact \"None: last_nametR \" to the list and into the group \"[none]\"",
+      "time" : {
+        "start" : 1555195391761,
+        "stop" : 1555195397600,
+        "duration" : 5839
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "Then the new contact list is equal to the old list with the added contact",
+      "time" : {
+        "start" : 1555195397600,
+        "stop" : 1555195397623,
+        "duration" : 23
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "578d021dc32b2135",
+      "name" : "log",
+      "source" : "578d021dc32b2135.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "bb3749d29e905cd8",
+      "name" : "stdout",
+      "source" : "bb3749d29e905cd8.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "a88d8665ee036fac",
+      "name" : "stderr",
+      "source" : "a88d8665ee036fac.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 4,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "stop::fin",
+    "time" : {
+      "start" : 1555195732212,
+      "stop" : 1555195737697,
+      "duration" : 5485
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "db::fin",
+    "time" : {
+      "start" : 1555195732207,
+      "stop" : 1555195732207,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_add_contact"
+  }, {
+    "name" : "host",
+    "value" : "Anna"
+  }, {
+    "name" : "thread",
+    "value" : "9412-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.test_add_contact"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "json_contact",
+    "value" : "None: last_nametR "
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "a2c51f42b504cca8",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555193237309,
+        "stop" : 1555193243884,
+        "duration" : 6575
+      }
+    }, {
+      "uid" : "191e3d312249421b",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555186322696,
+        "stop" : 1555186328814,
+        "duration" : 6118
+      }
+    }, {
+      "uid" : "1aa5fd173f866b3a",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555182349934,
+        "stop" : 1555182356019,
+        "duration" : 6085
+      }
+    }, {
+      "uid" : "495507d39cb7fd2",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555181805214,
+        "stop" : 1555181810520,
+        "duration" : 5306
+      }
+    }, {
+      "uid" : "fd334f2e9617eb31",
+      "status" : "broken",
+      "statusDetails" : "AttributeError: 'list' object has no attribute 'name'",
+      "time" : {
+        "start" : 1555181517370,
+        "stop" : 1555181517434,
+        "duration" : 64
+      }
+    }, {
+      "uid" : "33649b0db164fbd7",
+      "status" : "passed",
+      "time" : {
+        "start" : 1555180965681,
+        "stop" : 1555180971616,
+        "duration" : 5935
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "5c26b9f5114e9284.json",
+  "parameterValues" : [ "None: last_nametR " ]
+}
