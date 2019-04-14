@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.1 (Python 3.7.2 on win32)" generated="20190414 13:59:10.124" rpa="false">
+<suite id="s1" name="Group Scenarios" source="C:\PycharmProjects\homework_pdt2\rf\group_scenarios.robot">
+<kw name="Init Fixture" library="rf.Addressbook" type="setup">
+<status status="PASS" starttime="20190414 13:59:18.627" endtime="20190414 14:00:02.579"></status>
+</kw>
+<test id="s1-t1" name="Add new group">
+<kw name="Create Group" library="rf.Addressbook">
+<arguments>
+<arg>name1</arg>
+<arg>header1</arg>
+<arg>footer1</arg>
+</arguments>
+<status status="PASS" starttime="20190414 14:00:02.580" endtime="20190414 14:00:05.556"></status>
+</kw>
+<status status="PASS" starttime="20190414 14:00:02.579" endtime="20190414 14:00:05.557" critical="yes"></status>
+</test>
+<kw name="Finish Fixture" library="rf.Addressbook" type="teardown">
+<status status="PASS" starttime="20190414 14:00:05.558" endtime="20190414 14:00:09.228"></status>
+</kw>
+<status status="PASS" starttime="20190414 13:59:10.126" endtime="20190414 14:00:09.228"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Group Scenarios">Group Scenarios</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
