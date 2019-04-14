@@ -15,6 +15,15 @@ import importlib
 import jsonpickle
 
 
+def find_index(contacts, id):
+    index = 0
+    for c in contacts:
+        if c.id == id:
+            break
+        index += 1
+    return index
+
+
 class Addressbook:
 
     ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
@@ -63,3 +72,11 @@ class Addressbook:
 
     def contact_lists_should_be_equal(self, list1, list2):
         assert sorted(list1, key=Contact.id_or_max) == sorted(list2, key=Contact.id_or_max)
+
+    def modify_contact(self, contact, modify_data):
+        self.fixture.contact.edit_by_id(contact.id, modify_data)
+        modify_data.id = contact.id
+
+    def modify_contact_from_detail(self, contact, modify_data):
+        self.fixture.contact.edit_from_details_by_id(contact.id, modify_data)
+        modify_data.id = contact.id

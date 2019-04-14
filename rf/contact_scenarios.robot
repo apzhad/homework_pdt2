@@ -12,3 +12,25 @@ Add new contact
     ${new_list}=  Get Contact List
     Append To List  ${old_list}  ${contact}
     Contact Lists Should Be Equal  ${old_list}  ${new_list}
+
+Modify contact
+    ${old_list}=  Get Contact List
+    ${len}=  Get Length  ${old_list}
+    ${modify_data}=  New Contact  fffirst  modify_ln1  some_addr1  29-789-45
+    ${index}=  Evaluate  random.randrange(${len})  random
+    ${contact}=  Get From List  ${old_list}  ${index}
+    Modify Contact  ${contact}  ${modify_data}
+    ${new_list}=  Get Contact list
+    Set List Value  ${old_list}  ${index}  ${modify_data}
+    Contact Lists Should Be Equal  ${old_list}  ${new_list}
+
+Modify contact from detail
+    ${old_list}=  Get Contact List
+    ${len}=  Get Length  ${old_list}
+    ${modify_data}=  New Contact  fffirst  modify_ln1  some_addr1  29-789-45
+    ${index}=  Evaluate  random.randrange(${len})  random
+    ${contact}=  Get From List  ${old_list}  ${index}
+    Modify Contact From Detail  ${contact}  ${modify_data}
+    ${new_list}=  Get Contact list
+    Set List Value  ${old_list}  ${index}  ${modify_data}
+    Contact Lists Should Be Equal  ${old_list}  ${new_list}
