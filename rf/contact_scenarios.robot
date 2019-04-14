@@ -34,3 +34,27 @@ Modify contact from detail
     ${new_list}=  Get Contact list
     Set List Value  ${old_list}  ${index}  ${modify_data}
     Contact Lists Should Be Equal  ${old_list}  ${new_list}
+
+Delete contact
+    ${old_list}=  Get Contact List
+    ${len}=  Get Length  ${old_list}
+    ${index}=  Evaluate  random.randrange(${len})  random
+    ${contact}=  Get From List  ${old_list}  ${index}
+    Delete Contact  ${contact}
+    ${new_list}=  Get Contact list
+    Remove Values From List  ${old_list}  ${contact}
+    Contact Lists Should Be Equal  ${old_list}  ${new_list}
+
+Cancel delete contact
+    ${old_list}=  Get Contact List
+    ${len}=  Get Length  ${old_list}
+    ${index}=  Evaluate  random.randrange(${len})  random
+    ${contact}=  Get From List  ${old_list}  ${index}
+    Cancel Delete Contact  ${contact}
+    ${new_list}=  Get Contact list
+    Contact Lists Should Be Equal  ${old_list}  ${new_list}
+
+Delete all contacts
+    Delete All Contacts
+    ${new_list}=  Get Contact list
+    Contact Lists Should Be Empty  ${new_list}

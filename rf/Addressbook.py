@@ -80,3 +80,15 @@ class Addressbook:
     def modify_contact_from_detail(self, contact, modify_data):
         self.fixture.contact.edit_from_details_by_id(contact.id, modify_data)
         modify_data.id = contact.id
+
+    def delete_contact(self, contact):
+        self.fixture.contact.del_by_id(contact.id)
+
+    def cancel_delete_contact(self, contact):
+        self.fixture.contact.cancel_del_by_id(contact.id)
+
+    def delete_all_contacts(self):
+        self.fixture.contact.del_by_select_all()
+
+    def contact_list_should_be_emty(self, list):
+        assert [] == list
