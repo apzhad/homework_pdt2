@@ -14,6 +14,7 @@ Add new contact
     Contact Lists Should Be Equal  ${old_list}  ${new_list}
 
 Modify contact
+    Check Contact Exist
     ${old_list}=  Get Contact List
     ${len}=  Get Length  ${old_list}
     ${modify_data}=  New Contact  fffirst  modify_ln1  some_addr1  29-789-45
@@ -25,6 +26,7 @@ Modify contact
     Contact Lists Should Be Equal  ${old_list}  ${new_list}
 
 Modify contact from detail
+    Check Contact Exist
     ${old_list}=  Get Contact List
     ${len}=  Get Length  ${old_list}
     ${modify_data}=  New Contact  fffirst  modify_ln1  some_addr1  29-789-45
@@ -36,6 +38,7 @@ Modify contact from detail
     Contact Lists Should Be Equal  ${old_list}  ${new_list}
 
 Delete contact
+    Check Contact Exist
     ${old_list}=  Get Contact List
     ${len}=  Get Length  ${old_list}
     ${index}=  Evaluate  random.randrange(${len})  random
@@ -46,6 +49,7 @@ Delete contact
     Contact Lists Should Be Equal  ${old_list}  ${new_list}
 
 Cancel delete contact
+    Check Contact Exist
     ${old_list}=  Get Contact List
     ${len}=  Get Length  ${old_list}
     ${index}=  Evaluate  random.randrange(${len})  random
@@ -55,6 +59,7 @@ Cancel delete contact
     Contact Lists Should Be Equal  ${old_list}  ${new_list}
 
 Delete all contacts
+    Check Contact Exist
     Delete All Contacts
     ${new_list}=  Get Contact list
-    Contact Lists Should Be Empty  ${new_list}
+    Contact List Should Be Empty  ${new_list}

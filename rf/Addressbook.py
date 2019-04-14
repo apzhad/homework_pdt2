@@ -90,5 +90,11 @@ class Addressbook:
     def delete_all_contacts(self):
         self.fixture.contact.del_by_select_all()
 
-    def contact_list_should_be_emty(self, list):
+    def contact_list_should_be_empty(self, list):
         assert [] == list
+
+    def check_contact_exist(self):
+        if len(self.dbfixture.get_contact_list()) == 0:
+            self.fixture.contact.create(Contact(first_name="del_contact", fax="573-092", nickname="1"))
+            self.fixture.contact.create(Contact(first_name="del_contact", fax="573-092", nickname="2"))
+            self.fixture.contact.create(Contact(first_name="del_contact", fax="573-092", nickname="3"))
