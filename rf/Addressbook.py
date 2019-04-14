@@ -10,6 +10,7 @@ from fixture.orm import ORMFixture
 import json
 import os.path
 from model.group import Group
+from model.contact import Contact
 import importlib
 import jsonpickle
 
@@ -51,3 +52,14 @@ class Addressbook:
     def group_lists_should_be_equal(self, list1, list2):
         assert sorted(list1, key=Group.id_or_max) == sorted(list2, key=Group.id_or_max)
 
+    def get_contact_list(self):
+        return self.dbfixture.get_contact_list()
+
+    def new_contact(self, first_name, last_name, address, home_phone):
+        return Contact(first_name=first_name, last_name=last_name, address=address, home_phone=home_phone)
+
+    def create_contact(self, contact):
+        self.fixture.contact.create(contact)
+
+    def contact_lists_should_be_equal(self, list1, list2):
+        assert sorted(list1, key=Contact.id_or_max) == sorted(list2, key=Contact.id_or_max)
